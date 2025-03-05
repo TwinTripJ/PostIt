@@ -1,0 +1,40 @@
+.login-box {
+  position: relative;
+}
+
+.carosel {
+  display: flex;
+  width: 100%;
+  position: relative;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: -30px;
+}
+
+.logo img {
+  max-width: 100%;
+}
+
+.caroselImg {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+}
