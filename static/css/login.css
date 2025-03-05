@@ -76,6 +76,19 @@
   padding: 50px;
   justify-content: center;
   z-index: 5;
+  opacity: 0;
+  animation: slideDownLogin 1s ease-out 0.5s forwards;
+}
+
+@keyframes slideDownLogin {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .input-group {
@@ -99,7 +112,7 @@
   flex: 1;
   padding: 10px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.305);
+  background-color: rgba(255, 255, 255, 0.193);
   font-size: 16px;
   max-width: 80%;
   color: white;

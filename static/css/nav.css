@@ -159,3 +159,8 @@
 .join:hover a {
   color: #444;
 }
+
+/* 로고 */
+.mainLogo img {
+  width: 150px;
+}

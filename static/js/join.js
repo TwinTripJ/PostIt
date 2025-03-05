@@ -20,58 +20,10 @@ const join = (event) => {
 // 탈퇴 요청
 const secessionUser = (id) => {};
 
-// 중복 확인
-function check() {
-  const id = document.getElementById("id").value;
-  let userDataAll = JSON.parse(localStorage.getItem("userData")) || [];
-
-  const isExist = userDataAll.some((user) => user.id === id);
-
-  if (id === "") {
-    Swal.fire({
-      icon: "error",
-      text: "아이디가 비어있습니다.",
-    });
-  } else {
-    if (isExist) {
-      Swal.fire({
-        icon: "error",
-        text: "이미 사용 중인 아이디입니다.",
-      });
-    } else {
-      Swal.fire({
-        icon: "success",
-        text: "사용 가능한 아이디입니다.",
-      });
-    }
-  }
-}
-
-function passCheck() {
-  const pass = document.getElementById("pass").value;
-  const passCheck = document.getElementById("passCheck").value;
-  const alret = document.getElementById("alret");
-
-  if (pass === "" || passCheck === "") {
-    Swal.fire({
-      icon: "error",
-      text: "비밀번호가 비어있습니다.",
-    });
-  } else {
-    if (pass === passCheck) {
-      alret.innerText = "동일한 비밀번호입니다.";
-    } else {
-      alret.innerText = "비밀번호가 다릅니다.";
-    }
-  }
-}
-
 // 출생 연도
 const year = document.querySelector("#birth-year");
-// option 목록 생성 여부 확인
 isYearOptionExisted = false;
 year.addEventListener("focus", function () {
-  // year 목록 생성되지 않았을 때
   if (!isYearOptionExisted) {
     isYearOptionExisted = true;
     for (var i = 1940; i <= 2022; i++) {
