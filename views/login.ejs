@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="/static/css/login.css" />
+    <!-- 경고창 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
@@ -11,10 +17,13 @@
 
     <div class="login-box">
       <div class="carosel">
-        <img src="/static/images/mainCarosel.jpg" alt="carosel image" />
+        <img
+          class="caroselImg"
+          src="/static/images/mainCarosel.jpg"
+          alt="carosel image"
+        />
         <div class="logo">
-          <h2>로그인</h2>
-          <h2>로그인</h2>
+          <img src="/static/images/loginLogo.png" alt="login logo" />
         </div>
       </div>
       <form>
