@@ -5,23 +5,42 @@ require("dotenv").config();
 
 const User = db.users;
 
+// 아이디 중복 확인
+const checkEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "이메일을 입력해 주세요." });
+    }
+    const existingUser = await User.findOne({ where: { email } });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "이미 사용 중인 이메일입니다." });
+    }
+    return res.status(200).json({ message: "사용 가능한 이메일입니다." });
+  } catch (error) {
+    console.error("이메일 중복 확인 오류:", error);
+    return res.status(500).json({ message: "서버 오류가 발생했습니다." });
+  }
+};
+
 // 회원가입
 const registerUser = async (req, res) => {
   try {
-    const { email, password, username, address, gender, age, phone } = req.body;
+    const { email, username, password, address, gender, age, phone } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 중복
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ message: "중복." });
-    }
+    // const existingUser = await User.findOne({ where: { email } });
+    // if (existingUser) {
+    //   return res.status(400).json({ message: "중복." });
+    // }
 
     const user = await User.create({
       email,
-      password: hashedPassword,
       username,
+      password: hashedPassword,
       address: address || null,
       gender,
       age,
@@ -158,6 +177,7 @@ const deleteUser = async (req, res) => {
 
 // 컨트롤러 내보내기
 module.exports = {
+  checkEmail,
   registerUser,
   loginUser,
   authenticateToken,

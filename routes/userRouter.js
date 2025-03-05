@@ -1,6 +1,8 @@
-const userController = require("../controllers/userController.js");
+const userController = require("../controllers/userController");
 
 const router = require("express").Router();
+
+router.post("/check", userController.checkEmail);
 
 router.post("/addUser", userController.registerUser);
 
@@ -9,12 +11,15 @@ router.get(
   userController.authenticateToken,
   userController.getAllUsers
 );
+
 router.get(
   "/:id",
   userController.authenticateToken,
   userController.getUserById
 );
+
 router.put("/:id", userController.authenticateToken, userController.updateUser);
+
 router.delete(
   "/:id",
   userController.authenticateToken,

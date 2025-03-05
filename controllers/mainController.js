@@ -1,12 +1,10 @@
 // const products = require("../models/mainModel");
 
 const moveLogin = (req, res) => {
-  console.log("login");
   res.render("login");
 };
 
 const moveJoin = (req, res) => {
-  console.log("join");
   res.render("join");
 };
 

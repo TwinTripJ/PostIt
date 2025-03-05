@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <%- include("nav") %>
@@ -12,8 +13,8 @@
       <h2>회원가입</h2>
       <form>
         이메일
-        <input type="email" name="id" id="id" required />
-        <div class="check-btn" onclick="check()">중복확인</div>
+        <input type="email" name="email" id="email" required />
+        <div class="check-btn" onclick="idCheck()">중복확인</div>
         <br />
         이름
         <input
@@ -46,7 +47,7 @@
           required
         />
         <div id="alret"></div>
-        <div onclick="passCheck()" class="check-btn">비밀번호 확인</div>
+        <!-- <div onclick="passCheck()" class="check-btn">비밀번호 확인</div> -->
 
         <br />
         <div class="gender">
@@ -105,4 +106,5 @@
       </form>
     </div>
   </body>
+  <script src="/static/js/join.js"></script>
 </html>
