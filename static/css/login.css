@@ -123,6 +123,7 @@ body {
   justify-content: space-between;
   width: 100%;
   max-width: 1280px;
+  margin-left: 0;
 }
 
 .input-group label {
@@ -135,14 +136,14 @@ body {
 }
 
 .input-group input {
-  flex: 1;
   padding: 10px;
   border: none;
   background-color: rgba(255, 255, 255, 0.259);
   font-size: 16px;
   max-width: 80%;
+  width: 80%;
   color: white;
-  margin-left: 10px;
+  overflow: hidden;
 }
 
 .input-group input::placeholder {

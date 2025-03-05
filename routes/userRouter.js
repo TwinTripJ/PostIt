@@ -6,6 +6,8 @@ router.post("/check", userController.checkEmail);
 
 router.post("/addUser", userController.registerUser);
 
+router.post("/loginUser", userController.loginUser);
+
 router.get(
   "/allUsers",
   userController.authenticateToken,

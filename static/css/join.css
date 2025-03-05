@@ -3,12 +3,10 @@ body {
   -webkit-user-drag: none;
 }
 
-/* 로그인 박스 */
 .login-box {
   position: relative;
 }
 
-/* 캐러셀 영역 */
 .carosel {
   display: flex;
   width: 100%;
@@ -16,7 +14,6 @@ body {
   top: 0;
 }
 
-/* 로고 애니메이션 */
 .logo {
   display: flex;
   position: absolute;
@@ -47,6 +44,12 @@ body {
   margin-left: -20px;
 }
 
+.caroselContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
 .caroselImg {
   width: 100%;
   height: 100vh;
@@ -61,15 +64,27 @@ body {
     rgba(0, 0, 0, 1) 70%,
     rgba(0, 0, 0, 0)
   );
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.489) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  pointer-events: none;
 }
 
 /* 로그인 폼 */
-.loginBox {
+.join-box {
   position: absolute;
-  top: 60%;
-  left: 50%;
+  top: 125%;
+  left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -77,15 +92,106 @@ body {
   max-width: 550px;
   width: 90%;
   height: auto;
-  background-color: rgba(120, 120, 120, 0.499);
+  background-color: rgba(255, 255, 255, 0.551);
   border: 1px solid rgb(121, 121, 121);
   border-radius: 10px;
   padding: 50px;
   justify-content: center;
   z-index: 5;
+  opacity: 0;
+  animation: slideDownLogin 1s ease-out 0.5s forwards;
+
+  font-family: "Gothic A1", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-/* 입력 그룹 */
+@keyframes slideDownLogin {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.flex {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 17px;
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.input-group input {
+  padding: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.259);
+  font-size: 16px;
+  width: 100%;
+  color: white;
+  overflow: hidden;
+}
+
+.input-group input::placeholder {
+  color: rgba(96, 96, 96, 0.675);
+}
+
+input:focus {
+  outline: none;
+}
+
+input:active {
+  outline: none;
+}
+
+.check-btn {
+  cursor: pointer;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  padding: 7px 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.check-btn:hover {
+  background-color: rgba(0, 0, 0, 0.508);
+  transform: scale(1.1);
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+}
+
+input[type="number"]:focus {
+  outline: none;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
 .input-group {
   display: flex;
   align-items: center;
@@ -94,71 +200,134 @@ body {
   max-width: 1280px;
 }
 
-.input-group label {
-  font-size: 16px;
-  white-space: nowrap;
-  text-align: left;
-  margin-top: 10px;
-  color: white;
-}
-
-.input-group input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.305);
-  font-size: 16px;
-  max-width: 80%;
-  color: white;
-  margin-left: 10px;
-}
-
 .input-group input::placeholder {
-  color: white;
+  color: rgba(96, 96, 96, 0.675);
 }
 
-input:focus,
-input:active {
-  outline: none;
-}
-
-/* 로그인 버튼 */
-.loginBtn {
+.joinBtn {
   width: 100%;
   padding: 12px 0;
   margin-top: 15px;
   font-size: 16px;
-  font-weight: bold;
   text-align: center;
-  color: white;
-  background-color: #b8afc1;
+  color: #444;
+  background-color: #e7e2ed;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.loginBtn:hover {
-  background-color: #a19aa9;
+.joinBtn:hover {
+  background-color: #bfb9c7;
   transform: scale(1.05);
+  color: white;
 }
 
-.loginBtn:active {
-  background-color: #b8afc1;
+.joinBtn:active {
+  background-color: rgb(156, 145, 168);
   transform: scale(0.98);
 }
 
-/* 하단 링크 그룹 */
+/* 성별, 전화번호, 생일 그룹 */
+.gender,
+.birth,
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.birth select {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.adress {
+  margin-top: 10px;
+}
+
+#alret {
+  color: red;
+}
+.gender {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+  position: relative;
+}
+
+.gender .label {
+  font-weight: bold;
+  position: absolute;
+}
+
+.gender .label:first-child {
+  left: 10px; /* 남자 */
+}
+
+.gender .label:last-child {
+  right: 10px; /* 여자 */
+}
+
+/* 스위치 스타일 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e7e2ed;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #ffffff;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #bfb9c7;
+}
+
+input:checked + .slider:before {
+  transform: translateX(66px);
+}
+
 .link-group {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 15px;
+  position: relative;
 }
 
 .link-group a {
   display: inline-block;
-  color: white;
+  color: rgb(84, 84, 84);
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease;
@@ -166,7 +335,7 @@ input:active {
 }
 
 .link-group a:hover {
-  color: #ffceda;
+  color: #cb2b2b;
 }
 
 .link-group a::after {
@@ -176,7 +345,7 @@ input:active {
   left: 0;
   width: 0;
   height: 1.5px;
-  background-color: #ffceda;
+  background-color: #cb2b2b;
   transition: width 0.3s ease;
 }
 
@@ -186,7 +355,7 @@ input:active {
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .loginBox {
+  form {
     width: 100%;
     padding: 30px;
   }
@@ -196,22 +365,45 @@ input:active {
   .logo img {
     max-width: 300px;
   }
-  .loginBox {
-    padding: 20px;
+
+  .login-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    flex-direction: column;
   }
+
+  form {
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+
   .input-group {
     flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    align-items: center;
   }
+
   .input-group input {
     width: 100%;
+    max-width: 100%;
   }
+
   .input-group label {
     width: 100%;
   }
-  .link-group {
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+
+  .check-btn {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  a {
+    margin-top: 10px;
   }
 }

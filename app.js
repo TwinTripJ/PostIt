@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -23,6 +25,10 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
   res.render("main");
+});
+
+app.get("/get-kakao-api-key", (req, res) => {
+  res.json({ kakaoApiKey: process.env.KAKAO_API_KEY });
 });
 
 app.listen(port, () => {

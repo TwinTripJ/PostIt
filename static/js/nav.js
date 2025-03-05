@@ -29,6 +29,10 @@ function move(url) {
     });
 }
 
+function moveUrl(url) {
+  window.location.href = `/postit/${url}`;
+}
+
 // 로그인, 로그아웃
 document.addEventListener("DOMContentLoaded", async function () {
   const joinBox = document.querySelector(".joinBox");

@@ -1,3 +1,61 @@
+// 카카오 앱 키
+axios
+  .get("/get-kakao-api-key")
+  .then((response) => {
+    const kakaoApiKey = response.data.kakaoApiKey;
+
+    const script = document.createElement("script");
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&libraries=services`;
+    document.head.appendChild(script);
+  })
+  .catch((error) => {
+    console.error("카카오 API 키 로드 오류:", error);
+  });
+
+function sample6_execDaumPostcode() {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      var addr = ""; // 주소 변수
+      var extraAddr = ""; // 참고항목 변수
+
+      //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+      if (data.userSelectedType === "R") {
+        // 사용자가 도로명 주소를 선택했을 경우
+        addr = data.roadAddress;
+      } else {
+        // 사용자가 지번 주소를 선택했을 경우(J)
+        addr = data.jibunAddress;
+      }
+
+      // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+      if (data.userSelectedType === "R") {
+        // 법정동명이 있을 경우 추가 (법정리는 제외)
+        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝남
+        if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+          extraAddr += data.bname;
+        }
+        // 건물명이 있고, 공동주택일 경우
+        if (data.buildingName !== "" && data.apartment === "Y") {
+          extraAddr +=
+            extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
+        }
+        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열 생성
+        if (extraAddr !== "") {
+          extraAddr = " (" + extraAddr + ")";
+        }
+        document.getElementById("sample6_extraAddress").value = extraAddr;
+      } else {
+        document.getElementById("sample6_extraAddress").value = "";
+      }
+
+      document.getElementById("sample6_postcode").value = data.zonecode;
+      document.getElementById("sample6_address").value = addr;
+      // 커서를 상세주소 필드로 이동
+      document.getElementById("sample6_detailAddress").focus();
+    },
+  }).open();
+}
+
 // 아이디 중복 확인
 const idCheck = () => {
   const email = document.getElementById("email").value;
@@ -19,6 +77,26 @@ const idCheck = () => {
       Swal.fire("서버 오류가 발생했습니다.");
     });
 };
+
+// 비밀번호 중복 확인
+function passCheck() {
+  const pass = document.getElementById("pass").value;
+  const passCheck = document.getElementById("passCheck").value;
+  const alret = document.getElementById("alret");
+
+  if (pass === "" || passCheck === "") {
+    Swal.fire({
+      icon: "error",
+      text: "비밀번호가 비어있습니다.",
+    });
+  } else {
+    if (pass === passCheck) {
+      alret.innerText = "동일한 비밀번호입니다.";
+    } else {
+      alret.innerText = "비밀번호가 다릅니다.";
+    }
+  }
+}
 
 // 회원가입 함수
 const join = async () => {

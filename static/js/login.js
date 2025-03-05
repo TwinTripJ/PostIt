@@ -2,19 +2,20 @@ const loginCheck = () => {
   const id = document.getElementById("id").value;
   const pass = document.getElementById("pass").value;
   const data = { id, pass };
+  // 라우터 연결
   axios({
     method: "post",
-    url: `/login/check`,
+    url: `/user/loginUser`,
     data: data,
   })
     .then((res) => {
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
         axios
-          .get("/login/main_jwt")
+          .get("/")
           .then((response) => {
             if (response.status === 200) {
-              window.location.href = "/login/main_jwt";
+              window.location.href = "/";
             }
           })
           .catch((error) => {
@@ -37,3 +38,8 @@ const loginCheck = () => {
       });
     });
 };
+
+// 페이지 이동
+function moveUrl(url) {
+  window.location.href = `/postit/${url}`;
+}
