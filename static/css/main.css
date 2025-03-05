@@ -1,3 +1,8 @@
+body {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 /* 맨 위 이미지 */
 .topContainer {
   position: relative;

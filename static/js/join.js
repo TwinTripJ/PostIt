@@ -126,7 +126,6 @@ document.querySelector("form").addEventListener("submit", function (event) {
   let day = document.getElementById("birth-day").value;
 
   if (year === "출생 연도" || month === "월" || day === "일") {
-    // 경고창 꾸미기
     alert("출생 연도, 월, 일을 선택해주세요.");
     event.preventDefault();
   }
