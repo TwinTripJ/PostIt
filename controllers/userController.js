@@ -12,6 +12,12 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // 중복
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: "중복." });
+    }
+
     const user = await User.create({
       email,
       password: hashedPassword,
@@ -29,7 +35,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// 로그인 (JWT 토큰 발급)
+// 로그인
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -133,7 +139,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-// 사용자 삭제
+// 사용자 삭제 > 탈퇴로 변경할 것 !!
 const deleteUser = async (req, res) => {
   try {
     let id = req.params.id;

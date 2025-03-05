@@ -28,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255), // 대표 사진 저장
         allowNull: true,
       },
+      like_count: {
+        type: DataTypes.INTEGER(1000),
+      },
     },
     {
       timestamps: true,
