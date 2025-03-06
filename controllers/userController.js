@@ -10,13 +10,13 @@ const checkEmail = async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) {
-      return res.status(400).json({ message: "이메일을 입력해 주세요." });
+      return res.status(200).json({ message: "이메일을 입력해 주세요." });
     }
 
     const existingUser = await User.findOne({ where: { email: email } });
 
     if (existingUser) {
-      return res.status(400).json({ message: "이미 사용 중인 이메일입니다." });
+      return res.status(200).json({ message: "이미 사용 중인 이메일입니다." });
     }
     return res.status(200).json({ message: "사용 가능한 이메일입니다." });
   } catch (error) {
