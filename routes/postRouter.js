@@ -3,7 +3,7 @@ const postController = require("../controllers/postController");
 const router = require("express").Router();
 
 // 게시글 작성
-router.post("/createPost", postController.createPost);
+router.post("/create", postController.createPost);
 
 // 모든 게시글 조회
 router.get("/allPosts", postController.getAllPosts);
