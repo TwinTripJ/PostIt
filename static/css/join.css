@@ -178,11 +178,51 @@ input:active {
 }
 
 .gender {
+  padding: 0 20px;
   display: flex;
+  justify-content: space-between;
+}
+
+.genderContainer {
+  display: flex;
+  gap: 50px;
 }
 
 .custom-radio {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e7e2ed;
+  color: #444;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.custom-radio input {
+  display: none; /* 기본 라디오 버튼 숨김 */
+}
+
+/* 선택된 상태 */
+.custom-radio input:checked + span {
+  background-color: #bfb9c7;
+  color: white;
+  border: 2px solid #9b8faa;
+}
+
+/* 호버 효과 */
+.custom-radio:hover {
+  background-color: #d8d2e0;
+  transform: scale(1.05);
+}
+
+/* 선택된 라디오 버튼 */
+.custom-radio input:checked + span {
+  background-color: #bfb9c7;
+  color: white;
 }
 
 input[type="email"]:focus,
@@ -241,7 +281,6 @@ input[type="number"] {
 }
 
 /* 성별, 전화번호, 생일 그룹 */
-.gender,
 .birth,
 .input-group {
   display: flex;
@@ -258,8 +297,16 @@ input[type="number"] {
   margin-top: 10px;
 }
 
-#alret {
+.red {
+  font-size: small;
   color: red;
+  margin-top: 10px;
+}
+
+.green {
+  font-size: small;
+  color: green;
+  margin-top: 10px;
 }
 
 .link-group {

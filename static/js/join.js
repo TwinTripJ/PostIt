@@ -92,9 +92,9 @@ function passCheck() {
     });
   } else {
     if (pass === passCheck) {
-      alret.innerText = "동일한 비밀번호입니다.";
+      alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
     } else {
-      alret.innerText = "비밀번호가 다릅니다.";
+      alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
     }
   }
 }
