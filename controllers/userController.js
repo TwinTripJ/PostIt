@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const User = db.users;
+const User = db.User;
 
 // 아이디 중복 확인
 const checkEmail = async (req, res) => {
@@ -133,7 +133,7 @@ const getUserById = async (req, res) => {
   }
 };
 
-// 사용자 정보 업데이트
+// 사용자 정보 수정
 const updateUser = async (req, res) => {
   try {
     let id = req.params.id;
@@ -143,7 +143,9 @@ const updateUser = async (req, res) => {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
-    const [updated] = await User.update(updateData, { where: { id: id } });
+    const [updated] = await User.update(updateData, {
+      where: { id: id },
+    });
 
     if (!updated) {
       return res.status(404).json({ message: "업데이트할 사용자 없음" });
