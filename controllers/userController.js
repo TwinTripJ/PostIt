@@ -12,7 +12,8 @@ const checkEmail = async (req, res) => {
     if (!email) {
       return res.status(400).json({ message: "이메일을 입력해 주세요." });
     }
-    const existingUser = await User.findOne({ where: { email } });
+
+    const existingUser = await User.findOne({ where: { email: email } });
 
     if (existingUser) {
       return res.status(400).json({ message: "이미 사용 중인 이메일입니다." });
@@ -43,7 +44,10 @@ const registerUser = async (req, res) => {
       .replace(/[^0-9]/g, "")
       .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const formatBirth = new Date(birthDate).toISOString().split("T")[0];
+
     const user = await User.create({
       email,
       username,
@@ -67,16 +71,16 @@ const registerUser = async (req, res) => {
 // 로그인
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, pass } = req.body;
 
     // 사용자 확인
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email: email } });
     if (!user) {
       return res.status(404).json({ message: "사용자를 찾을 수 없음" });
     }
 
     // 비밀번호 검증
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(pass, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "비밀번호가 일치하지 않음" });
     }

@@ -1,7 +1,7 @@
 const loginCheck = () => {
-  const id = document.getElementById("id").value;
+  const email = document.getElementById("email").value;
   const pass = document.getElementById("pass").value;
-  const data = { id, pass };
+  const data = { email, pass };
   // 라우터 연결
   axios({
     method: "post",
