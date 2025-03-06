@@ -36,12 +36,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(35),
         allowNull: false,
       },
-      address: {
+      address_main: {
+        // 도로명 주소
+        type: DataTypes.STRING(255),
+        allowNull: false,
+      },
+      address_detail: {
+        // 상세주소
         type: DataTypes.STRING(255),
         allowNull: true,
       },
       gender: {
-        type: DataTypes.ENUM("남", "여"),
+        type: DataTypes.ENUM("man", "woman"),
         allowNull: false,
       },
       birthdate: {
@@ -49,11 +55,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       phone: {
-        type: DataTypes.STRING(15),
+        type: DataTypes.STRING(13),
         allowNull: false,
         unique: true,
         validate: {
-          is: /^[0-9]{10,11}$/,
+          is: /^01[0-9]-\d{3,4}-\d{4}$/,
         },
       },
     },

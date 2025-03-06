@@ -23,12 +23,18 @@ module.exports = {
         type: Sequelize.STRING(35),
         allowNull: false,
       },
-      address: {
+      address_main: {
+        // 도로명 주소
+        type: Sequelize.STRING(255),
+        allowNull: false,
+      },
+      address_detail: {
+        // 상세주소
         type: Sequelize.STRING(255),
         allowNull: true,
       },
       gender: {
-        type: Sequelize.ENUM("남", "여"),
+        type: Sequelize.ENUM("man", "woman"),
         allowNull: false,
       },
       birthdate: {
@@ -36,7 +42,7 @@ module.exports = {
         allowNull: false,
       },
       phone: {
-        type: Sequelize.STRING(15),
+        type: Sequelize.STRING(13),
         allowNull: false,
         unique: true,
       },
