@@ -69,6 +69,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       const logoutBtn = document.createElement("a");
       logoutBtn.href = "#";
       logoutBtn.textContent = "로그아웃";
+      logoutBtn.onclick = function () {
+        logout();
+      };
 
       logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("token");
