@@ -84,7 +84,7 @@ body {
 /* 로그인 폼 */
 .join-box {
   position: absolute;
-  top: 120%;
+  top: 123%;
   left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -186,12 +186,12 @@ input:active {
   font-size: 17px;
 }
 
+/* 성별 radio */
 .genderContainer {
   display: flex;
   gap: 50px;
 }
 
-/* 성별 radio */
 .custom-radio {
   display: flex;
   align-items: center;
@@ -351,13 +351,13 @@ input[type="number"] {
 
 .red {
   font-size: small;
-  color: red;
+  color: rgb(212, 28, 28);
   margin-top: 10px;
 }
 
 .green {
   font-size: small;
-  color: green;
+  color: rgb(187, 255, 187);
   margin-top: 10px;
 }
 
@@ -397,6 +397,10 @@ input[type="number"] {
   width: 100%;
 }
 
+.flex p {
+  margin-top: 15px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .join-box {
@@ -409,6 +413,11 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+  .join-box {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
   .logo img {
     max-width: 300px;
   }
@@ -452,5 +461,13 @@ input[type="number"] {
 
   a {
     margin-top: 10px;
+  }
+
+  .mainLogo {
+    margin-top: -10px;
+  }
+
+  .genderContainer {
+    gap: 20px;
   }
 }
