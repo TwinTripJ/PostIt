@@ -12,10 +12,10 @@ const sequelize = new Sequelize(
   config
 );
 
-db.users = require("./userModel.js")(sequelize, DataTypes);
-db.categories = require("./categoryModel.js")(sequelize, DataTypes);
-db.likes = require("./likeModel.js")(sequelize, DataTypes);
-db.posts = require("./postModel.js")(sequelize, DataTypes);
+db.User = require("./userModel.js")(sequelize, DataTypes);
+db.Category = require("./categoryModel.js")(sequelize, DataTypes);
+db.Like = require("./likeModel.js")(sequelize, DataTypes);
+db.Post = require("./postModel.js")(sequelize, DataTypes);
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
