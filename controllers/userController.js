@@ -27,7 +27,16 @@ const checkEmail = async (req, res) => {
 // 회원가입
 const registerUser = async (req, res) => {
   try {
-    const { email, username, password, address, gender, age, phone } = req.body;
+    const {
+      email,
+      username,
+      password,
+      address_main,
+      address_detail,
+      gender,
+      age,
+      phone,
+    } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -41,7 +50,8 @@ const registerUser = async (req, res) => {
       email,
       username,
       password: hashedPassword,
-      address: address || null,
+      address_main,
+      address_detail,
       gender,
       age,
       phone,
