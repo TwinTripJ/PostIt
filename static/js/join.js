@@ -192,8 +192,12 @@ const join = async () => {
     });
 
     if (response.status === 200) {
-      alert("회원가입이 완료되었습니다!");
-      location.reload();
+      Swal.fire({
+        icon: "success",
+        title: "로그인 성공하였습니다!",
+      }).then((res) => {
+        window.location.href = "/";
+      });
     }
   } catch (error) {
     alert("회원가입 실패");
