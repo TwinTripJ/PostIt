@@ -54,8 +54,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 네비게이션 로그인, 로그아웃 버튼
   if (token) {
     try {
-      // 토큰 검증 따로 만드는 게 좋을 것 같음
-      const response = await axios("/user/", {
+      const response = await axios("/user/getUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

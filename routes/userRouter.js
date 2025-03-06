@@ -18,6 +18,13 @@ router.get(
 
 // 특정 유저 확인 (id)
 router.get(
+  "/getUser",
+  userController.authenticateToken,
+  userController.getUserById
+);
+
+// 특정 유저 확인 (id)
+router.get(
   "/:id",
   userController.authenticateToken,
   userController.getUserById
