@@ -34,18 +34,22 @@ const registerUser = async (req, res) => {
       address_main,
       address_detail,
       gender,
-      age,
+      birthDate,
       phone,
     } = req.body;
 
+    const pw =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!pw.test(password)) {
+      return res.status(400).json({
+        message:
+          "비밀번호는 최소 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다.",
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 중복
-    // const existingUser = await User.findOne({ where: { email } });
-    // if (existingUser) {
-    //   return res.status(400).json({ message: "중복." });
-    // }
-
+    const formatBirth = new Date(birthDate).toISOString().split("T")[0];
     const user = await User.create({
       email,
       username,
@@ -53,7 +57,7 @@ const registerUser = async (req, res) => {
       address_main,
       address_detail,
       gender,
-      age,
+      formatBirth,
       phone,
     });
 

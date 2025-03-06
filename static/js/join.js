@@ -111,12 +111,12 @@ const join = async () => {
     "input[name='middleNumber']"
   ).value;
   const lastNumber = document.querySelector("input[name='lastNumber']").value;
-  const phone = `${areaCode}-${middleNumber}-${lastNumber}`;
+  const phone = `${areaCode}${middleNumber}${lastNumber}`;
 
   const birthYear = document.getElementById("birth-year").value;
   const birthMonth = document.getElementById("birth-month").value;
   const birthDay = document.getElementById("birth-day").value;
-  const birthDate = `${birthYear}${birthMonth}${birthDay}`;
+  const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
 
   const address_main = document.getElementById("address").value;
   const address_detail = document.getElementById("detailAddress").value;
