@@ -164,7 +164,7 @@ const join = async () => {
     "input[name='middleNumber']"
   ).value;
   const lastNumber = document.querySelector("input[name='lastNumber']").value;
-  const phone = `${areaCode}${middleNumber}${lastNumber}`;
+  const phone = `${areaCode}-${middleNumber}-${lastNumber}`;
 
   const birthYear = document.getElementById("birth-year").value;
   const birthMonth = document.getElementById("birth-month").value;

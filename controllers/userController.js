@@ -39,10 +39,6 @@ const registerUser = async (req, res) => {
       phone,
     } = req.body;
 
-    const formatPhone = phone
-      .replace(/[^0-9]/g, "")
-      .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
-
     const hashedPassword = await bcrypt.hash(password, 10);
     const formatBirth = new Date(birthDate).toISOString().split("T")[0];
 
@@ -54,7 +50,6 @@ const registerUser = async (req, res) => {
       address_detail,
       gender,
       birthDate: formatBirth,
-      phone: formatPhone,
       formatBirth,
       phone,
     });
