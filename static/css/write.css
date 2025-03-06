@@ -37,6 +37,7 @@ body {
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .titleBox {
@@ -51,12 +52,12 @@ body {
 #titleName {
   font-size: large;
   color: white;
+  width: 50px;
 }
 
 .titleBox input {
   width: 700px;
   max-width: 100%;
-  min-width: 120px;
   border: none;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -105,4 +106,48 @@ option {
 .editor-container {
   width: 100%;
   max-width: 900px;
+  margin-bottom: 30px;
+}
+
+.saveBtn {
+  width: 200px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  color: rgb(88, 88, 88);
+  background-color: #e7e2ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.saveBtn:hover {
+  background-color: #ddd1ee;
+  transform: scale(1.05);
+  color: white;
+}
+
+.saveBtn:active {
+  background-color: #e7e2ee;
+  transform: scale(0.98);
+}
+
+.saveBtn:disabled {
+  background-color: white;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 620px) {
+  #titleName {
+    width: 70px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #titleName {
+    width: 100px;
+  }
+  .formContainer {
+    top: 70px;
+  }
 }

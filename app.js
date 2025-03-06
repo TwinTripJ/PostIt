@@ -10,7 +10,7 @@ const mainRouter = require("./routes/mainRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const postRouter = require("./routes/postRouter");
-const { upload } = require("./controllers/adminController");
+// const { upload } = require("./controllers/adminController");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,12 +35,12 @@ app.get("/get-kakao-api-key", (req, res) => {
   res.json({ kakaoApiKey: process.env.KAKAO_API_KEY });
 });
 
-app.post("/upload", upload.single("files"), (req, res) => {
-  res.json({
-    imageUrl: `/uploads/${req.file.filename}`,
-    title: req.body.title,
-  });
-});
+// app.post("/upload", upload.single("files"), (req, res) => {
+//   res.json({
+//     imageUrl: `/uploads/${req.file.filename}`,
+//     title: req.body.title,
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -1,52 +1,3 @@
-// 카카오 앱 키
-axios
-  .get("/get-kakao-api-key")
-  .then((response) => {
-    const kakaoApiKey = response.data.kakaoApiKey;
-
-    const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&libraries=services`;
-    document.head.appendChild(script);
-  })
-  .catch((error) => {
-    console.error("카카오 API 키 로드 오류:", error);
-  });
-
-function sample6_execDaumPostcode() {
-  new daum.Postcode({
-    oncomplete: function (data) {
-      var addr = "";
-      var extraAddr = "";
-
-      if (data.userSelectedType === "R") {
-        addr = data.roadAddress;
-      } else {
-        addr = data.jibunAddress;
-      }
-
-      if (data.userSelectedType === "R") {
-        if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
-          extraAddr += data.bname;
-        }
-        if (data.buildingName !== "" && data.apartment === "Y") {
-          extraAddr +=
-            extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
-        }
-        if (extraAddr !== "") {
-          extraAddr = " (" + extraAddr + ")";
-        }
-        document.getElementById("sample6_extraAddress").value = extraAddr;
-      } else {
-        document.getElementById("sample6_extraAddress").value = "";
-      }
-
-      document.getElementById("sample6_postcode").value = data.zonecode;
-      document.getElementById("address").value = addr;
-      document.getElementById("detailAddress").focus();
-    },
-  }).open();
-}
-
 // 버튼 활성화, 비활성화 체크
 let emailChecked = false;
 let passwordsMatch = false;
@@ -56,11 +7,56 @@ const joinBtn = document.querySelector(".joinBtn");
 
 const enableJoinButton = () => {
   if (emailChecked && passwordsMatch && allFieldsFilled) {
-    joinBtn.disabled = true;
-  } else {
     joinBtn.disabled = false;
+  } else {
+    joinBtn.disabled = true;
   }
 };
+
+// 모든 필드가 채워졌는지 확인
+const checkAllFields = () => {
+  const email = document.getElementById("email").value;
+  const username = document.querySelector("input[name='name']").value;
+  const pass = document.getElementById("pass").value;
+  const passCheck = document.getElementById("passCheck").value;
+  const areaCode = document.querySelector("input[name='areaCode']").value;
+  const middleNumber = document.querySelector(
+    "input[name='middleNumber']"
+  ).value;
+  const lastNumber = document.querySelector("input[name='lastNumber']").value;
+
+  const birthYear = document.getElementById("birth-year").value;
+  const birthMonth = document.getElementById("birth-month").value;
+  const birthDay = document.getElementById("birth-day").value;
+
+  if (
+    email &&
+    username &&
+    pass &&
+    passCheck &&
+    areaCode &&
+    middleNumber &&
+    lastNumber &&
+    birthYear !== "출생 연도" &&
+    birthMonth !== "월" &&
+    birthDay !== "일" &&
+    emailChecked &&
+    passwordsMatch
+  ) {
+    allFieldsFilled = true;
+  } else {
+    allFieldsFilled = false;
+  }
+
+  enableJoinButton();
+};
+
+document.querySelectorAll("input").forEach((input) => {
+  input.addEventListener("input", checkAllFields);
+});
+document.querySelectorAll("select").forEach((select) => {
+  select.addEventListener("change", checkAllFields);
+});
 
 // 아이디 중복 확인
 const idCheck = () => {
@@ -80,11 +76,10 @@ const idCheck = () => {
 
       if (response.data.message === "사용 가능한 이메일입니다.") {
         emailChecked = true;
-        enableJoinButton();
       } else {
         emailChecked = false;
-        enableJoinButton();
       }
+      checkAllFields();
     })
     .catch((error) => {
       console.error("중복 확인 오류:", error);
@@ -107,49 +102,23 @@ function passCheck() {
     if (pass === passCheck) {
       alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
       passwordsMatch = true;
-      enableJoinButton();
     } else {
       alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
       passwordsMatch = false;
-      enableJoinButton();
     }
+    checkAllFields();
   }
 }
 
-// 모든 필드가 채워졌는지 확인
-const checkAllFields = () => {
-  const email = document.getElementById("email").value;
-  const username = document.querySelector("input[name='name']").value;
-  const pass = document.getElementById("pass").value;
-  const passCheck = document.getElementById("passCheck").value;
+// 전화번호 중복 확인
+function phoneCheck() {
   const areaCode = document.querySelector("input[name='areaCode']").value;
   const middleNumber = document.querySelector(
     "input[name='middleNumber']"
   ).value;
   const lastNumber = document.querySelector("input[name='lastNumber']").value;
-  const address = document.getElementById("address").value;
-  const detailAddress = document.getElementById("detailAddress").value;
-
-  if (
-    email &&
-    username &&
-    pass &&
-    passCheck &&
-    areaCode &&
-    middleNumber &&
-    lastNumber &&
-    address &&
-    detailAddress &&
-    emailChecked &&
-    passwordsMatch
-  ) {
-    allFieldsFilled = true;
-  } else {
-    allFieldsFilled = false;
-  }
-
-  enableJoinButton();
-};
+  const phone = `${areaCode}-${middleNumber}-${lastNumber}`;
+}
 
 // 회원가입 함수
 const join = async () => {
@@ -171,9 +140,6 @@ const join = async () => {
   const birthDay = document.getElementById("birth-day").value;
   const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
 
-  const address_main = document.getElementById("address").value;
-  const address_detail = document.getElementById("detailAddress").value;
-
   if (password !== passwordCheck) {
     alert("비밀번호가 일치하지 않습니다.");
     return;
@@ -187,8 +153,6 @@ const join = async () => {
       gender,
       phone,
       birthDate,
-      address_main,
-      address_detail,
     });
 
     if (response.status === 200) {
@@ -256,17 +220,5 @@ day.addEventListener("focus", function () {
 
       this.appendChild(dayOption);
     }
-  }
-});
-
-// 생년월일 기본값일 경우
-document.querySelector("form").addEventListener("submit", function (event) {
-  let year = document.getElementById("birth-year").value;
-  let month = document.getElementById("birth-month").value;
-  let day = document.getElementById("birth-day").value;
-
-  if (year === "출생 연도" || month === "월" || day === "일") {
-    alert("출생 연도, 월, 일을 선택해주세요.");
-    event.preventDefault();
   }
 });

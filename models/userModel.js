@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       address_main: {
         // 도로명 주소
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       address_detail: {
         // 상세주소

@@ -60,7 +60,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .caroselImg {
@@ -204,6 +204,12 @@ body {
   font-weight: 600;
   font-style: normal;
   color: rgb(101, 100, 100);
+}
+
+@media screen and (max-width: 900px) {
+  .categorys {
+    top: 220px;
+  }
 }
 
 @media screen and (max-width: 700px) {

@@ -223,8 +223,13 @@ input:active {
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .loginBox {
-    width: 100%;
     padding: 30px;
+    margin: 0 7px;
+    overflow: hidden;
+  }
+
+  .logo img {
+    margin: 0 7px;
   }
 }
 
@@ -241,12 +246,6 @@ input:active {
     height: 100vh;
     min-height: 100vh;
     flex-direction: column;
-  }
-
-  .loginBox {
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
   }
 
   .input-group {

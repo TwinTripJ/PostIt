@@ -26,7 +26,7 @@ module.exports = {
       address_main: {
         // 도로명 주소
         type: Sequelize.STRING(255),
-        allowNull: false,
+        allowNull: true,
       },
       address_detail: {
         // 상세주소
