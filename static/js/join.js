@@ -118,6 +118,9 @@ const join = async () => {
   const birthDay = document.getElementById("birth-day").value;
   const birthDate = `${birthYear}${birthMonth}${birthDay}`;
 
+  const address_main = document.getElementById("address").value;
+  const address_detail = document.getElementById("detailAddress").value;
+
   if (password !== passwordCheck) {
     alert("비밀번호가 일치하지 않습니다.");
     return;
@@ -131,6 +134,8 @@ const join = async () => {
       gender,
       phone,
       birthDate,
+      address_main,
+      address_detail,
     });
 
     if (response.status === 200) {
