@@ -44,6 +44,19 @@ const registerUser = async (req, res) => {
       .replace(/[^0-9]/g, "")
       .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
 
+    const pw =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!pw.test(password)) {
+      return res.status(400).json({
+        message:
+          "비밀번호는 최소 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다.",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+
+    const formatBirth = new Date(birthDate).toISOString().split("T")[0];
     const user = await User.create({
       email,
       username,
@@ -53,6 +66,8 @@ const registerUser = async (req, res) => {
       gender,
       birthDate: formatBirth,
       phone: formatPhone,
+      formatBirth,
+      phone,
     });
 
     res.status(200).json({ message: "회원가입 성공", user });
