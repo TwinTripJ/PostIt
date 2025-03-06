@@ -49,9 +49,9 @@ function sample6_execDaumPostcode() {
       }
 
       document.getElementById("sample6_postcode").value = data.zonecode;
-      document.getElementById("sample6_address").value = addr;
+      document.getElementById("address").value = addr;
       // 커서를 상세주소 필드로 이동
-      document.getElementById("sample6_detailAddress").focus();
+      document.getElementById("detailAddress").focus();
     },
   }).open();
 }
@@ -60,6 +60,7 @@ function sample6_execDaumPostcode() {
 const idCheck = () => {
   const email = document.getElementById("email").value;
   const data = { email };
+  console.log(data);
   if (!email) {
     Swal.fire("아이디를 입력해 주세요.");
     return;
