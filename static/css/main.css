@@ -17,12 +17,14 @@ body {
 
 .logo {
   display: flex;
+  flex-direction: column;
   position: absolute;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   top: -30px;
+  gap: 30px;
   opacity: 0;
   transform: translateY(50px);
   animation: moveUpLogo 1s forwards;
@@ -42,6 +44,23 @@ body {
 
 .logo img {
   max-width: 100%;
+}
+
+.write {
+  display: flex;
+  width: 300px;
+  height: 50px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.7) 30%,
+    rgba(255, 255, 255, 0.7) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .caroselImg {
@@ -167,7 +186,6 @@ body {
 .text h4 {
   font-family: "Lobster", sans-serif;
   font-weight: 400;
-  font-style: normal;
   font-style: italic;
 }
 
@@ -179,4 +197,17 @@ body {
 .ProfileContainer {
   position: sticky;
   width: 30%;
+}
+
+.write {
+  font-family: "Gothic A1", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: rgb(101, 100, 100);
+}
+
+@media screen and (max-width: 700px) {
+  .categorys {
+    display: none;
+  }
 }

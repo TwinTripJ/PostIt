@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/static/css/write.css" />
   </head>
   <body>
+    <%- include("nav") %>
     <!-- 글쓰기 -->
     <!-- 제목 -->
     <div class="titleBox">
@@ -20,8 +21,9 @@
     <div class="image">
       <input type="file" multiple />
     </div>
-    <!-- 토스에디터/내용 -->
-    <span id="content"></span>
+    <div class="editor-container">
+      <div id="detailEditor"></div>
+    </div>
     <button class="saveBtn">발행</button>
   </body>
   <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>

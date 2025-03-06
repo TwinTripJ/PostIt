@@ -2,7 +2,7 @@ window.addEventListener("scroll", function () {
   let header = document.querySelector(".header");
   if (window.scrollY > 0) {
     header.style.position = "fixed";
-    header.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+    header.style.backgroundColor = "rgba(74, 68, 113, 0.7)";
   } else {
     header.style.position = "absolute";
     header.style.backgroundColor = "transparent";
