@@ -1,12 +1,13 @@
 // 버튼 활성화, 비활성화 체크
 let emailChecked = false;
 let passwordsMatch = false;
+let phoneChecked = false;
 let allFieldsFilled = false;
 
 const joinBtn = document.querySelector(".joinBtn");
 
 const enableJoinButton = () => {
-  if (emailChecked && passwordsMatch && allFieldsFilled) {
+  if (emailChecked && passwordsMatch && allFieldsFilled && phoneChecked) {
     joinBtn.disabled = false;
   } else {
     joinBtn.disabled = true;
@@ -118,6 +119,33 @@ function phoneCheck() {
   ).value;
   const lastNumber = document.querySelector("input[name='lastNumber']").value;
   const phone = `${areaCode}-${middleNumber}-${lastNumber}`;
+
+  const data = { phone };
+
+  if (!areaCode || !middleNumber || !lastNumber) {
+    Swal.fire("전화번호를 입력해 주세요.");
+    return;
+  }
+
+  axios({
+    method: "post",
+    url: `/user/phoneCheck`,
+    data: data,
+  })
+    .then((response) => {
+      Swal.fire(response.data.message);
+
+      if (response.data.message === "가입 가능한 전화번호입니다.") {
+        phoneChecked = true;
+      } else {
+        phoneChecked = false;
+      }
+      checkAllFields();
+    })
+    .catch((error) => {
+      console.error("중복 확인 오류:", error);
+      Swal.fire("서버 오류가 발생했습니다.");
+    });
 }
 
 // 회원가입 함수
@@ -158,7 +186,8 @@ const join = async () => {
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "로그인 성공하였습니다!",
+        title: "회원가입 성공하였습니다!",
+        text: "로그인 후 이용하여 주세요.",
       }).then((res) => {
         window.location.href = "/";
       });

@@ -5,6 +5,9 @@ const router = require("express").Router();
 // 아이디 중복 확인
 router.post("/check", userController.checkEmail);
 
+// 전화번호 중복 확인
+router.post("/phoneCheck", userController.checkPhone);
+
 // 유저 추가
 router.post("/addUser", userController.registerUser);
 

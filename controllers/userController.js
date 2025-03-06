@@ -25,6 +25,23 @@ const checkEmail = async (req, res) => {
   }
 };
 
+// 전화번호 중복 확인
+const checkPhone = async (req, res) => {
+  try {
+    const { phone } = req.body;
+
+    const existingUser = await User.findOne({ where: { phone: phone } });
+
+    if (existingUser) {
+      return res.status(200).json({ message: "이미 가입된 전화번호입니다." });
+    }
+    return res.status(200).json({ message: "가입 가능한 전화번호입니다." });
+  } catch (error) {
+    console.error("이메일 중복 확인 오류:", error);
+    return res.status(500).json({ message: "서버 오류가 발생했습니다." });
+  }
+};
+
 // 회원가입
 const registerUser = async (req, res) => {
   try {
@@ -213,4 +230,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByIdNav,
+  checkPhone,
 };
