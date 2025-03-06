@@ -39,6 +39,7 @@ const registerUser = async (req, res) => {
       phone,
     } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     const formatPhone = phone
       .replace(/[^0-9]/g, "")
       .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
