@@ -1,6 +1,5 @@
 // 에디터
 const ed = document.querySelector("#editor");
-const comment = ed.dataset.inputComment;
 
 const detailEditor = new toastui.Editor({
   el: document.querySelector("#detailEditor"),
@@ -8,11 +7,12 @@ const detailEditor = new toastui.Editor({
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
   initialValue: "상세 정보를 입력해주세요.",
+
 });
 // 글 저장
 const write = async () => {
   const title = document.querySelector("input[name='title']").value;
-  const gender = document.querySelector("input[name='gender']:checked").value;
+  const content = editor.getMarkdown();
 
   try {
     const response = await axios.post("/post/create", {});
