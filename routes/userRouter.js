@@ -20,7 +20,7 @@ router.get(
 router.get(
   "/getUser",
   userController.authenticateToken,
-  userController.getUserById
+  userController.getUserByIdNav
 );
 
 // 특정 유저 확인 (id)
