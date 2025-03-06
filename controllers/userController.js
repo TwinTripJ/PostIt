@@ -44,7 +44,6 @@ const registerUser = async (req, res) => {
       .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const formatBirth = new Date(birthDate).toISOString().split("T")[0];
 
     const user = await User.create({
