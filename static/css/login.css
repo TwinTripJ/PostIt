@@ -147,7 +147,7 @@ body {
 }
 
 .input-group input::placeholder {
-  color: rgba(96, 96, 96, 0.675);
+  color: rgba(62, 62, 62, 0.734);
 }
 
 input:focus {
