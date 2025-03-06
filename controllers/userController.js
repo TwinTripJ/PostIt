@@ -38,6 +38,12 @@ const registerUser = async (req, res) => {
       phone,
     } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const formatBirth = new Date(birthDate).toISOString().split("T")[0];
+    const formatPhone = phone
+      .replace(/[^0-9]/g, "")
+      .replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
+
     const pw =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!pw.test(password)) {
@@ -49,6 +55,7 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+
     const formatBirth = new Date(birthDate).toISOString().split("T")[0];
     const user = await User.create({
       email,
@@ -57,11 +64,13 @@ const registerUser = async (req, res) => {
       address_main,
       address_detail,
       gender,
+      birthDate: formatBirth,
+      phone: formatPhone,
       formatBirth,
       phone,
     });
 
-    res.status(201).json({ message: "회원가입 성공", user });
+    res.status(200).json({ message: "회원가입 성공", user });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "회원가입 실패", error: err.message });
