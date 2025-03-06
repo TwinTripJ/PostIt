@@ -15,31 +15,23 @@ axios
 function sample6_execDaumPostcode() {
   new daum.Postcode({
     oncomplete: function (data) {
-      var addr = ""; // 주소 변수
-      var extraAddr = ""; // 참고항목 변수
+      var addr = "";
+      var extraAddr = "";
 
-      //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
       if (data.userSelectedType === "R") {
-        // 사용자가 도로명 주소를 선택했을 경우
         addr = data.roadAddress;
       } else {
-        // 사용자가 지번 주소를 선택했을 경우(J)
         addr = data.jibunAddress;
       }
 
-      // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
       if (data.userSelectedType === "R") {
-        // 법정동명이 있을 경우 추가 (법정리는 제외)
-        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝남
         if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
           extraAddr += data.bname;
         }
-        // 건물명이 있고, 공동주택일 경우
         if (data.buildingName !== "" && data.apartment === "Y") {
           extraAddr +=
             extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
         }
-        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열 생성
         if (extraAddr !== "") {
           extraAddr = " (" + extraAddr + ")";
         }
@@ -50,11 +42,50 @@ function sample6_execDaumPostcode() {
 
       document.getElementById("sample6_postcode").value = data.zonecode;
       document.getElementById("address").value = addr;
-      // 커서를 상세주소 필드로 이동
       document.getElementById("detailAddress").focus();
     },
   }).open();
 }
+
+// 버튼 활성화, 비활성화 체크
+let emailChecked = false;
+let passwordsMatch = false;
+let allFieldsFilled = false;
+
+// 모든 필드가 채워졌는지 확인
+const checkAllFields = () => {
+  const email = document.getElementById("email").value;
+  const username = document.querySelector("input[name='name']").value;
+  const pass = document.getElementById("pass").value;
+  const passCheck = document.getElementById("passCheck").value;
+  const areaCode = document.querySelector("input[name='areaCode']").value;
+  const middleNumber = document.querySelector(
+    "input[name='middleNumber']"
+  ).value;
+  const lastNumber = document.querySelector("input[name='lastNumber']").value;
+  const address = document.getElementById("address").value;
+  const detailAddress = document.getElementById("detailAddress").value;
+
+  if (
+    email &&
+    username &&
+    pass &&
+    passCheck &&
+    areaCode &&
+    middleNumber &&
+    lastNumber &&
+    address &&
+    detailAddress &&
+    emailChecked &&
+    passwordsMatch
+  ) {
+    allFieldsFilled = true;
+  } else {
+    allFieldsFilled = false;
+  }
+
+  enableJoinButton();
+};
 
 // 아이디 중복 확인
 const idCheck = () => {
@@ -72,6 +103,14 @@ const idCheck = () => {
   })
     .then((response) => {
       Swal.fire(response.data.message);
+
+      if (response.data.message === "사용 가능한 이메일입니다.") {
+        submitButton.disabled = false;
+        enableJoinButton();
+      } else {
+        submitButton.disabled = true;
+        enableJoinButton();
+      }
     })
     .catch((error) => {
       console.error("중복 확인 오류:", error);
@@ -93,8 +132,10 @@ function passCheck() {
   } else {
     if (pass === passCheck) {
       alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+      passwordsMatch = true;
     } else {
       alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+      passwordsMatch = false;
     }
   }
 }
