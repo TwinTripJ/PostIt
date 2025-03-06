@@ -280,6 +280,13 @@ input[type="number"] {
   transform: scale(0.98);
 }
 
+.joinBtn:disabled {
+  background-color: #d1c9d7;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 /* 성별, 전화번호, 생일 그룹 */
 .birth,
 .input-group {
