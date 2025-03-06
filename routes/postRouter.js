@@ -16,3 +16,5 @@ router.put("/:id", postController.updatePost);
 
 // 게시글 삭제
 router.delete("/:id", postController.deletePost);
+
+module.exports = router;
