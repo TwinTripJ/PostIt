@@ -202,6 +202,30 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// 아이디 찾기
+const findId = async (req, res) => {
+  try {
+    const { username, phone } = req.body;
+
+    if (!username || !phone) {
+      return res.status(404).json({ message: "이름과 전화번호를 입력하세요" });
+    }
+
+    const user = await User.findOne({ where: { username, phone } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "해당 정보를 가진 아이디가 없습니다" });
+    }
+
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "서버 오류 발생", error: err.message });
+  }
+};
+
 // 컨트롤러 내보내기
 module.exports = {
   checkEmail,
@@ -213,4 +237,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByIdNav,
+  findId,
 };
