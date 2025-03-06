@@ -42,17 +42,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const token = localStorage.getItem("token");
 
-  // 토글 안 아이콘들
   if (token) {
-    loginBefore.style.display = "block";
-    loginAfter.style.display = "none";
-  } else {
     loginBefore.style.display = "none";
     loginAfter.style.display = "block";
-  }
 
-  // 네비게이션 로그인, 로그아웃 버튼
-  if (token) {
     try {
       const response = await axios(`/user/getUser`, {
         method: "GET",
@@ -66,11 +59,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       // 유저 이름 추가
       const userNameElem = document.createElement("span");
+      userNameElem.classList.add("white"); // white 클래스 추가
       userNameElem.textContent = `${response.data.username} 님`;
       userNameElem.style.marginRight = "10px";
 
       const logoutDiv = document.createElement("div");
-      logoutDiv.classList.add("join");
+      logoutDiv.classList.add("logout");
+
       const logoutBtn = document.createElement("a");
       logoutBtn.href = "#";
       logoutBtn.textContent = "로그아웃";
@@ -80,10 +75,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         location.reload();
       });
 
+      logoutDiv.appendChild(logoutBtn);
+
       joinBox.appendChild(userNameElem);
-      joinBox.appendChild(logoutBtn);
+      joinBox.appendChild(logoutDiv);
     } catch (error) {
       console.error(error);
     }
+  } else {
+    loginBefore.style.display = "block";
+    loginAfter.style.display = "none";
   }
 });
