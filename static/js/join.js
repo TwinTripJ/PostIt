@@ -52,6 +52,70 @@ let emailChecked = false;
 let passwordsMatch = false;
 let allFieldsFilled = false;
 
+const joinBtn = document.querySelector(".joinBtn");
+
+const enableJoinButton = () => {
+  if (emailChecked && passwordsMatch && allFieldsFilled) {
+    joinBtn.disabled = true;
+  } else {
+    joinBtn.disabled = false;
+  }
+};
+
+// 아이디 중복 확인
+const idCheck = () => {
+  const email = document.getElementById("email").value;
+  const data = { email };
+  if (!email) {
+    Swal.fire("아이디를 입력해 주세요.");
+    return;
+  }
+  axios({
+    method: "post",
+    url: `/user/check`,
+    data: data,
+  })
+    .then((response) => {
+      Swal.fire(response.data.message);
+
+      if (response.data.message === "사용 가능한 이메일입니다.") {
+        emailChecked = true;
+        enableJoinButton();
+      } else {
+        emailChecked = false;
+        enableJoinButton();
+      }
+    })
+    .catch((error) => {
+      console.error("중복 확인 오류:", error);
+      Swal.fire("서버 오류가 발생했습니다.");
+    });
+};
+
+// 비밀번호 중복 확인
+function passCheck() {
+  const pass = document.getElementById("pass").value;
+  const passCheck = document.getElementById("passCheck").value;
+  const alret = document.getElementById("alret");
+
+  if (pass === "" || passCheck === "") {
+    Swal.fire({
+      icon: "error",
+      text: "비밀번호가 비어있습니다.",
+    });
+  } else {
+    if (pass === passCheck) {
+      alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+      passwordsMatch = true;
+      enableJoinButton();
+    } else {
+      alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+      passwordsMatch = false;
+      enableJoinButton();
+    }
+  }
+}
+
 // 모든 필드가 채워졌는지 확인
 const checkAllFields = () => {
   const email = document.getElementById("email").value;
@@ -86,59 +150,6 @@ const checkAllFields = () => {
 
   enableJoinButton();
 };
-
-// 아이디 중복 확인
-const idCheck = () => {
-  const email = document.getElementById("email").value;
-  const data = { email };
-  console.log(data);
-  if (!email) {
-    Swal.fire("아이디를 입력해 주세요.");
-    return;
-  }
-  axios({
-    method: "post",
-    url: `/user/check`,
-    data: data,
-  })
-    .then((response) => {
-      Swal.fire(response.data.message);
-
-      if (response.data.message === "사용 가능한 이메일입니다.") {
-        submitButton.disabled = false;
-        enableJoinButton();
-      } else {
-        submitButton.disabled = true;
-        enableJoinButton();
-      }
-    })
-    .catch((error) => {
-      console.error("중복 확인 오류:", error);
-      Swal.fire("서버 오류가 발생했습니다.");
-    });
-};
-
-// 비밀번호 중복 확인
-function passCheck() {
-  const pass = document.getElementById("pass").value;
-  const passCheck = document.getElementById("passCheck").value;
-  const alret = document.getElementById("alret");
-
-  if (pass === "" || passCheck === "") {
-    Swal.fire({
-      icon: "error",
-      text: "비밀번호가 비어있습니다.",
-    });
-  } else {
-    if (pass === passCheck) {
-      alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
-      passwordsMatch = true;
-    } else {
-      alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
-      passwordsMatch = false;
-    }
-  }
-}
 
 // 회원가입 함수
 const join = async () => {
