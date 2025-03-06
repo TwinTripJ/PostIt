@@ -167,7 +167,7 @@ input:active {
   background-color: rgba(0, 0, 0, 0.26);
   border-radius: 10px;
   padding: 7px 10px;
-  margin-top: 10px;
+  margin-top: 14px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
 }
@@ -350,14 +350,17 @@ input[type="number"] {
 }
 
 .red {
+  position: absolute;
   font-size: small;
   color: rgb(212, 28, 28);
   margin-top: 10px;
 }
 
 .green {
+  position: absolute;
   font-size: small;
-  color: rgb(187, 255, 187);
+  font-weight: bold;
+  color: rgb(87, 252, 87);
   margin-top: 10px;
 }
 

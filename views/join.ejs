@@ -79,10 +79,10 @@
               id="pass"
               placeholder="비밀번호를 입력해 주세요"
               required
-              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$"
-              title="비밀번호는 8자 이상, 대소문자 하나씩 포함, 특수문자 하나 이상 포함해야 합니다."
             />
           </div>
+
+          <div class="alret"></div>
 
           <br />
 
@@ -97,6 +97,7 @@
             />
           </div>
           <div id="alret"></div>
+          <br />
           <div onclick="passCheck()" class="check-btn">비밀번호 확인</div>
 
           <br />
@@ -126,9 +127,8 @@
                 name="areaCode"
                 maxlength="3"
                 required
-                pattern="^(01[0-9])$"
-                title="010, 011 등 올바른 형식을 입력해주세요."
                 placeholder="010"
+                oninput="handleOnInput(this, 3)"
               />
               <p>-</p>
               <input
@@ -136,9 +136,8 @@
                 name="middleNumber"
                 maxlength="4"
                 required
-                pattern="^\d{4}$"
-                title="4자리"
-                placeholder="xxxx"
+                placeholder="0000"
+                oninput="handleOnInput(this, 4)"
               />
               <p>-</p>
               <input
@@ -146,12 +145,12 @@
                 name="lastNumber"
                 maxlength="4"
                 required
-                pattern="^\d{4}$"
-                title="4자리"
-                placeholder="xxxx"
+                placeholder="0000"
+                oninput="handleOnInput(this, 4)"
               />
             </div>
           </div>
+          <div class="alret"></div>
           <div onclick="phoneCheck()" class="check-btn">전화번호 확인</div>
 
           <br />

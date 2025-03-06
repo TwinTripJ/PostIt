@@ -13,10 +13,18 @@ router.post("/addUser", userController.registerUser);
 
 router.post("/loginUser", userController.loginUser);
 
+router.post("/upload", userController.imgUpload);
+
 router.get(
   "/allUsers",
   userController.authenticateToken,
   userController.getAllUsers
+);
+
+router.get(
+  "/getUserId",
+  userController.authenticateToken,
+  userController.getUserByIdWrite
 );
 
 // 특정 유저 확인 (id)

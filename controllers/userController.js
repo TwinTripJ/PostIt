@@ -1,9 +1,24 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const path = require("path");
+const multer = require("multer");
 require("dotenv").config();
 
 const User = db.User;
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const filename = path.basename(file.originalname, ext);
+    cb(null, filename + ext);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // 아이디 중복 확인
 const checkEmail = async (req, res) => {
@@ -40,6 +55,15 @@ const checkPhone = async (req, res) => {
     console.error("이메일 중복 확인 오류:", error);
     return res.status(500).json({ message: "서버 오류가 발생했습니다." });
   }
+};
+
+const imgUpload = (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ message: "이미지 업로드 실패" });
+  }
+
+  const imageUrls = req.files.map((file) => `/uploads/${file.filename}`);
+  res.json({ success: true, imageUrls });
 };
 
 // 회원가입
@@ -147,6 +171,24 @@ const getUserByIdNav = async (req, res) => {
   }
 };
 
+const getUserByIdWrite = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const user = await User.findOne({ where: { id: id } });
+
+    if (!user) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없음" });
+    }
+
+    res.status(200).json({
+      id: user.id,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "사용자 조회 실패", error: err.message });
+  }
+};
+
 // 모든 사용자 조회
 const getAllUsers = async (req, res) => {
   try {
@@ -231,4 +273,6 @@ module.exports = {
   deleteUser,
   getUserByIdNav,
   checkPhone,
+  getUserByIdWrite,
+  imgUpload,
 };

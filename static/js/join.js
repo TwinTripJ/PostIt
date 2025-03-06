@@ -251,3 +251,25 @@ day.addEventListener("focus", function () {
     }
   }
 });
+
+// 전화번호
+function handleOnInput(el, maxlength) {
+  if (el.value.length > maxlength) {
+    el.value = el.value.substr(0, maxlength);
+  }
+}
+
+// 비밀번호 유효성 검사
+document.getElementById("pass").addEventListener("input", function () {
+  const pass = document.getElementById("pass").value;
+  const alertDiv = document.querySelector(".alret");
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+  if (!passwordRegex.test(pass)) {
+    alertDiv.innerHTML =
+      "<div class='red'>비밀번호는 8자 이상, 대소문자 하나씩 포함, 특수문자 하나 이상 포함해야 합니다.</div>";
+  } else {
+    alertDiv.innerHTML = "";
+  }
+});

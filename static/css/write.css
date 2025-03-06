@@ -15,7 +15,7 @@ body {
 
 .caroselImg {
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   object-fit: cover;
   mask-image: linear-gradient(
     to bottom,
