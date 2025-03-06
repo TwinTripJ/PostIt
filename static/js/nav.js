@@ -54,26 +54,19 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 네비게이션 로그인, 로그아웃 버튼
   if (token) {
     try {
-      const response = await axios("/user/getUser", {
-        method: "POST",
+      const response = await axios(`/user/getUser`, {
+        method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-
-      if (!response.ok) {
-        throw new Error("유저 정보를 불러올 수 없음");
-      }
-
-      const { username } = await response.json();
 
       // 기존 버튼들 삭제
       joinBox.innerHTML = "";
 
       // 유저 이름 추가
       const userNameElem = document.createElement("span");
-      userNameElem.textContent = `${username} 님`;
+      userNameElem.textContent = `${response.data.username} 님`;
       userNameElem.style.marginRight = "10px";
 
       const logoutDiv = document.createElement("div");

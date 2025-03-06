@@ -80,7 +80,7 @@ const loginUser = async (req, res) => {
 
     // JWT 토큰 생성
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: user.id, email: user.email, username: user.username },
       process.env.SECRET_KEY,
       { expiresIn: "1h" }
     );
@@ -109,6 +109,24 @@ const authenticateToken = (req, res, next) => {
     res
       .status(401)
       .json({ message: "토큰이 유효하지 않음", error: err.message });
+  }
+};
+
+const getUserByIdNav = async (req, res) => {
+  try {
+    const username = req.user.username;
+    const user = await User.findOne({ where: { username: username } });
+
+    if (!user) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없음" });
+    }
+
+    res.status(200).json({
+      username: user.username,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "사용자 조회 실패", error: err.message });
   }
 };
 
@@ -194,4 +212,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  getUserByIdNav,
 };
