@@ -1,14 +1,14 @@
 // 에디터
 const ed = document.querySelector("#editor");
 
-const editor = new toastui.Editor({
-  el: document.querySelector("#content"),
-  height: "300px",
-  initialEditType: "markdown",
-  initialValue: "글 작성",
+const detailEditor = new toastui.Editor({
+  el: document.querySelector("#detailEditor"),
+  height: "170px",
+  initialEditType: "wysiwyg",
   previewStyle: "vertical",
-});
+  initialValue: "상세 정보를 입력해주세요.",
 
+});
 // 글 저장
 const write = async () => {
   const title = document.querySelector("input[name='title']").value;
