@@ -225,11 +225,16 @@ const changePass = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     if (!email || !password) {
       return res.status(404).json({ message: "모든 필드를 입력하세요" });
     }
 
-    const [updated] = await User.update({ password }, { where: { email } });
+    const [updated] = await User.update(
+      { password: hashedPassword },
+      { where: { email } }
+    );
 
     if (!updated) {
       return res
