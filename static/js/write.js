@@ -7,21 +7,10 @@ const editor = new toastui.Editor({
   placeholder: "상세 정보를 입력해주세요.",
 });
 
-// 이미지 URL 추출 함수
-const extractImageUrls = (content) => {
-  const imgTags = content.match(/!\[.*?\]\((.*?)\)/g);
+const saveButton = document.querySelector(".saveBtn");
 
-  if (!imgTags) return [];
-  return imgTags
-    .map((tag) => {
-      const matches = tag.match(/\((.*?)\)/);
-      return matches ? matches[1] : null;
-    })
-    .filter(Boolean);
-};
-
+// 버튼 활성화, 비활성화
 document.addEventListener("DOMContentLoaded", function () {
-  const saveButton = document.querySelector(".saveBtn");
   const titleInput = document.querySelector("input[name='title']");
 
   // 글 내용 검증 함수
@@ -40,8 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   checkFormValidity();
 });
 
-const saveButton = document.querySelector(".saveBtn");
-
+// 사용자 찾기
 const getUserId = async (token) => {
   if (!token) return null;
   try {
@@ -68,7 +56,6 @@ const addWrite = async () => {
   const title = document.querySelector("input[name='title']").value.trim();
   const category = document.querySelector("select[name='category']").value;
   const content = editor.getMarkdown();
-  const images = extractImageUrls(content);
   const token = localStorage.getItem("token");
 
   try {

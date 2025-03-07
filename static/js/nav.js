@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("token");
-        location.reload();
+        window.location.href = "/";
       });
 
       logoutDiv.appendChild(logoutBtn);

@@ -304,4 +304,5 @@ module.exports = {
   imgUpload,
   findId,
   getUserByIdWrite,
+  findpw,
 };
