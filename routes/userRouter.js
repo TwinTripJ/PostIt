@@ -45,6 +45,8 @@ router.get(
   userController.getUserById
 );
 
+router.put("/changePass", userController.changePass);
+
 // 유저 정보 수정
 router.put("/:id", userController.authenticateToken, userController.updateUser);
 

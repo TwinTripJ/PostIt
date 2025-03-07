@@ -54,7 +54,7 @@
             />
           </div>
           <br />
-          <div class="input-group passInput">
+          <div class="passInput">
             <label for="pass">비밀번호</label>
             <input
               type="password"
@@ -64,9 +64,26 @@
               required
             />
           </div>
+          <div class="alret"></div>
+
           <br />
-          <button type="button" class="loginBtn" onclick="idCheck()">
-            아이디 확인
+
+          <div class="passInput">
+            <label for="password">비밀번호 <br />재확인</label>
+            <input
+              type="password"
+              name="passCheck"
+              id="passCheck"
+              placeholder="비밀번호를 확인해 주세요"
+              required
+            />
+          </div>
+          <div id="alretCheck"></div>
+          <br />
+          <button type="button" class="check-btn"></button>
+          <br />
+          <button type="button" class="loginBtn">
+            <div class="checkBtn" onclick="idCheck()">아이디 확인</div>
           </button>
         </form>
         <div class="link-group">

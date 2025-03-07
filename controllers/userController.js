@@ -220,6 +220,30 @@ const findPw = async (req, res) => {
   }
 };
 
+// 비밀번호 변경
+const changePass = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(404).json({ message: "모든 필드를 입력하세요" });
+    }
+
+    const [updated] = await User.update({ password }, { where: { email } });
+
+    if (!updated) {
+      return res
+        .status(404)
+        .json({ message: "해당 정보를 가진 아이디가 없습니다" });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "서버 오류 발생", error: err.message });
+  }
+};
+
 const getUserByIdWrite = async (req, res) => {
   try {
     const id = req.user.id;
@@ -326,4 +350,5 @@ module.exports = {
   findId,
   getUserByIdWrite,
   findPw,
+  changePass,
 };
