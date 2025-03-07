@@ -31,3 +31,8 @@ const loginCheck = async () => {
     console.error("Error:", error);
   }
 };
+
+// 페이지 이동
+function moveUrl(url) {
+  window.location.href = `/postit/${url}`;
+}
