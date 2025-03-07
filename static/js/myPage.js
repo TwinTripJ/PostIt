@@ -158,7 +158,7 @@ const changeInfo = async () => {
   }
 
   try {
-    console.log([...formData.entries()]);
+    console.log("js:", [...formData.entries()]);
 
     const response = await axios.put(`/user/info`, formData, {
       headers: {

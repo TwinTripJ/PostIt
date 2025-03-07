@@ -290,10 +290,10 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let userId = req.user.id;
-    let updateData = req.params;
+    let updateData = req.body;
 
-    console.log(userId);
-    console.log(updateData);
+    console.log("userId:", userId);
+    console.log("updateData:", updateData);
 
     if (updateData.password) {
       updateData.password = await bcrypt.hash(updateData.password, 10);
