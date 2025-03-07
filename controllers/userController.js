@@ -300,4 +300,8 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByIdNav,
+  checkPhone,
+  imgUpload,
+  findId,
+  getUserByIdWrite,
 };
