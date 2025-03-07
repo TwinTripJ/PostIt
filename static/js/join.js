@@ -88,28 +88,21 @@ const idCheck = () => {
     });
 };
 
-// 비밀번호 중복 확인
-function passCheck() {
-  const pass = document.getElementById("pass").value;
-  const passCheck = document.getElementById("passCheck").value;
-  const alret = document.getElementById("alret");
+// 비밀번호 일치
+const pwCheck = () => {
+  const password = document.getElementById("pass").value;
+  const passwordCheck = document.getElementById("passCheck").value;
+  const check = document.getElementById("alret");
 
-  if (pass === "" || passCheck === "") {
-    Swal.fire({
-      icon: "error",
-      text: "비밀번호가 비어있습니다.",
-    });
+  if (password === passwordCheck) {
+    check.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+    passwordsMatch = true;
   } else {
-    if (pass === passCheck) {
-      alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
-      passwordsMatch = true;
-    } else {
-      alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
-      passwordsMatch = false;
-    }
-    checkAllFields();
+    check.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+    passwordsMatch = false;
   }
-}
+  checkAllFields();
+};
 
 // 전화번호 중복 확인
 function phoneCheck() {
@@ -153,7 +146,7 @@ const join = async () => {
   const email = document.getElementById("email").value;
   const username = document.querySelector("input[name='name']").value;
   const password = document.getElementById("pass").value;
-  const passwordCheck = document.getElementById("passCheck").value;
+  const passwordCheckText = document.getElementById("alret").innerText;
   const gender = document.querySelector("input[name='gender']:checked").value;
 
   const areaCode = document.querySelector("input[name='areaCode']").value;
@@ -168,11 +161,14 @@ const join = async () => {
   const birthDay = document.getElementById("birth-day").value;
   const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
 
-  if (password !== passwordCheck) {
-    alert("비밀번호가 일치하지 않습니다.");
+  if (passwordCheckText !== "비밀번호 일치") {
+    Swal.fire({
+      icon: "error",
+      title: "비밀번호 불일치",
+      text: "비밀번호가 일치하지 않습니다. 다시 확인해 주세요.",
+    });
     return;
   }
-
   try {
     const response = await axios.post("/user/addUser", {
       email,

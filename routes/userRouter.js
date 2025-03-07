@@ -64,7 +64,7 @@ router.put("/changePass", userController.changePass);
 
 // 유저 정보 수정
 router.put(
-  "/:email",
+  "/:id",
   userController.authenticateToken,
   userController.updateUser,
   uploadFiles
