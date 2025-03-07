@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       image_url: {
-        type: DataTypes.TEXT(255),
+        type: DataTypes.STRING(255),
         allowNull: true,
       },
     },
