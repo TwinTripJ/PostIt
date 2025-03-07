@@ -64,13 +64,13 @@ const getAllPosts = async (req, res) => {
 // 특정 게시글 조회 및 좋아요 개수 (id)
 const getPostById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.params.id;
     const post = await Post.findOne({
-      where: { id },
+      where: { id: postId },
       include: [
         {
           model: Like,
-          attribute: [],
+          as: "likes",
         },
       ],
       attribute: {

@@ -17,6 +17,12 @@ db.Category = require("./categoryModel.js")(sequelize, DataTypes);
 db.Like = require("./likeModel.js")(sequelize, DataTypes);
 db.Post = require("./postModel.js")(sequelize, DataTypes);
 
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
