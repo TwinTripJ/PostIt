@@ -47,56 +47,95 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
-// 회원가입 함수
-const join = async () => {
-  const email = document.getElementById("email").value;
-  const username = document.querySelector("input[name='name']").value;
+// 프로필 이미지 선택
+const changeProfile = () => {
+  const fileInput = document.getElementById("fileInput");
+  fileInput.click();
+};
+
+// 프로필 이미지 보기
+const preview = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById("profileImage").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+// 프로필 이미지 삭제 > 기본 이미지로 변경
+const deleteProfile = () => {
+  const fileInput = document.getElementById("fileInput");
+  const profileImage = document.getElementById("profileImage");
+  const defaultImage = "/static/images/profile.png";
+
+  profileImage.src = defaultImage;
+  fileInput.value = "";
+};
+
+// 비밀번호 일치
+const pwCheck = () => {
   const password = document.getElementById("pass").value;
   const passwordCheck = document.getElementById("passCheck").value;
-  const gender = document.querySelector("input[name='gender']:checked").value;
+  const check = document.getElementById("alret");
 
-  const areaCode = document.querySelector("input[name='areaCode']").value;
-  const middleNumber = document.querySelector(
-    "input[name='middleNumber']"
-  ).value;
-  const lastNumber = document.querySelector("input[name='lastNumber']").value;
-  const phone = `${areaCode}-${middleNumber}-${lastNumber}`;
+  if (password === passwordCheck) {
+    check.innerText = "비밀번호 일치";
+  } else {
+    check.innerText = "비밀번호 불일치";
+  }
+};
 
-  const birthYear = document.getElementById("birth-year").value;
-  const birthMonth = document.getElementById("birth-month").value;
-  const birthDay = document.getElementById("birth-day").value;
-  const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
+// 정보 수정 함수
+const changeInfo = async () => {
+  const token = localStorage.getItem("token");
 
+  const fileInput = document.getElementById("fileInput");
+  const password = document.getElementById("pass").value;
   const address_main = document.getElementById("address").value;
   const address_detail = document.getElementById("detailAddress").value;
 
-  if (password !== passwordCheck) {
-    alert("비밀번호가 일치하지 않습니다.");
-    return;
+  const formData = new FormData();
+
+  if (fileInput.files.length > 0) {
+    formData.append("image", fileInput.files[0]);
+  }
+
+  if (password) {
+    formData.append("password", password);
+  }
+
+  if (address_main) {
+    formData.append("address_main", address_main);
+  }
+  if (address_detail) {
+    formData.append("address_detail", address_detail);
   }
 
   try {
-    const response = await axios.post("/user/addUser", {
-      email,
-      username,
-      password,
-      gender,
-      phone,
-      birthDate,
-      address_main,
-      address_detail,
+    const response = await axios.put("/user/changeInfo", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "로그인 성공하였습니다!",
-      }).then((res) => {
+        title: "수정되었습니다!",
+      }).then(() => {
         window.location.href = "/";
       });
     }
   } catch (error) {
-    alert("회원가입 실패");
+    Swal.fire({
+      icon: "error",
+      title: "수정 실패",
+      text: "오류가 발생했습니다.",
+    });
     console.error("Error:", error);
   }
 };

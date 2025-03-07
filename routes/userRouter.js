@@ -1,6 +1,21 @@
+const multer = require("multer");
 const userController = require("../controllers/userController");
-
 const router = require("express").Router();
+
+// Multer 설정 (파일 업로드)
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename(req, file, cb) {
+    const ext = path.extname(file.originalname);
+    cb(null, Date.now() + ext);
+  },
+});
+
+const upload = multer({ storage });
+
+const uploadFiles = upload.fields([{ imgae_url: "image", maxCount: 1 }]);
 
 router.get(
   "/allUsers",
@@ -46,7 +61,12 @@ router.get(
 );
 
 // 유저 정보 수정
-router.put("/:id", userController.authenticateToken, userController.updateUser);
+router.put(
+  "/:email",
+  userController.authenticateToken,
+  userController.updateUser,
+  uploadFiles
+);
 
 // 유저 정보 삭제
 router.delete(
