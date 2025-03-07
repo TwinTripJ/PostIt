@@ -101,13 +101,13 @@ const loginUser = async (req, res) => {
     // 사용자 확인
     const user = await User.findOne({ where: { email: email } });
     if (!user) {
-      return res.status(404).json({ message: "사용자를 찾을 수 없음" });
+      return res.status(400).json({ message: "일치하는 계정이 없습니다." });
     }
 
     // 비밀번호 검증
     const isMatch = await bcrypt.compare(pass, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "비밀번호가 일치하지 않음" });
+      return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
     }
 
     // JWT 토큰 생성
