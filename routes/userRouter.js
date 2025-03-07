@@ -51,4 +51,6 @@ router.delete(
   userController.deleteUser
 );
 
+router.post("/findId", userController.findId);
+
 module.exports = router;

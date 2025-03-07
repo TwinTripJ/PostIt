@@ -153,6 +153,7 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
+// 로그인 후
 const getUserByIdNav = async (req, res) => {
   try {
     const username = req.user.username;
@@ -170,6 +171,33 @@ const getUserByIdNav = async (req, res) => {
     res.status(500).json({ message: "사용자 조회 실패", error: err.message });
   }
 };
+
+// 아이디 찾기
+const findId = async (req, res) => {
+  try {
+    const { username, phone } = req.body;
+
+    if (!username || !phone) {
+      return res.status(404).json({ message: "이름과 전화번호를 입력하세요" });
+    }
+
+    const user = await User.findOne({ where: { username, phone } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "해당 정보를 가진 아이디가 없습니다" });
+    }
+
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "서버 오류 발생", error: err.message });
+  }
+};
+
+// 새 비밀번호 발급 nodemailer
+const findpw = async (req, res) => {};
 
 const getUserByIdWrite = async (req, res) => {
   try {
@@ -272,7 +300,4 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByIdNav,
-  checkPhone,
-  getUserByIdWrite,
-  imgUpload,
 };
