@@ -189,7 +189,7 @@ const join = async () => {
         title: "회원가입 성공하였습니다!",
         text: "로그인 후 이용하여 주세요.",
       }).then((res) => {
-        window.location.href = "/";
+        window.location.href = "/postit/login";
       });
     }
   } catch (error) {

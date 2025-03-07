@@ -83,7 +83,7 @@ body {
 /* 로그인 폼 */
 .loginBox {
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
