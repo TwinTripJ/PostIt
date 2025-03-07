@@ -293,15 +293,18 @@ const getUserById = async (req, res) => {
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
   try {
-    let id = req.params.id;
-    let updateData = req.body;
+    let userId = req.user.id;
+    let updateData = req.params;
+
+    console.log(userId);
+    console.log(updateData);
 
     if (updateData.password) {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
     const [updated] = await User.update(updateData, {
-      where: { id: id },
+      where: { id: userId },
     });
 
     if (!updated) {

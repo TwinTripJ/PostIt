@@ -47,33 +47,73 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
-// 프로필 이미지 선택
-const changeProfile = () => {
-  const fileInput = document.getElementById("fileInput");
-  fileInput.click();
-};
-
-// 프로필 이미지 보기
-const preview = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      document.getElementById("profileImage").src = e.target.result;
-    };
-    reader.readAsDataURL(file);
+window.onload = function () {
+  const preview = document.getElementById("preview");
+  const label = document.querySelector(".image-upload span");
+  const imageUpload = document.querySelector(".image-upload");
+  if (preview.src && preview.src.trim() !== "" && preview.src !== "undefined") {
+    preview.style.display = "block";
+    label.style.display = "none";
+    imageUpload.style.border = "2px solid transparent";
+  } else {
+    preview.style.display = "none";
+    label.style.display = "block";
+    imageUpload.style.border = "2px dashed #ccc";
   }
 };
 
-// 프로필 이미지 삭제 > 기본 이미지로 변경
-const deleteProfile = () => {
-  const fileInput = document.getElementById("fileInput");
-  const profileImage = document.getElementById("profileImage");
-  const defaultImage = "/static/images/profile.png";
-
-  profileImage.src = defaultImage;
-  fileInput.value = "";
-};
+async function uploadImage(file) {
+  const formData = new FormData();
+  formData.append("image", file);
+  try {
+    const res = await axios.post("/admin/uploadImage", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    if (res.data.imageUrl) {
+      return res.data.imageUrl;
+    } else {
+      alert("이미지 업로드 실패");
+      return "";
+    }
+  } catch (error) {
+    console.error("이미지 업로드 에러:", error);
+    alert("이미지 업로드 중 오류 발생");
+    return "";
+  }
+}
+// 파일 선택 후 미리보기 & 업로드 기능
+async function previewImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById("preview");
+  const label = document.querySelector(".image-upload span");
+  const imageUpload = document.querySelector(".image-upload");
+  if (file) {
+    try {
+      const uploadedImageUrl = await uploadImage(file);
+      if (uploadedImageUrl) {
+        preview.src = uploadedImageUrl;
+        preview.style.display = "block";
+        label.style.display = "none";
+        imageUpload.style.border = "2px solid transparent";
+        preview.dataset.imageUrl = uploadedImageUrl;
+      } else {
+        alert("이미지 업로드 실패");
+      }
+    } catch (error) {
+      console.error("이미지 업로드 중 오류 발생", error);
+      alert("이미지 업로드 실패");
+    }
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    preview.style.display = "none";
+    label.style.display = "block";
+    imageUpload.style.border = "2px dashed #ccc";
+  }
+}
 
 // 비밀번호 일치
 const pwCheck = () => {
@@ -88,37 +128,34 @@ const pwCheck = () => {
     check.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
     passwordsMatch = false;
   }
-  checkAllFields();
 };
 
 // 정보 수정 함수
 const changeInfo = async () => {
   const token = localStorage.getItem("token");
 
-  const fileInput = document.getElementById("fileInput");
-  const password = document.getElementById("pass").value;
-  const address_main = document.getElementById("address").value;
-  const address_detail = document.getElementById("detailAddress").value;
-
-  const formData = new FormData();
-
-  if (fileInput.files.length > 0) {
-    formData.append("image", fileInput.files[0]);
-  }
-
-  if (password) {
-    formData.append("password", password);
-  }
-
-  if (address_main) {
-    formData.append("address_main", address_main);
-  }
-  if (address_detail) {
-    formData.append("address_detail", address_detail);
-  }
-
   try {
-    const response = await axios.put("/user/changeInfo", formData, {
+    if (fileInput.files.length > 0) {
+      formData.append("image", fileInput.files[0]);
+    } else {
+      if (profileImage !== "/static/images/profile.png") {
+        formData.append("image_url", profileImage);
+      }
+    }
+
+    if (password) {
+      formData.append("password", password);
+    }
+    if (address_main) {
+      formData.append("address_main", address_main);
+    }
+    if (address_detail) {
+      formData.append("address_detail", address_detail);
+    }
+
+    console.log(formData);
+
+    const response = await axios.put(`/user/info`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,

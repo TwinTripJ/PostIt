@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const uploadFiles = upload.fields([{ imgae_url: "image", maxCount: 1 }]);
+const uploadFiles = upload.single([{ image_url: "image", maxCount: 1 }]);
 
 router.get(
   "/allUsers",
@@ -64,7 +64,7 @@ router.put("/changePass", userController.changePass);
 
 // 유저 정보 수정
 router.put(
-  "/:id",
+  "/info",
   userController.authenticateToken,
   userController.updateUser,
   uploadFiles
