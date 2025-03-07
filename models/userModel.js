@@ -62,6 +62,10 @@ module.exports = (sequelize, DataTypes) => {
           is: /^01[0-9]-\d{3,4}-\d{4}$/,
         },
       },
+      image_url: {
+        type: DataTypes.TEXT(255),
+        allowNull: true,
+      },
     },
     {
       timestamps: true,

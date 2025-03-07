@@ -293,7 +293,7 @@ const getUserById = async (req, res) => {
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
   try {
-    let id = req.params.id;
+    let email = req.params.email;
     let updateData = req.body;
 
     if (updateData.password) {
@@ -301,7 +301,7 @@ const updateUser = async (req, res) => {
     }
 
     const [updated] = await User.update(updateData, {
-      where: { id: id },
+      where: { email: email },
     });
 
     if (!updated) {
