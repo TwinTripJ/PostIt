@@ -11,6 +11,6 @@ function moveWrite(url) {
         console.error(error);
       });
   } else {
-    window.location.href = "/";
+    window.location.href = "/postit/login";
   }
 }

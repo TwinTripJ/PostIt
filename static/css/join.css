@@ -42,7 +42,7 @@ body {
 
 .logo img {
   max-width: 400px;
-  margin-left: -20px;
+  margin-left: -10px;
 }
 
 .caroselContainer {
@@ -84,19 +84,18 @@ body {
 /* 로그인 폼 */
 .join-box {
   position: absolute;
-  top: 130%;
+  top: 123%;
   left: 49%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 0 6px;
   max-width: 550px;
   width: 90%;
   height: auto;
   background-color: rgba(255, 255, 255, 0.551);
-  border: 1px solid rgb(121, 121, 121);
   border-radius: 10px;
-  padding: 30px 50px;
+  padding: 30px;
   justify-content: center;
   z-index: 5;
   opacity: 0;
@@ -144,6 +143,7 @@ body {
   border: none;
   background-color: rgba(255, 255, 255, 0.259);
   font-size: 16px;
+  font-weight: bold;
   width: 100%;
   color: white;
   overflow: hidden;
@@ -167,22 +167,26 @@ input:active {
   background-color: rgba(0, 0, 0, 0.26);
   border-radius: 10px;
   padding: 7px 10px;
-  margin-top: 10px;
+  margin-top: 14px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
 }
 
 .check-btn:hover {
   background-color: rgba(0, 0, 0, 0.508);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .gender {
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 17px;
 }
 
+/* 성별 radio */
 .genderContainer {
   display: flex;
   gap: 50px;
@@ -192,7 +196,7 @@ input:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e7e2ed;
+  background-color: #e7e2ed7f;
   color: #444;
   padding: 10px 20px;
   border-radius: 10px;
@@ -203,26 +207,17 @@ input:active {
 }
 
 .custom-radio input {
-  display: none; /* 기본 라디오 버튼 숨김 */
+  display: none;
 }
 
-/* 선택된 상태 */
-.custom-radio input:checked + span {
-  background-color: #bfb9c7;
+.custom-radio:has(input:checked) {
+  background-color: #807a89;
   color: white;
-  border: 2px solid #9b8faa;
 }
 
-/* 호버 효과 */
 .custom-radio:hover {
   background-color: #d8d2e0;
   transform: scale(1.05);
-}
-
-/* 선택된 라디오 버튼 */
-.custom-radio input:checked + span {
-  background-color: #bfb9c7;
-  color: white;
 }
 
 input[type="email"]:focus,
@@ -243,18 +238,34 @@ input[type="number"] {
   margin-top: 10px;
 }
 
-.input-group {
+/* 전화번호 */
+.phoneBox {
+  font-size: 17px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.phoneInputs {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1280px;
 }
 
-.input-group input::placeholder {
-  color: rgb(96, 96, 96);
+.phoneInputs p {
+  margin-top: 20px;
 }
 
+.phoneInputs input {
+  padding: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.259);
+  font-size: 16px;
+  width: 30%;
+  color: white;
+  overflow: hidden;
+}
+
+/* 회원가입 버튼 */
 .joinBtn {
   width: 100%;
   padding: 12px 0;
@@ -287,16 +298,50 @@ input[type="number"] {
   opacity: 0.6;
 }
 
+.box {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("/static/images/custom-arrow.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  padding: 5px 25px 5px 10px;
+}
+
 /* 성별, 전화번호, 생일 그룹 */
+.birthInputs {
+  display: flex;
+  margin-top: 20px;
+}
+
 .birth,
 .input-group {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  font-size: 17px;
+  color: white;
 }
 
 .birth select {
+  height: 30px;
   margin-top: 5px;
+  font-size: 14px;
+  flex: 1;
+  margin-left: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.259);
+}
+
+.birth select:focus {
+  border: none;
+  outline: none;
+}
+
+.birth option {
+  background-color: #f9f9f9;
+  color: #333;
   font-size: 14px;
 }
 
@@ -305,14 +350,17 @@ input[type="number"] {
 }
 
 .red {
+  position: absolute;
   font-size: small;
-  color: red;
+  color: rgb(212, 28, 28);
   margin-top: 10px;
 }
 
 .green {
+  position: absolute;
   font-size: small;
-  color: green;
+  font-weight: bold;
+  color: rgb(87, 252, 87);
   margin-top: 10px;
 }
 
@@ -352,8 +400,15 @@ input[type="number"] {
   width: 100%;
 }
 
+.flex p {
+  margin-top: 15px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
+  .join-box {
+    padding: 20px;
+  }
   form {
     width: 100%;
     padding: 30px;
@@ -361,6 +416,11 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+  .join-box {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
   .logo img {
     max-width: 300px;
   }
@@ -404,5 +464,13 @@ input[type="number"] {
 
   a {
     margin-top: 10px;
+  }
+
+  .mainLogo {
+    margin-top: -10px;
+  }
+
+  .genderContainer {
+    gap: 20px;
   }
 }

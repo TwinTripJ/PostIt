@@ -2,18 +2,16 @@ const userController = require("../controllers/userController");
 
 const router = require("express").Router();
 
-// 아이디 중복 확인
-router.post("/check", userController.checkEmail);
-
-// 유저 추가
-router.post("/addUser", userController.registerUser);
-
-router.post("/loginUser", userController.loginUser);
-
 router.get(
   "/allUsers",
   userController.authenticateToken,
   userController.getAllUsers
+);
+
+router.get(
+  "/getUserId",
+  userController.authenticateToken,
+  userController.getUserByIdWrite
 );
 
 // 특정 유저 확인 (id)
@@ -22,6 +20,21 @@ router.get(
   userController.authenticateToken,
   userController.getUserByIdNav
 );
+
+// 아이디 중복 확인
+router.post("/check", userController.checkEmail);
+
+// 전화번호 중복 확인
+router.post("/phoneCheck", userController.checkPhone);
+
+// 유저 추가
+router.post("/addUser", userController.registerUser);
+
+router.post("/loginUser", userController.loginUser);
+
+router.post("/upload", userController.imgUpload);
+
+router.post("/findId", userController.findId);
 
 // 특정 유저 확인 (id)
 router.get(
@@ -39,7 +52,5 @@ router.delete(
   userController.authenticateToken,
   userController.deleteUser
 );
-
-router.post("/findId", userController.findId);
 
 module.exports = router;
