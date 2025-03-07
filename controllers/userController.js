@@ -155,9 +155,6 @@ const findId = async (req, res) => {
   }
 };
 
-// 새 비밀번호 발급 nodemailer
-const findpw = async (req, res) => {};
-
 // 모든 사용자 조회
 const getAllUsers = async (req, res) => {
   try {
