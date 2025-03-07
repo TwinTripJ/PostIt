@@ -229,7 +229,7 @@ input:active {
 }
 
 .link-group a:hover {
-  color: #ffd7d7;
+  color: #ff6868;
 }
 
 .link-group a::after {
@@ -239,7 +239,7 @@ input:active {
   left: 0;
   width: 0;
   height: 1.5px;
-  background-color: #ffd7d7;
+  background-color: #ff6868;
   transition: width 0.3s ease;
 }
 

@@ -1,3 +1,4 @@
+const token = localStorage.getItem("token");
 // 카카오 앱 키
 axios
   .get("/get-kakao-api-key")
@@ -52,10 +53,21 @@ window.onload = async function () {
   const preview = document.getElementById("preview");
   const label = document.querySelector(".image-upload span");
   const imageUpload = document.querySelector(".image-upload");
+  const address_main = document.getElementById("address");
+  const address_detail = document.getElementById("detailAddress");
 
   try {
-    const response = await axios.get("/user/profile");
+    const response = await axios.get("/user/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const imageUrl = response.data.imageUrl;
+    const mainAddr = response.data.address_main;
+    const detailAddr = response.data.address_detail;
+
+    address_main.value = mainAddr;
+    address_detail.value = detailAddr;
 
     if (imageUrl && imageUrl.trim() !== "") {
       preview.src = `${imageUrl}`;
@@ -104,7 +116,6 @@ async function previewImage(event) {
 
   if (file) {
     try {
-      // 먼저 이미지 파일을 서버에 업로드
       const uploadedImageUrl = await uploadImage(file);
       if (uploadedImageUrl) {
         preview.src = uploadedImageUrl;
@@ -132,6 +143,7 @@ async function previewImage(event) {
   }
 }
 
+const changeBtn = document.querySelector(".changeBtn");
 // 비밀번호 일치
 const pwCheck = () => {
   const password = document.getElementById("pass").value;
@@ -140,17 +152,47 @@ const pwCheck = () => {
 
   if (password === passwordCheck) {
     check.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
-    passwordsMatch = true;
   } else {
     check.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
-    passwordsMatch = false;
   }
+  pwCheckCondition();
 };
+
+// 비밀번호 유효성 검사
+document.getElementById("pass").addEventListener("input", function () {
+  changeBtn.disabled = true;
+  pwCheckCondition();
+
+  const pass = document.getElementById("pass").value;
+  const alertDiv = document.querySelector(".check");
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+  if (!passwordRegex.test(pass)) {
+    alertDiv.innerHTML =
+      "<div class='red'>비밀번호는 8자 이상, 대소문자 하나씩 포함, 특수문자 하나 이상 포함해야 합니다.</div>";
+  } else {
+    alertDiv.innerHTML = "";
+  }
+  pwCheckCondition();
+});
+
+// 버튼 활성화, 비활성화
+function pwCheckCondition() {
+  const check = document.querySelector(".check").innerHTML;
+  const alert = document.getElementById("alret").innerHTML;
+  if (
+    (check === "" && alert === "동일한 비밀번호입니다.") ||
+    (check === "" && alert === "")
+  ) {
+    changeBtn.disabled = false;
+  } else {
+    changeBtn.disabled = true;
+  }
+}
 
 // 정보 수정 함수
 const changeInfo = async () => {
-  const token = localStorage.getItem("token");
-
   const password = document.getElementById("pass").value;
   const address_main = document.getElementById("address").value;
   const address_detail = document.getElementById("detailAddress").value;
@@ -201,3 +243,6 @@ const changeInfo = async () => {
     console.error("Error:", error);
   }
 };
+
+// 탈퇴 요청
+const deleteUser = () => {};

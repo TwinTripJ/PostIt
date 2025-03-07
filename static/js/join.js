@@ -161,7 +161,6 @@ const join = async () => {
   const birthDay = document.getElementById("birth-day").value;
   const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
 
-
   if (passwordCheckText !== "동일한 비밀번호입니다.") {
     Swal.fire({
       icon: "error",
@@ -194,9 +193,6 @@ const join = async () => {
     console.error("Error:", error);
   }
 };
-
-// 탈퇴 요청
-const secessionUser = (id) => {};
 
 // 출생 연도
 const year = document.querySelector("#birth-year");

@@ -33,6 +33,11 @@ function moveUrl(url) {
   window.location.href = `/postit/${url}`;
 }
 
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "/";
+}
+
 // 로그인, 로그아웃
 document.addEventListener("DOMContentLoaded", async function () {
   const joinBox = document.querySelector(".joinBox");
@@ -59,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       // 유저 이름 추가
       const userNameElem = document.createElement("span");
-      userNameElem.classList.add("white"); // white 클래스 추가
+      userNameElem.classList.add("white");
       userNameElem.textContent = `${response.data.username} 님`;
       userNameElem.style.marginRight = "10px";
 
@@ -69,9 +74,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       const logoutBtn = document.createElement("a");
       logoutBtn.href = "#";
       logoutBtn.textContent = "로그아웃";
-      logoutBtn.onclick = function () {
-        logout();
-      };
 
       logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("token");

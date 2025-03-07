@@ -1,10 +1,11 @@
 // 버튼 활성화, 비활성화
 let passwordsMatch = false;
+let passwordsOkay = false;
 
-const enableJoinButton = (ClearBtn) => {
-  console.log(passwordsMatch);
-  console.log("ddd", ClearBtn);
-  if (passwordsMatch) {
+const enableJoinButton = () => {
+  const ClearBtn = document.querySelector(".checkBtn");
+  console.log(ClearBtn);
+  if (passwordsMatch && passwordsOkay) {
     ClearBtn.removeAttribute("disabled");
   } else {
     ClearBtn.setAttribute("disabled", "true");
@@ -16,7 +17,6 @@ function passCheck() {
   const pass = document.getElementById("pass").value;
   const passCheckVal = document.getElementById("passCheck").value;
   const alret = document.getElementById("alretCheck");
-  const ClearBtn = document.querySelector(".checkBtn");
 
   if (pass === "" || passCheckVal === "") {
     Swal.fire({
@@ -31,9 +31,27 @@ function passCheck() {
       alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
       passwordsMatch = false;
     }
-    enableJoinButton(ClearBtn);
+    enableJoinButton();
   }
 }
+
+// 비밀번호 유효성 검사
+document.getElementById("pass").addEventListener("input", function () {
+  const pass = document.getElementById("pass").value;
+  const alertDiv = document.querySelector(".alret");
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+  if (!passwordRegex.test(pass)) {
+    alertDiv.innerHTML =
+      "<div class='red'>비밀번호는 8자 이상, 대소문자 하나씩 포함, 특수문자 하나 이상 포함해야 합니다.</div>";
+    passwordsOkay = false;
+  } else {
+    alertDiv.innerHTML = "";
+    passwordsOkay = true;
+  }
+  enableJoinButton();
+});
 
 // 비밀번호 찾기
 const idCheck = async () => {
@@ -87,20 +105,8 @@ const idCheck = async () => {
   }
 };
 
-// 비밀번호 유효성 검사
-document.getElementById("pass").addEventListener("input", function () {
-  const pass = document.getElementById("pass").value;
-  const alertDiv = document.querySelector(".alret");
-
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
-
-  if (!passwordRegex.test(pass)) {
-    alertDiv.innerHTML =
-      "<div class='red'>비밀번호는 8자 이상, 대소문자 하나씩 포함, 특수문자 하나 이상 포함해야 합니다.</div>";
-  } else {
-    alertDiv.innerHTML = "";
-  }
-});
+// 창 크기 변경 시 반응형 처리
+window.addEventListener("resize", updateLayout);
 
 // 비밃번호 변경
 const pwChange = async () => {
@@ -111,8 +117,6 @@ const pwChange = async () => {
 
   try {
     const res = await axios.put("/user/changePass", data);
-
-    console.log(res.data.success);
 
     if (res.data.success) {
       Swal.fire({

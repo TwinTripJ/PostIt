@@ -99,6 +99,7 @@ const loginUser = async (req, res) => {
 
     // 사용자 확인
     const user = await User.findOne({ where: { email: email } });
+
     if (!user) {
       return res.status(400).json({ message: "일치하는 계정이 없습니다." });
     }
@@ -126,6 +127,8 @@ const loginUser = async (req, res) => {
 // JWT 인증 미들웨어
 const authenticateToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
+
+  console.log(authHeader);
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({ message: "유효한 토큰이 필요합니다" });
@@ -288,9 +291,6 @@ const getUserById = async (req, res) => {
 
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
-  console.log("update", req.body);
-  console.log("file", req.file);
-
   try {
     let userId = req.user.id;
     let updateData = req.body;
@@ -348,7 +348,7 @@ const uploadImage = (req, res) => {
   res.json({ success: true, imageUrl });
 };
 
-// 프로필 사진 가져오기
+// 프로필 사진, 주소 가져오기
 const getUserProfile = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -363,6 +363,8 @@ const getUserProfile = async (req, res) => {
       username: user.username,
       email: user.email,
       imageUrl: user.image_url || "/static/images/profile.png",
+      address_main: user.address_main,
+      address_detail: user.address_detail,
     });
   } catch (err) {
     console.error(err);
