@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="/static/css/login.css" />
+    <link rel="stylesheet" href="/static/css/findId.css" />
     <!-- 경고창 -->
     <link
       rel="stylesheet"
@@ -54,37 +54,36 @@
             />
           </div>
           <br />
-          <div class="input-group">
-            <label for="phone">전화번호</label>
-            <input
-              type="number"
-              name="areaCode"
-              maxlength="3"
-              required
-              pattern="^(01[0-9])$"
-              title="010, 011 등 올바른 형식을 입력해주세요."
-              placeholder="010"
-            />
-            -
-            <input
-              type="number"
-              name="middleNumber"
-              maxlength="4"
-              required
-              pattern="^\d{4}$"
-              title="4자리"
-              placeholder="xxxx"
-            />
-            -
-            <input
-              type="number"
-              name="lastNumber"
-              maxlength="4"
-              required
-              pattern="^\d{4}$"
-              title="4자리"
-              placeholder="xxxx"
-            />
+          <div class="phoneBox">
+            전화번호
+            <div class="phoneInputs">
+              <input
+                type="number"
+                name="areaCode"
+                maxlength="3"
+                required
+                placeholder="010"
+                oninput="handleOnInput(this, 3)"
+              />
+              <p>-</p>
+              <input
+                type="number"
+                name="middleNumber"
+                maxlength="4"
+                required
+                placeholder="0000"
+                oninput="handleOnInput(this, 4)"
+              />
+              <p>-</p>
+              <input
+                type="number"
+                name="lastNumber"
+                maxlength="4"
+                required
+                placeholder="0000"
+                oninput="handleOnInput(this, 4)"
+              />
+            </div>
           </div>
           <br />
           <button type="button" class="loginBtn" onclick="loginCheck()">

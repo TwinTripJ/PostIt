@@ -57,15 +57,6 @@ const checkPhone = async (req, res) => {
   }
 };
 
-const imgUpload = (req, res) => {
-  if (!req.files || req.files.length === 0) {
-    return res.status(400).json({ message: "이미지 업로드 실패" });
-  }
-
-  const imageUrls = req.files.map((file) => `/uploads/${file.filename}`);
-  res.json({ success: true, imageUrls });
-};
-
 // 회원가입
 const registerUser = async (req, res) => {
   try {
@@ -209,7 +200,7 @@ const findPw = async (req, res) => {
 
     if (!user) {
       return res
-        .status(404)
+        .status(200)
         .json({ message: "해당 정보를 가진 아이디가 없습니다" });
     }
 
@@ -225,11 +216,16 @@ const changePass = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     if (!email || !password) {
       return res.status(404).json({ message: "모든 필드를 입력하세요" });
     }
 
-    const [updated] = await User.update({ password }, { where: { email } });
+    const [updated] = await User.update(
+      { password: hashedPassword },
+      { where: { email } }
+    );
 
     if (!updated) {
       return res
@@ -337,6 +333,16 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// 이미지 업로드
+const uploadImage = (req, res) => {
+  if (!req.file) {
+    console.log("이미지 파일이 없습니다.");
+    return res.status(400).json({ message: "이미지 업로드 실패" });
+  }
+  const imageUrl = `/uploads/${req.file.filename}`;
+  res.json({ success: true, imageUrl });
+};
+
 // 컨트롤러 내보내기
 module.exports = {
   checkEmail,
@@ -349,9 +355,10 @@ module.exports = {
   deleteUser,
   getUserByIdNav,
   checkPhone,
-  imgUpload,
+  uploadImage,
   findId,
   getUserByIdWrite,
   findPw,
   changePass,
+  upload,
 };
