@@ -47,21 +47,34 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
-window.onload = function () {
+// 페이지 로드 시 이미지 처리
+window.onload = async function () {
   const preview = document.getElementById("preview");
   const label = document.querySelector(".image-upload span");
   const imageUpload = document.querySelector(".image-upload");
-  if (preview.src && preview.src.trim() !== "" && preview.src !== "undefined") {
-    preview.style.display = "block";
-    label.style.display = "none";
-    imageUpload.style.border = "2px solid transparent";
-  } else {
-    preview.style.display = "none";
-    label.style.display = "block";
-    imageUpload.style.border = "2px dashed #ccc";
+
+  try {
+    const response = await axios.get("/user/profile");
+    const imageUrl = response.data.imageUrl;
+
+    if (imageUrl && imageUrl.trim() !== "") {
+      preview.src = `${imageUrl}`;
+      preview.style.display = "block";
+      label.style.display = "none";
+      imageUpload.style.border = "2px solid transparent";
+    } else {
+      preview.src = "/static/images/profile.png";
+      preview.style.display = "block";
+      label.style.display = "none";
+      imageUpload.style.border = "2px solid transparent";
+    }
+  } catch (error) {
+    console.error("프로필 정보 로드 오류", error);
+    preview.src = "/static/images/profile.png";
   }
 };
 
+// 이미지 업로드 함수
 async function uploadImage(file) {
   const formData = new FormData();
   formData.append("image", file);
@@ -81,14 +94,17 @@ async function uploadImage(file) {
     return "";
   }
 }
+
 // 파일 선택 후 미리보기 & 업로드 기능
 async function previewImage(event) {
   const file = event.target.files[0];
   const preview = document.getElementById("preview");
   const label = document.querySelector(".image-upload span");
   const imageUpload = document.querySelector(".image-upload");
+
   if (file) {
     try {
+      // 먼저 이미지 파일을 서버에 업로드
       const uploadedImageUrl = await uploadImage(file);
       if (uploadedImageUrl) {
         preview.src = uploadedImageUrl;
@@ -103,6 +119,7 @@ async function previewImage(event) {
       console.error("이미지 업로드 중 오류 발생", error);
       alert("이미지 업로드 실패");
     }
+
     const reader = new FileReader();
     reader.onload = function (e) {
       preview.src = e.target.result;
@@ -137,13 +154,13 @@ const changeInfo = async () => {
   const password = document.getElementById("pass").value;
   const address_main = document.getElementById("address").value;
   const address_detail = document.getElementById("detailAddress").value;
-  const preview = document.getElementById("preview");
-  const imageUrl = preview.dataset.imageUrl;
+  const imageInput = document.getElementById("imageInput");
 
   const formData = new FormData();
 
-  if (imageUrl && imageUrl !== "/static/images/profile.png") {
-    formData.append("image", imageUrl);
+  if (imageInput.files.length > 0) {
+    console.log("이미지 추가");
+    formData.append("image", imageInput.files[0]);
   }
 
   if (password.trim()) {
@@ -158,7 +175,7 @@ const changeInfo = async () => {
   }
 
   try {
-    console.log("js:", [...formData.entries()]);
+    console.log(formData);
 
     const response = await axios.put(`/user/info`, formData, {
       headers: {

@@ -13,8 +13,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const filename = path.basename(file.originalname, ext);
-    cb(null, filename + ext);
+    cb(null, Date.now() + ext);
   },
 });
 
@@ -127,6 +126,7 @@ const loginUser = async (req, res) => {
 // JWT 인증 미들웨어
 const authenticateToken = (req, res, next) => {
   const authHeader = req.header("Authorization");
+
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({ message: "유효한 토큰이 필요합니다" });
   }
@@ -288,15 +288,20 @@ const getUserById = async (req, res) => {
 
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
+  console.log("update", req.body);
+  console.log("file", req.file);
+
   try {
     let userId = req.user.id;
     let updateData = req.body;
 
-    console.log("userId:", userId);
-    console.log("updateData:", updateData);
-
     if (updateData.password) {
       updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    if (req.file) {
+      const imageUrl = `/uploads/${req.file.filename}`;
+      updateData.image_url = imageUrl;
     }
 
     const [updated] = await User.update(updateData, {
@@ -343,6 +348,28 @@ const uploadImage = (req, res) => {
   res.json({ success: true, imageUrl });
 };
 
+// 프로필 사진 가져오기
+const getUserProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    console.log("id", userId);
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      return res.status(404).json({ message: "사용자 정보를 찾을 수 없음" });
+    }
+
+    res.status(200).json({
+      username: user.username,
+      email: user.email,
+      imageUrl: user.image_url || "/static/images/profile.png",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "서버 오류", error: err.message });
+  }
+};
+
 // 컨트롤러 내보내기
 module.exports = {
   checkEmail,
@@ -361,4 +388,5 @@ module.exports = {
   findPw,
   changePass,
   upload,
+  getUserProfile,
 };

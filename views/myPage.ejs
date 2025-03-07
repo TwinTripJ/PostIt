@@ -39,22 +39,16 @@
             type="file"
             id="imageInput"
             name="image"
-            accept="image/*"
             onchange="previewImage(event)"
-          />
-          <img
-            id="preview"
-            src="/static/images/profile.png"
-            alt="이미지 미리보기"
-            style="display: block"
           />
           <img
             id="preview"
             src=""
             alt="이미지 미리보기"
-            style="display: none"
+            style="display: block"
           />
         </div>
+
         <button onclick="deleteProfile()">삭제</button>
       </div>
       <div class="input-group">

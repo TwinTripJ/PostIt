@@ -1,6 +1,7 @@
 const multer = require("multer");
 const userController = require("../controllers/userController");
 const router = require("express").Router();
+const path = require("path");
 
 // Multer 설정 (파일 업로드)
 const storage = multer.diskStorage({
@@ -14,8 +15,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
-const uploadFiles = upload.single([{ image_url: "image", maxCount: 1 }]);
 
 router.get(
   "/allUsers",
@@ -34,6 +33,12 @@ router.get(
   "/getUser",
   userController.authenticateToken,
   userController.getUserByIdNav
+);
+
+router.get(
+  "/profile",
+  userController.authenticateToken,
+  userController.getUserProfile
 );
 
 // 아이디 중복 확인
@@ -69,9 +74,9 @@ router.put("/changePass", userController.changePass);
 // 유저 정보 수정
 router.put(
   "/info",
+  upload.single("image"),
   userController.authenticateToken,
-  userController.updateUser,
-  uploadFiles
+  userController.updateUser
 );
 
 // 유저 정보 삭제
