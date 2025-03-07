@@ -4,7 +4,7 @@ const editor = new toastui.Editor({
   height: "300px",
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
-  initialValue: "상세 정보를 입력해주세요.",
+  placeholder: "상세 정보를 입력해주세요.",
 });
 
 // 이미지 URL 추출 함수
