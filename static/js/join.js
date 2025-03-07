@@ -161,7 +161,7 @@ const join = async () => {
   const birthDay = document.getElementById("birth-day").value;
   const birthDate = `${birthYear}.${birthMonth}.${birthDay}`;
 
-  if (passwordCheckText !== "비밀번호 일치") {
+  if (passwordCheckText !== "동일한 비밀번호입니다.") {
     Swal.fire({
       icon: "error",
       title: "비밀번호 불일치",

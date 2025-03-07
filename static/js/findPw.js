@@ -1,5 +1,4 @@
 // 버튼 활성화, 비활성화
-
 let passwordsMatch = false;
 
 const enableJoinButton = (ClearBtn) => {
@@ -48,7 +47,7 @@ const idCheck = async () => {
     if (res.data.email) {
       Swal.fire({
         title: `새 비밀번호를 저장하시겠습니까`,
-        icon: "success",
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "확인",
       }).then((result) => {
@@ -75,7 +74,7 @@ const idCheck = async () => {
       });
     } else {
       Swal.fire({
-        title: "해당 정보로 가입된 아이디가 없습니다.",
+        text: "해당 정보로 가입된 아이디가 없습니다.",
         icon: "error",
       });
     }

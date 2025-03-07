@@ -47,11 +47,15 @@ router.post("/addUser", userController.registerUser);
 
 router.post("/loginUser", userController.loginUser);
 
-router.post("/upload", userController.imgUpload);
-
 router.post("/findId", userController.findId);
 
 router.post("/findPw", userController.findPw);
+
+router.post(
+  "/uploadImage",
+  userController.upload.single("image"),
+  userController.uploadImage
+);
 
 // 특정 유저 확인 (id)
 router.get(
