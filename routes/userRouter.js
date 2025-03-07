@@ -36,6 +36,8 @@ router.post("/upload", userController.imgUpload);
 
 router.post("/findId", userController.findId);
 
+router.post("/findPw", userController.findPw);
+
 // 특정 유저 확인 (id)
 router.get(
   "/:id",

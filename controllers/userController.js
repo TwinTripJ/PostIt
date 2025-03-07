@@ -196,8 +196,29 @@ const findId = async (req, res) => {
   }
 };
 
-// 새 비밀번호 발급 nodemailer
-const findpw = async (req, res) => {};
+// 새 비밀번호 저장
+const findPw = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(404).json({ message: "이메일을 입력하세요" });
+    }
+
+    const user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "해당 정보를 가진 아이디가 없습니다" });
+    }
+
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "서버 오류 발생", error: err.message });
+  }
+};
 
 const getUserByIdWrite = async (req, res) => {
   try {
@@ -304,5 +325,5 @@ module.exports = {
   imgUpload,
   findId,
   getUserByIdWrite,
-  findpw,
+  findPw,
 };
