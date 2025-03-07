@@ -47,7 +47,7 @@ module.exports = {
         unique: true,
       },
       image_url: {
-        type: Sequelize.TEXT(255),
+        type: Sequelize.STRING(255),
         allowNull: true,
       },
       createdAt: {
@@ -63,9 +63,6 @@ module.exports = {
         ),
       },
     });
-    await queryInterface.bulkInsert("users", [
-      { image_url: "/static/images/profile.png" },
-    ]);
   },
 
   async down(queryInterface, Sequelize) {
