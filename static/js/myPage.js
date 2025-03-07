@@ -82,10 +82,13 @@ const pwCheck = () => {
   const check = document.getElementById("alret");
 
   if (password === passwordCheck) {
-    check.innerText = "비밀번호 일치";
+    check.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+    passwordsMatch = true;
   } else {
-    check.innerText = "비밀번호 불일치";
+    check.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+    passwordsMatch = false;
   }
+  checkAllFields();
 };
 
 // 정보 수정 함수
