@@ -66,7 +66,7 @@ async function uploadImage(file) {
   const formData = new FormData();
   formData.append("image", file);
   try {
-    const res = await axios.post("/admin/uploadImage", formData, {
+    const res = await axios.post("/user/uploadImage", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     if (res.data.imageUrl) {
@@ -134,26 +134,31 @@ const pwCheck = () => {
 const changeInfo = async () => {
   const token = localStorage.getItem("token");
 
+  const password = document.getElementById("pass").value;
+  const address_main = document.getElementById("address").value;
+  const address_detail = document.getElementById("detailAddress").value;
+  const preview = document.getElementById("preview");
+  const imageUrl = preview.dataset.imageUrl;
+
+  const formData = new FormData();
+
+  if (imageUrl && imageUrl !== "/static/images/profile.png") {
+    formData.append("image", imageUrl);
+  }
+
+  if (password.trim()) {
+    formData.append("password", password);
+  }
+
+  if (address_main.trim()) {
+    formData.append("address_main", address_main);
+  }
+  if (address_detail.trim()) {
+    formData.append("address_detail", address_detail);
+  }
+
   try {
-    if (fileInput.files.length > 0) {
-      formData.append("image", fileInput.files[0]);
-    } else {
-      if (profileImage !== "/static/images/profile.png") {
-        formData.append("image_url", profileImage);
-      }
-    }
-
-    if (password) {
-      formData.append("password", password);
-    }
-    if (address_main) {
-      formData.append("address_main", address_main);
-    }
-    if (address_detail) {
-      formData.append("address_detail", address_detail);
-    }
-
-    console.log(formData);
+    console.log([...formData.entries()]);
 
     const response = await axios.put(`/user/info`, formData, {
       headers: {
