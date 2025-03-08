@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Naver Login</title>
   </head>
-  <body></body>
+  <body>
+    <h1>네이버 로그인 완료</h1>
+    <p>로그인에 성공했습니다. 토큰을 저장합니다...</p>
+
+    <script>
+      window.onload = function () {
+        const hashParams = new URLSearchParams(window.location.hash.slice(1));
+        const access_token = hashParams.get("access_token");
+        const state = hashParams.get("state");
+
+        if (access_token && state) {
+          window.location.href = `/user/callback?access_token=${access_token}&state=${state}`;
+        }
+      };
+    </script>
+  </body>
 </html>
