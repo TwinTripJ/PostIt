@@ -48,6 +48,36 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
+// 네이버, 카카오의 경우 비밀번호 변경 막기
+document.addEventListener("DOMContentLoaded", async function () {
+  const token = localStorage.getItem("token");
+  const pass = document.getElementById("pass");
+  const passCheck = document.getElementById("passCheck");
+
+  if (token) {
+    try {
+      const response = await axios(`/user/getUser`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const user = response.data;
+
+      if (!user.password || user.password === "" || user.provider === "naver") {
+        pass.disabled = true;
+        passCheck.disabled = true;
+      } else {
+        pass.disabled = false;
+        passCheck.disabled = false;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+});
+
 // 페이지 로드 시 이미지 처리
 window.onload = async function () {
   const preview = document.getElementById("preview");
@@ -119,7 +149,7 @@ async function previewImage(event) {
       const uploadedImageUrl = await uploadImage(file);
       if (uploadedImageUrl) {
         preview.src = uploadedImageUrl;
-        preview.dataset.imageUrl = uploadedImageUrl; // ✅ 변경된 이미지 URL 저장
+        preview.dataset.imageUrl = uploadedImageUrl;
       } else {
         alert("이미지 업로드 실패");
       }
@@ -141,20 +171,18 @@ async function previewImage(event) {
 }
 
 // 이미지 삭제
-let imageDeleted = false; // ✅ 이미지 삭제 상태 추적
+let imageDeleted = false;
 
-// 📌 이미지 삭제 함수
 const deleteProfile = () => {
   const preview = document.getElementById("preview");
   const imageInput = document.getElementById("imageInput");
 
   preview.src = "/static/images/profile.png";
-  preview.dataset.imageUrl = ""; // ✅ 데이터셋에서 이미지 URL 제거
-  imageDeleted = true; // ✅ 이미지 삭제 상태 true로 변경
+  preview.dataset.imageUrl = "";
+  imageDeleted = true;
 
-  // ✅ 파일 입력 필드 완전 초기화
   imageInput.value = "";
-  imageInput.type = "text"; // 타입을 변경하여 강제 초기화
+  imageInput.type = "text";
   imageInput.type = "file";
 };
 
@@ -216,16 +244,11 @@ async function changeInfo() {
 
   const formData = new FormData();
 
-  // ✅ 이미지 삭제된 경우
   if (imageDeleted) {
     formData.append("imageDeleted", true);
-  }
-  // ✅ 새 이미지가 업로드된 경우
-  else if (imageInput.files.length > 0) {
+  } else if (imageInput.files.length > 0) {
     formData.append("image", imageInput.files[0]);
-  }
-  // ✅ 기존 업로드된 이미지 유지
-  else if (
+  } else if (
     preview.dataset.imageUrl &&
     preview.dataset.imageUrl !== "/static/images/profile.png"
   ) {

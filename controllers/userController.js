@@ -149,6 +149,7 @@ const authenticateToken = (req, res, next) => {
 // 로그인 후
 const getUserByIdNav = async (req, res) => {
   try {
+    console.log(req.user);
     const username = req.user.username;
     const user = await User.findOne({ where: { username: username } });
 
@@ -158,6 +159,7 @@ const getUserByIdNav = async (req, res) => {
 
     res.status(200).json({
       username: user.username,
+      password: user.password,
     });
   } catch (err) {
     console.error(err);
@@ -380,66 +382,6 @@ const naverLogin = (req, res) => {
   });
 };
 
-const naverProfile = async (req, res) => {
-  const { accessToken } = req.body;
-
-  try {
-    const response = await axios.get("https://openapi.naver.com/v1/nid/me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const profile = response.data.response;
-    if (!profile.email) {
-      return res
-        .status(400)
-        .json({ error: "Naver profile does not contain email" });
-    }
-
-    let user = await User.findOne({ where: { email: profile.email } });
-
-    // 숫자만 남기고 하이픈 추가하여 포맷
-    const phoneNumber = profile.mobile.replace(/[^0-9]/g, ""); // 숫자만 남기기
-    const formattedPhone = phoneNumber.replace(
-      /(\d{3})(\d{4})(\d{4})/,
-      "$1-$2-$3" // 010-1234-5678 형식으로 포맷
-    );
-    console.log(formattedPhone); // 포맷된 전화번호 출력
-
-    if (!user) {
-      user = await User.create({
-        email: profile.email,
-        password: "",
-        username: profile.nickname || "NaverUser",
-        gender: profile.gender === "M" ? "man" : "woman",
-        birthDate: profile.birthyear ? `${profile.birthyear}-01-01` : null,
-        phone: formattedPhone,
-        image_url: profile.profile_image || null,
-      });
-    }
-
-    // JWT 토큰 발급
-    const token = jwt.sign(
-      { id: user.id, email: user.email, provider: "naver" },
-      process.env.SECRET_KEY,
-      { expiresIn: "1h" }
-    );
-
-    // 응답 반환
-    res.json({
-      token,
-      email: user.email,
-      username: user.username,
-      clientId: process.env.NAVER_CLIENT_ID,
-      callbackUrl: process.env.NAVER_CALLBACK_URL,
-    });
-  } catch (error) {
-    console.error("Error fetching Naver profile:", error);
-    res.status(500).json({ error: "Failed to fetch user profile from Naver" });
-  }
-};
-
 // 콜백 요청
 const callBack = async (req, res) => {
   const { access_token, state } = req.query;
@@ -464,6 +406,12 @@ const callBack = async (req, res) => {
 
     let user = await User.findOne({ where: { email: profile.email } });
 
+    const phoneNumber = profile.mobile.replace(/[^0-9]/g, "");
+    const formattedPhone = phoneNumber.replace(
+      /(\d{3})(\d{4})(\d{4})/,
+      "$1-$2-$3"
+    );
+
     if (!user) {
       user = await User.create({
         email: profile.email,
@@ -471,18 +419,29 @@ const callBack = async (req, res) => {
         username: profile.nickname || "NaverUser",
         gender: profile.gender === "M" ? "man" : "woman",
         birthDate: profile.birthyear ? `${profile.birthyear}-01-01` : null,
-        phone: profile.mobile.replace(/-/g, ""),
+        phone: formattedPhone,
         image_url: profile.profile_image || null,
       });
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, provider: "naver" },
+      {
+        id: user.id,
+        email: user.email,
+        provider: "naver",
+        username: user.username,
+        phone: user.phone,
+        image_url: user.image_url,
+      },
       process.env.SECRET_KEY,
       { expiresIn: "1h" }
     );
 
-    res.redirect(`/some-page?token=${token}`);
+    res.json({
+      success: true,
+      token,
+      message: "Login successful",
+    });
   } catch (error) {
     console.error("Error processing Naver callback", error);
     res.status(500).json({ error: "Failed to process Naver callback" });
@@ -509,6 +468,5 @@ module.exports = {
   upload,
   getUserProfile,
   naverLogin,
-  naverProfile,
   callBack,
 };
