@@ -136,7 +136,48 @@ window.onload = async function () {
 //   }
 // }
 
-// 파일 선택 후 미리보기 & 업로드 기능
+// async function previewImage(event) {
+//   const file = event.target.files[0];
+//   const preview = document.getElementById("preview");
+//   const label = document.querySelector(".image-upload span");
+//   const imageUpload = document.querySelector(".image-upload");
+
+//   if (file) {
+//     try {
+//       const uploadedImageUrl = await uploadImage(file);
+//       if (uploadedImageUrl) {
+//         preview.src = uploadedImageUrl;
+//         preview.dataset.imageUrl = uploadedImageUrl;
+//       } else {
+//         alert("이미지 업로드 실패");
+//       }
+//     } catch (error) {
+//       console.error("이미지 업로드 중 오류 발생", error);
+//       alert("이미지 업로드 실패");
+//     }
+
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//       preview.src = e.target.result;
+//     };
+//     reader.readAsDataURL(file);
+
+//     preview.style.display = "block";
+//     label.style.display = "none";
+//     imageUpload.style.border = "none";
+//   } else {
+//     preview.style.display = "none";
+//     label.style.display = "none";
+//     imageUpload.style.border = "none";
+
+//     const defaultImageUrl =
+//       preview.dataset.imageUrl || "/path/to/default/image.jpg";
+//     preview.src = defaultImageUrl;
+//     preview.style.display = "block";
+//   }
+// }
+
+// 파일 선택 후 미리보기
 async function previewImage(event) {
   const file = event.target.files[0];
   const preview = document.getElementById("preview");
@@ -144,7 +185,6 @@ async function previewImage(event) {
   const imageUpload = document.querySelector(".image-upload");
 
   if (file) {
-    // 파일을 미리보기만 하기
     const reader = new FileReader();
     reader.onload = function (e) {
       preview.src = e.target.result;
