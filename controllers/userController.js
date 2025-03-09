@@ -324,7 +324,12 @@ const updateUser = async (req, res) => {
 // 사용자 삭제 > 탈퇴로 변경할 것 !!
 const deleteUser = async (req, res) => {
   try {
-    let id = req.params.id;
+    const { id } = req.user;
+
+    if (!id) {
+      return res.status(400).json({ message: "사용자 ID가 필요합니다" });
+    }
+
     const deleted = await User.destroy({ where: { id: id } });
 
     if (!deleted) {

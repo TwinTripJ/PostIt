@@ -85,7 +85,7 @@ router.put(
 
 // 유저 정보 삭제
 router.delete(
-  "/:id",
+  "/deleteUser",
   userController.authenticateToken,
   userController.deleteUser
 );

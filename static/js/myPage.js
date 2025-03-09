@@ -50,7 +50,6 @@ function sample6_execDaumPostcode() {
 
 // 네이버, 카카오의 경우 비밀번호 변경 막기
 document.addEventListener("DOMContentLoaded", async function () {
-  const token = localStorage.getItem("token");
   const pass = document.getElementById("pass");
   const passCheck = document.getElementById("passCheck");
 
@@ -292,4 +291,48 @@ async function changeInfo() {
 }
 
 // 탈퇴 요청
-const deleteUser = () => {};
+const deleteUser = async () => {
+  // 탈퇴 확인
+  const result = await Swal.fire({
+    title: "탈퇴하시겠습니까?",
+    text: "탈퇴 후 복구가 불가능합니다.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "확인",
+    cancelButtonText: "취소",
+  });
+
+  if (result.isConfirmed) {
+    // 확인 클릭 시 탈퇴 요청
+    try {
+      const response = await axios.delete("/user/deleteUser", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      Swal.fire({
+        title: "탈퇴가 완료되었습니다.",
+        text: "메인으로 이동됩니다.",
+        icon: "success",
+        confirmButtonText: "확인",
+      }).then(() => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+      });
+    } catch (error) {
+      console.error("탈퇴 오류", error);
+      Swal.fire({
+        title: "탈퇴 실패",
+        text: "문제가 발생했습니다. 다시 시도해 주세요.",
+        icon: "error",
+      });
+    }
+  } else {
+    // 취소 클릭 시
+    Swal.fire({
+      title: "탈퇴가 취소되었습니다.",
+      icon: "info",
+    });
+  }
+};
