@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/category.css" />
+
+    <title><%= categoryName %> 게시글</title>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <%- include("nav") %>
+
+    <div class="categoryContainer">
+      <h2 id="categoryTitle"><%= categoryName %></h2>
+
+      <div class="posts">
+        <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+        <div class="postCard" onclick="viewPost('<%= post.id %>')">
+          <img src="<%= post.image_url %>" alt="Post Image" />
+          <h3><%= post.title %></h3>
+          <span><%= post.content.substring(0, 100) %></span>
+          <span>❤️ <%= post.like_count %> 좋아요</span>
+          <span
+            >🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString()
+            %></span
+          >
+        </div>
+        <% }) %> <% } else { %>
+        <p class="noPost">이 카테고리에 게시글이 없습니다.</p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+  <script src="/static/js/category.js"></script>
+</html>
