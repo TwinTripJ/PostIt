@@ -116,25 +116,25 @@ window.onload = async function () {
 };
 
 // 이미지 업로드 함수
-async function uploadImage(file) {
-  const formData = new FormData();
-  formData.append("image", file);
-  try {
-    const res = await axios.post("/user/uploadImage", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    if (res.data.imageUrl) {
-      return res.data.imageUrl;
-    } else {
-      alert("이미지 업로드 실패");
-      return "";
-    }
-  } catch (error) {
-    console.error("이미지 업로드 에러:", error);
-    alert("이미지 업로드 중 오류 발생");
-    return "";
-  }
-}
+// async function uploadImage(file) {
+//   const formData = new FormData();
+//   formData.append("image", file);
+//   try {
+//     const res = await axios.post("/user/uploadImage", formData, {
+//       headers: { "Content-Type": "multipart/form-data" },
+//     });
+//     if (res.data.imageUrl) {
+//       return res.data.imageUrl;
+//     } else {
+//       alert("이미지 업로드 실패");
+//       return "";
+//     }
+//   } catch (error) {
+//     console.error("이미지 업로드 에러:", error);
+//     alert("이미지 업로드 중 오류 발생");
+//     return "";
+//   }
+// }
 
 // 파일 선택 후 미리보기 & 업로드 기능
 async function previewImage(event) {
@@ -144,28 +144,25 @@ async function previewImage(event) {
   const imageUpload = document.querySelector(".image-upload");
 
   if (file) {
-    try {
-      const uploadedImageUrl = await uploadImage(file);
-      if (uploadedImageUrl) {
-        preview.src = uploadedImageUrl;
-        preview.dataset.imageUrl = uploadedImageUrl;
-      } else {
-        alert("이미지 업로드 실패");
-      }
-    } catch (error) {
-      console.error("이미지 업로드 중 오류 발생", error);
-      alert("이미지 업로드 실패");
-    }
-
+    // 파일을 미리보기만 하기
     const reader = new FileReader();
     reader.onload = function (e) {
       preview.src = e.target.result;
     };
     reader.readAsDataURL(file);
+
+    preview.style.display = "block";
+    label.style.display = "none";
+    imageUpload.style.border = "none";
   } else {
     preview.style.display = "none";
-    label.style.display = "block";
-    imageUpload.style.border = "2px dashed #ccc";
+    label.style.display = "none";
+    imageUpload.style.border = "none";
+
+    const defaultImageUrl =
+      preview.dataset.imageUrl || "/static/images/profile.png";
+    preview.src = defaultImageUrl;
+    preview.style.display = "block";
   }
 }
 
@@ -177,9 +174,11 @@ const deleteProfile = () => {
   const imageInput = document.getElementById("imageInput");
 
   preview.src = "/static/images/profile.png";
-  preview.dataset.imageUrl = "";
+  preview.dataset.imageUrl = "/static/images/profile.png";
+
   imageDeleted = true;
 
+  // 파일 input 값 초기화
   imageInput.value = "";
   imageInput.type = "text";
   imageInput.type = "file";
@@ -303,7 +302,6 @@ const deleteUser = async () => {
   });
 
   if (result.isConfirmed) {
-    // 확인 클릭 시 탈퇴 요청
     try {
       const response = await axios.delete("/user/deleteUser", {
         headers: {
@@ -329,7 +327,6 @@ const deleteUser = async () => {
       });
     }
   } else {
-    // 취소 클릭 시
     Swal.fire({
       title: "탈퇴가 취소되었습니다.",
       icon: "info",

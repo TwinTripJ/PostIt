@@ -299,6 +299,28 @@ const updateUser = async (req, res) => {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
+    if (updateData.imageDeleted === "true") {
+      updateData.image_url = "/static/images/profile.png";
+
+      // 기존 이미지 경로가 존재하는지 확인
+      if (
+        req.user.image_url &&
+        req.user.image_url !== "/static/images/profile.png"
+      ) {
+        const oldImagePath = path.join(
+          __dirname,
+          "..",
+          "uploads",
+          req.user.image_url
+        );
+
+        if (fs.existsSync(oldImagePath)) {
+          // 기존 경로 삭제
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+    }
+
     if (req.file) {
       const imageUrl = `/uploads/${req.file.filename}`;
       updateData.image_url = imageUrl;
