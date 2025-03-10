@@ -33,7 +33,6 @@ const moveToCategory = (categoryId) => {
 // const loadAllPosts = async () => {
 //   try {
 //     const response = await axios.get("/post/allPosts");
-
 //     if (response.status === 200) {
 //       const posts = response.data;
 //       const postContainer = document.querySelector(".mainContainer");
