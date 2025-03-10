@@ -9,7 +9,7 @@ router.post("/create", postController.createPost);
 router.get("/:postId", postController.getPostById);
 
 // 내 글 조회
-router.get("/myPost", postController.getMyPost);
+router.get("/myPost/:userId", postController.getMyPost);
 
 // 게시글 수정
 router.put("/:id", postController.updatePost);

@@ -34,6 +34,26 @@ function moveUrl(url) {
   window.location.href = `/postit/${url}`;
 }
 
+// 내가 쓴 글 보기
+const goToMyPost = async (url) => {
+  try {
+    const token = localStorage.getItem("token");
+    const idResponse = await axios.get("/user/getUserId", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const userId = idResponse.data.id;
+
+    if (url === "myPost") {
+      window.location.href = `/post/myPost/${userId}`;
+    } else {
+      window.location.href = `/postit/${url}`;
+    }
+  } catch (error) {
+    console.error("사용자 ID 가져오기 실패:", error);
+  }
+};
+
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "/";

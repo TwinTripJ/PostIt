@@ -1,6 +1,7 @@
 const db = require("../models");
 require("dotenv").config();
 
+const User = db.User;
 const Post = db.Post;
 const Like = db.Like;
 const Category = db.Category;
@@ -10,8 +11,6 @@ const createPost = async (req, res) => {
   try {
     const { user_id, category_id, title, content, image_url, like_count } =
       req.body;
-
-    console.log(req.body);
 
     if (!user_id || !title || !content) {
       return res.status(400).json({ message: "필수 입력값이 누락되었습니다" });
@@ -112,7 +111,6 @@ const getPostById = async (req, res) => {
     };
 
     res.render("postDetail", { modifiedPost, categoryName });
-
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {
@@ -125,32 +123,42 @@ const getPostById = async (req, res) => {
 // 내 글 보기
 const getMyPost = async (req, res) => {
   try {
-    const { postId } = req.params.postId;
+    const { userId } = req.params;
 
-    const post = await Post.findAll({
-      where: { id: postId },
+    const posts = await Post.findAll({
+      where: { user_id: userId },
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "image_url",
+        "createdAt",
+        [db.sequelize.fn("COUNT", db.sequelize.col("likes.id")), "like_count"],
+      ],
       include: [
         {
           model: Like,
-          as: "likes",
+          attributes: [],
         },
       ],
-      attribute: {
-        include: [
-          [
-            db.sequelize.fn("COUNT", db.sequelize.col("likes.id")),
-            "like_count",
-          ],
-        ],
-      },
+
       group: ["Post.id"],
+      order: [["createdAt", "DESC"]],
     });
 
-    if (!post) {
-      return res.status(404).json({ message: "게시글 조회 실패" });
+    if (!posts) {
+      return res.status(404).json({ message: "작성된 게시글이 없습니다" });
     }
 
-    res.status(200).json(post);
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "사용자 정보를 찾을 수 없습니다." });
+    }
+
+    res.render("myPost", { user, posts });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });
