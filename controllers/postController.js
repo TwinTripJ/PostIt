@@ -112,6 +112,7 @@ const getPostById = async (req, res) => {
     };
 
     res.render("postDetail", { modifiedPost, categoryName });
+
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {
