@@ -1,7 +1,4 @@
 // 게시글 보기
-
-const token = localStorage.getItem("token");
-
 const viewPost = (categoryName, postId) => {
   axios
     .get(`/post/${categoryName}/${postId}`, { withCredentials: true })

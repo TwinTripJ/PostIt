@@ -41,11 +41,12 @@ const loadAllPosts = async () => {
         const postElement = document.createElement("div");
         postElement.classList.add("post-item");
         postElement.innerHTML = `
-          <div class="post-card" onclick="moveToPost(${post.id})">
+          <div class="post-card" onclick="moveToPost(${post.id})" >
             <img src="${
               post.image_url
             }" alt="Post Image" class="post-image" width="100px" height="100px">
             <div class="post-info">
+            
               <h4>${post.title}</h4>
               <p>${post.content.substring(0, 100)}...</p>
               <span>❤️ ${post.like_count || 0}</span>

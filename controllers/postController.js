@@ -74,7 +74,6 @@ const getAllPosts = async (req, res) => {
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
-    console.log("sdfsdf", req.params);
     const post = await Post.findOne({
       where: { id: postId },
       attributes: [
