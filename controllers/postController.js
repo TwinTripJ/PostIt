@@ -106,7 +106,12 @@ const getPostById = async (req, res) => {
       return res.status(404);
     }
 
-    res.render("postDetail", { post, categoryName });
+    const modifiedPosts = post.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n"),
+    }));
+
+    res.render("postDetail", { modifiedPosts, categoryName });
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {
