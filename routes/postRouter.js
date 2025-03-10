@@ -6,7 +6,7 @@ const router = require("express").Router();
 router.post("/create", postController.createPost);
 
 // 특정 게시글 조회 (id)
-router.get("/:categoryName/:postId", postController.getPostById);
+router.get("/:postId", postController.getPostById);
 
 // 내 글 조회
 router.get("/myPost", postController.getMyPost);
