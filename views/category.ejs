@@ -17,10 +17,7 @@
 
       <div class="posts">
         <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
-        <div
-          class="postCard"
-          onclick="viewPost('<%= categoryName %>', '<%= post.id %>')"
-        >
+        <div class="postCard" onclick="viewPost('<%= post.id %>')">
           <img src="<%= post.image_url %>" alt="Post Image" />
           <h3><%= post.title %></h3>
           <span><%= post.content %></span>

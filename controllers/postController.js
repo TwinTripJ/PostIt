@@ -121,7 +121,7 @@ const getMyPost = async (req, res) => {
   try {
     const { postId } = req.params.postId;
 
-    const post = await Post.findOne({
+    const post = await Post.findAll({
       where: { id: postId },
       include: [
         {

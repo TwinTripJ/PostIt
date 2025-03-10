@@ -17,6 +17,19 @@ function showAlert() {
   });
 }
 
+// 게시글 보기
+// const viewPost = (userId, postId) => {
+//   axios
+//     .get(`/post/${categoryName}/${postId}`, { withCredentials: true })
+//     .then((response) => {
+//       console.log(response);
+//       window.location.href = `/postit/${categoryName}/${postId}`;
+//     })
+//     .catch((error) => {
+//       console.error("게시글 조회 실패:", error);
+//     });
+// };
+
 function moveUrl(url) {
   window.location.href = `/postit/${url}`;
 }
