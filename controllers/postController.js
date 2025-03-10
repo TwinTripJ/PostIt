@@ -36,7 +36,7 @@ const createPost = async (req, res) => {
 };
 
 // 모든 게시글 조회 및 좋아요 개수
-const getAllPosts = async (req, res) => {
+const getAllPosts = async () => {
   try {
     const posts = await Post.findAll({
       attributes: [
@@ -49,24 +49,27 @@ const getAllPosts = async (req, res) => {
         "createdAt",
         "updatedAt",
         [db.sequelize.fn("COUNT", db.sequelize.col("Likes.id")), "like_count"],
-        // 좋아요 개수 계산
       ],
       include: [
         {
           model: Like,
           attributes: [],
-          // 좋아요 개수 계산을 위한 관계만 필요하므로 빈 배열
         },
       ],
       group: ["Post.id"],
-      // 중복 방지
       order: [["createdAt", "DESC"]],
-      // 최신 게시글 정렬
     });
-    return posts;
+
+    // content에서 <p> 태그 제거
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n"),
+    }));
+
+    return modifiedPosts;
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "게시글 조회 실패", error: err.message });
+    return [];
   }
 };
 
