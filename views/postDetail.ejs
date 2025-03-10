@@ -8,23 +8,25 @@
   <body>
     <div class="container">
       <div class="post-header">
-        <h1><%= post.title %></h1>
-        <p>카테고리: <strong><%= categoryName %></strong></p>
-        <p>🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString() %></p>
+        <h1><%= modifiedPost.title %></h1>
+        <p>
+          🕒 작성일: <%= new Date(modifiedPost.createdAt).toLocaleDateString()
+          %>
+        </p>
       </div>
 
-      <% if (post.image_url) { %>
+      <% if (modifiedPost.image_url) { %>
       <img
-        class="post-image"
-        src="<%= post.image_url %>"
+        class="modifiedPost-image"
+        src="<%= modifiedPost.image_url %>"
         alt="게시글 이미지"
         width="100px"
         height="100px"
       />
       <% } %>
 
-      <div class="post-content">
-        <p><%= post.content %></p>
+      <div class="modifiedPost-content">
+        <p><%= modifiedPost.content %></p>
       </div>
     </div>
   </body>
