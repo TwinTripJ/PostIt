@@ -92,3 +92,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     loginAfter.style.display = "none";
   }
 });
+
+// 카테고리별 게시글로 이동하기
+const moveToCategory = (categoryId) => {
+  if (token) {
+    window.location.href = `/category/${categoryId}`;
+  } else {
+    window.location.href = "/postit/login";
+  }
+};

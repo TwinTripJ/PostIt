@@ -231,13 +231,27 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.648);
+  background-color: rgba(255, 255, 255, 0.478);
   border-radius: 10px;
   padding: 10px;
   width: 230px;
   height: 300px;
   align-items: center;
   cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+
+.postContainer img {
+  opacity: 0.8;
+  transition: opacity 0.5s ease-in;
+}
+
+.postContainer:hover {
+  background-color: rgba(255, 255, 255, 0.801);
+}
+
+.postContainer:hover img {
+  opacity: 1;
 }
 
 .contentBox {
@@ -264,10 +278,26 @@ body {
   display: flex;
   flex-direction: column;
   text-align: right;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-card .post-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5px;
 }
 
 .post-info {
-  margin-right: 5px;
+  margin-right: -150px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 좋아요 버튼 */
+.favoriteIcon img {
+  width: 20px;
 }
 
 @media screen and (max-width: 1275px) {

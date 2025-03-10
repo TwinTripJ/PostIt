@@ -5,6 +5,12 @@ const editor = new toastui.Editor({
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
   initialValue: "상세 정보를 입력해주세요.",
+  hooks: {
+    addImageBlobHook(blob, callback) {
+      console.log(blob);
+      console.log(callback);
+    },
+  },
 });
 
 const saveButton = document.querySelector(".saveBtn");

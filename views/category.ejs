@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/css/category.css" />
 
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+
     <title><%= categoryName %> 게시글</title>
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -13,19 +21,46 @@
     <%- include("nav") %>
 
     <div class="categoryContainer">
-      <h2 id="categoryTitle"><%= categoryName %></h2>
+      <div class="carosel">
+        <div class="caroselContainer">
+          <img
+            class="caroselImg"
+            src="/static/images/mainCarosel.jpg"
+            alt="carosel image"
+          />
+          <div class="overlay"></div>
+        </div>
+        <div class="logo">
+          <h2 id="categoryTitle"><%= categoryName %></h2>
+        </div>
+      </div>
 
       <div class="posts">
         <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
-        <div class="postCard" onclick="viewPost('<%= post.id %>')">
-          <img src="<%= post.image_url %>" alt="Post Image" />
+        <div class="postCard">
+          <img
+            src="<%= post.image_url %>"
+            alt="Post Image"
+            onclick="viewPost('<%= post.id %>')"
+            data-id="<%= post.id %>"
+          />
           <h3><%= post.title %></h3>
           <span><%= post.content %></span>
-          <span>❤️ <%= post.like_count %> 좋아요</span>
-          <span
-            >🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString()
-            %></span
-          >
+          <span>
+            <div
+              class="favoriteIcon"
+              onclick="heart(event)"
+              data-fav="<%= post.favorite ? '1' : '0' %>"
+            >
+              <img
+                src="<%= post.favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
+              />
+            </div>
+            <%= post.like_count %> 좋아요
+          </span>
+          <span>
+            🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString() %>
+          </span>
         </div>
         <% }) %> <% } else { %>
         <p class="noPost">이 카테고리에 게시글이 없습니다.</p>
