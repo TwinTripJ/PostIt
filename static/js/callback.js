@@ -13,7 +13,7 @@ window.onload = function () {
           setTimeout(() => {
             window.close();
             window.opener.location.href = "/";
-          }, 500);
+          }, 0.00001);
         } else {
           alert("로그인 실패: 서버에서 실패 응답");
         }

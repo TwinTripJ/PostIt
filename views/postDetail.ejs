@@ -1,33 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="/static/css/postDetail.css" />
   </head>
   <body>
-    <div class="container">
+    <%- include("nav") %>
+    <div class="backColor">
+      <div class="carosel">
+        <div class="caroselContainer">
+          <img
+            class="caroselImg"
+            src="/static/images/mainCarosel.jpg"
+            alt="carosel image"
+          />
+          <div class="overlay"></div>
+        </div>
+      </div>
       <div class="post-header">
-        <h1><%= modifiedPost.title %></h1>
-        <p>
-          🕒 작성일: <%= new Date(modifiedPost.createdAt).toLocaleDateString()
-          %>
-        </p>
+        <h1><%= post.title %></h1>
+        <p>🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString() %></p>
       </div>
 
-      <% if (modifiedPost.image_url) { %>
+      <% if (post.image_url) { %>
       <img
-        class="modifiedPost-image"
-        src="<%= modifiedPost.image_url %>"
+        class="post-image"
+        src="<%= post.image_url %>"
         alt="게시글 이미지"
         width="100px"
         height="100px"
       />
       <% } %>
 
-      <div class="modifiedPost-content">
-        <p><%= modifiedPost.content %></p>
+      <div class="post-content">
+        <p><%- post.content %></p>
       </div>
+      <%- include("footer") %>
     </div>
   </body>
 </html>

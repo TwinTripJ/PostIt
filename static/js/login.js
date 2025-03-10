@@ -87,6 +87,22 @@ function initializeNaverLogin() {
     });
 }
 
+// document.getElementById("naverLoginBtn").addEventListener("click", function () {
+//   axios
+//     .get("/user/naver")
+//     .then((response) => {
+//       const { clientId, redirectUri } = response.data;
+
+//       const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
+
+//       window.location.href = loginUrl;
+//     })
+//     .catch((error) => {
+//       console.error("네이버 로그인 설정 불러오기 실패:", error);
+//       alert("네이버 로그인 설정을 불러오는 중 문제가 발생했습니다.");
+//     });
+// });
+
 // 카카오 로그인
 axios
   .get("/user/kakao-key")

@@ -128,5 +128,9 @@ async function setLikeStatus() {
 document.addEventListener("DOMContentLoaded", setLikeStatus);
 
 const moveToPost = (postId) => {
-  window.location.href = `/post/${postId}`;
+  if (token) {
+    window.location.href = `/post/${postId}`;
+  } else {
+    window.location.href = "/postit/login";
+  }
 };

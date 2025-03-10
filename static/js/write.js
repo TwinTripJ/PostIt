@@ -113,7 +113,7 @@ async function previewImage(event) {
       img.onload = function () {
         preview.style.display = "block";
         label.style.display = "none";
-        imageUpload.style.border = "2px solid transparent";
+        imageUpload.style.border = "none";
       };
       img.onerror = function () {
         alert("이미지 로드에 실패했습니다.");

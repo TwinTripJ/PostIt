@@ -59,10 +59,9 @@ const getAllPosts = async () => {
       order: [["createdAt", "DESC"]],
     });
 
-    // content에서 <p> 태그 제거
     const modifiedPosts = posts.map((post) => ({
       ...post.toJSON(),
-      content: post.content.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n"),
+      content: post.content.replace(/<[^>]*>/g, ""),
     }));
 
     return modifiedPosts;
@@ -105,12 +104,10 @@ const getPostById = async (req, res) => {
       return res.status(404);
     }
 
-    const modifiedPost = {
-      ...post.toJSON(),
-      content: post.content.replace(/<\/?p[^>]*>/g, ""),
-    };
-
-    res.render("postDetail", { modifiedPost, categoryName });
+    res.render("postDetail", {
+      post: { ...post.toJSON() },
+      categoryName,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {
