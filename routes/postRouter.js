@@ -9,7 +9,10 @@ router.post("/create", postController.createPost);
 router.get("/allPosts", postController.getAllPosts);
 
 // 특정 게시글 조회 (id)
-router.get("/:id", postController.getPostById);
+router.get("/:categoryName/:postId", postController.getPostById);
+
+// 내 글 조회
+router.get("/myPost", postController.getMyPost);
 
 // 게시글 수정
 router.put("/:id", postController.updatePost);

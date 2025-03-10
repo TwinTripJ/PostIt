@@ -82,7 +82,6 @@ const registerUser = async (req, res) => {
       address_detail,
       gender,
       birthDate: formatBirth,
-      formatBirth,
       phone,
     });
 
