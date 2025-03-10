@@ -135,14 +135,15 @@ const addWrite = async () => {
   const image = document.getElementById("preview").dataset.imageUrl || null;
 
   try {
+    const userId = await getUserId(token);
     const response = await axios.post(
       "/post/create",
       {
-        userId: getUserId(token),
+        user_id: userId,
         title,
-        category,
+        category_id: category,
         content,
-        image,
+        image_url: image,
       },
       {
         headers: {

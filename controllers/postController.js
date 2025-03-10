@@ -2,15 +2,16 @@ const db = require("../models");
 require("dotenv").config();
 
 const Post = db.Post;
-const User = db.User;
-const Category = db.Category;
 const Like = db.Like;
+const Category = db.Category;
 
 // 글 작성
 const createPost = async (req, res) => {
   try {
     const { user_id, category_id, title, content, image_url, like_count } =
       req.body;
+
+    console.log(req.body);
 
     if (!user_id || !title || !content) {
       return res.status(400).json({ message: "필수 입력값이 누락되었습니다" });
@@ -34,25 +35,33 @@ const createPost = async (req, res) => {
   }
 };
 
-// 게시글 목록 조회 및 좋아요 개수
+// 모든 게시글 조회 및 좋아요 개수
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.findAll({
+      attributes: [
+        "id",
+        "user_id",
+        "category_id",
+        "title",
+        "content",
+        "image_url",
+        "createdAt",
+        "updatedAt",
+        [db.sequelize.fn("COUNT", db.sequelize.col("Likes.id")), "like_count"],
+        // 좋아요 개수 계산
+      ],
       include: [
         {
           model: Like,
-          attribute: [],
+          attributes: [],
+          // 좋아요 개수 계산을 위한 관계만 필요하므로 빈 배열
         },
       ],
-      attribute: {
-        include: [
-          [
-            db.sequelize.fn("COUNT", db.sequelize.col("likes.id")),
-            "like_count",
-          ],
-        ],
-      },
       group: ["Post.id"],
+      // 중복 방지
+      order: [["createdAt", "DESC"]],
+      // 최신 게시글 정렬
     });
     res.status(200).json(posts);
   } catch (err) {
@@ -61,10 +70,55 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-// 특정 게시글 조회 및 좋아요 개수 (id)
+// 특정 게시글(카테고리명별로) 조회 및 좋아요 개수 (id)
 const getPostById = async (req, res) => {
   try {
-    const { postId } = req.params.id;
+    const { categoryName, postId } = req.params;
+    console.log("sdfsdf", req.params);
+    const post = await Post.findOne({
+      where: { id: postId },
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "image_url",
+        "createdAt",
+        "category_id",
+        [
+          db.sequelize.literal(
+            "(SELECT COUNT(*) FROM Likes WHERE Likes.post_id = Post.id)"
+          ),
+          "like_count",
+        ],
+      ],
+      include: [
+        {
+          model: Category,
+          as: "Category",
+          attributes: ["id", "name"],
+        },
+      ],
+    });
+
+    if (!post) {
+      return res.status(404);
+    }
+
+    res.render("postDetail", { post, categoryName });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("error", {
+      message: "서버 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
+};
+
+// 내 글 보기
+const getMyPost = async (req, res) => {
+  try {
+    const { postId } = req.params.postId;
+
     const post = await Post.findOne({
       where: { id: postId },
       include: [
@@ -141,4 +195,5 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
+  getMyPost,
 };
