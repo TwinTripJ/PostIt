@@ -109,6 +109,24 @@
 
       <div class="mainContainer">
         <div class="postContainer"></div>
+        <% for (let i = 0; i < posts.length; i++) { %>
+        <div class="postContainer">
+          <div class="post-card" onclick="moveToPost('<%= posts[i].id %>')">
+            <img
+              src="<%= posts[i].image_url %>"
+              alt="Post Image"
+              class="post-image"
+              width="100px"
+              height="100px"
+            />
+            <div class="post-info">
+              <h4><%= posts[i].title %></h4>
+              <p><%= posts[i].content.substring(0, 100) %>...</p>
+              <span>❤️ <%= posts[i].like_count || 0 %></span>
+            </div>
+          </div>
+        </div>
+        <% } %>
       </div>
 
       <%- include("footer") %>
