@@ -17,18 +17,6 @@ function showAlert() {
   });
 }
 
-// 페이지 이동
-function move(url) {
-  axios
-    .get(`/postit/${url}`)
-    .then((res) => {
-      window.location.href = `/postit/${url}`;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function moveUrl(url) {
   window.location.href = `/postit/${url}`;
 }
@@ -90,3 +78,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     loginAfter.style.display = "none";
   }
 });
+
+// 내 글 보기
+const goToMyPost = (userId) => {
+  axios
+    .get(`/post/${userId}`)
+    .then((res) => {
+      window.location.href = `/postit/${url}`;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};

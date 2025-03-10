@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="post-header">
+        <h1><%= post.title %></h1>
+        <p>카테고리: <strong><%= categoryName %></strong></p>
+        <p>🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString() %></p>
+      </div>
+
+      <% if (post.image_url) { %>
+      <img
+        class="post-image"
+        src="<%= post.image_url %>"
+        alt="게시글 이미지"
+        width="100px"
+        height="100px"
+      />
+      <% } %>
+
+      <div class="post-content">
+        <p><%= post.content %></p>
+      </div>
+    </div>
+  </body>
+</html>

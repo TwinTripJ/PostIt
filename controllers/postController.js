@@ -70,8 +70,52 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-// 특정 게시글 조회 및 좋아요 개수 (id)
+// 특정 게시글(카테고리명별로) 조회 및 좋아요 개수 (id)
 const getPostById = async (req, res) => {
+  try {
+    const { categoryName, postId } = req.params;
+    console.log("sdfsdf", req.params);
+    const post = await Post.findOne({
+      where: { id: postId },
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "image_url",
+        "createdAt",
+        "category_id",
+        [
+          db.sequelize.literal(
+            "(SELECT COUNT(*) FROM Likes WHERE Likes.post_id = Post.id)"
+          ),
+          "like_count",
+        ],
+      ],
+      include: [
+        {
+          model: Category,
+          as: "Category",
+          attributes: ["id", "name"],
+        },
+      ],
+    });
+
+    if (!post) {
+      return res.status(404);
+    }
+
+    res.render("postDetail", { post, categoryName });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render("error", {
+      message: "서버 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
+};
+
+// 내 글 보기
+const getMyPost = async (req, res) => {
   try {
     const { postId } = req.params.postId;
 
@@ -151,4 +195,5 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
+  getMyPost,
 };
