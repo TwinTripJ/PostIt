@@ -51,65 +51,82 @@
           </div>
         </div>
 
-      <div class="categorys">
-        <div class="category">
-          <div class="imgContainer" onclick="moveToCategory(1)">
-            <img src="/static/images/category1.jpg" alt="trip image" />
-            <div class="overlay"></div>
-            <div class="text">
-              <h4>
-                Travel Reviews <br />
-                & <br />
-                Information
-              </h4>
+        <div class="categorys">
+          <div class="category">
+            <div class="imgContainer" onclick="moveToCategory(1)">
+              <img src="/static/images/category1.jpg" alt="trip image" />
+              <div class="overlay"></div>
+              <div class="text">
+                <h4>
+                  Travel Reviews <br />
+                  & <br />
+                  Information
+                </h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="category">
-          <div class="imgContainer" onclick="moveToCategory(2)">
-            <img src="/static/images/category2.jpg" alt="trip image" />
-            <div class="overlay"></div>
-            <div class="text">
-              <h4>
-                Accommodation <br />
-                Information
-              </h4>
+          <div class="category">
+            <div class="imgContainer" onclick="moveToCategory(2)">
+              <img src="/static/images/category2.jpg" alt="trip image" />
+              <div class="overlay"></div>
+              <div class="text">
+                <h4>
+                  Accommodation <br />
+                  Information
+                </h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="category">
-          <div class="imgContainer" onclick="moveToCategory(3)">
-            <img src="/static/images/category3.jpg" alt="trip image" />
-            <div class="overlay"></div>
-            <div class="text">
-              <h4>Restaurant & Cafe</h4>
+          <div class="category">
+            <div class="imgContainer" onclick="moveToCategory(3)">
+              <img src="/static/images/category3.jpg" alt="trip image" />
+              <div class="overlay"></div>
+              <div class="text">
+                <h4>Restaurant & Cafe</h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="category">
-          <div class="imgContainer" onclick="moveToCategory(4)">
-            <img src="/static/images/category4.jpg" alt="trip image" />
-            <div class="overlay"></div>
-            <div class="text">
-              <h4>Free Bulletin Board</h4>
+          <div class="category">
+            <div class="imgContainer" onclick="moveToCategory(4)">
+              <img src="/static/images/category4.jpg" alt="trip image" />
+              <div class="overlay"></div>
+              <div class="text">
+                <h4>Free Bulletin Board</h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="category">
-          <div class="imgContainer" onclick="moveToCategory(5)">
-            <img src="/static/images/category5.jpg" alt="trip image" />
-            <div class="overlay"></div>
-            <div class="text">
-              <h4>Photo Gallery</h4>
+          <div class="category">
+            <div class="imgContainer" onclick="moveToCategory(5)">
+              <img src="/static/images/category5.jpg" alt="trip image" />
+              <div class="overlay"></div>
+              <div class="text">
+                <h4>Photo Gallery</h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-    <div class="mainContainer">
-      <div class="ProfileContainer"></div>
-      <!-- <div class="postContainer"></div> -->
-    </div>
+      <div class="mainContainer">
+        <% for (let i = 0; i < posts.length; i++) { %>
+        <div class="postContainer">
+          <div class="post-card" onclick="moveToPost('<%= posts[i].id %>')">
+            <img
+              src="<%= posts[i].image_url %>"
+              alt="Post Image"
+              class="post-image"
+              width="100px"
+              height="100px"
+            />
+            <div class="post-info">
+              <h4><%= posts[i].title %></h4>
+              <p><%= posts[i].content.substring(0, 100) %>...</p>
+              <span>❤️ <%= posts[i].like_count || 0 %></span>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
 
       <%- include("footer") %>
     </div>

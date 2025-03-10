@@ -63,7 +63,7 @@ const getAllPosts = async (req, res) => {
       order: [["createdAt", "DESC"]],
       // 최신 게시글 정렬
     });
-    res.status(200).json(posts);
+    return posts;
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });

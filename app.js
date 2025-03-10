@@ -10,7 +10,7 @@ const mainRouter = require("./routes/mainRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const postRouter = require("./routes/postRouter");
-// const { upload } = require("./controllers/adminController");
+const postController = require("./controllers/postController");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,20 +27,14 @@ app.use("/post", postRouter);
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("main");
+app.get("/", async (req, res) => {
+  const posts = await postController.getAllPosts();
+  res.render("main", { posts });
 });
 
 app.get("/get-kakao-api-key", (req, res) => {
   res.json({ kakaoApiKey: process.env.KAKAO_API_KEY });
 });
-
-// app.post("/upload", upload.single("files"), (req, res) => {
-//   res.json({
-//     imageUrl: `/uploads/${req.file.filename}`,
-//     title: req.body.title,
-//   });
-// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
