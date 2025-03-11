@@ -410,21 +410,6 @@ const naverLogin = (req, res) => {
   });
 };
 
-// const naverLogin = (req, res) => {
-//   const state = generateState();
-//   const redirectUri = process.env.NAVER_CALLBACK_URL;
-
-//   if (!redirectUri) {
-//     return res
-//       .status(500)
-//       .json({ error: "Callback URL is not set in the environment variables" });
-//   }
-
-//   const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&state=${state}&redirect_uri=${redirectUri}`;
-
-//   res.redirect(naverLoginUrl); // 네이버 로그인 페이지로 리다이렉트
-// };
-
 // 콜백 요청
 const callBack = async (req, res) => {
   const { code, state } = req.query;
