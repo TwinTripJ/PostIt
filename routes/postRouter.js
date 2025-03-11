@@ -12,9 +12,9 @@ router.get("/:postId", postController.getPostById);
 router.get("/myPost/:userId", postController.getMyPost);
 
 // 게시글 수정
-router.put("/:id", postController.updatePost);
+router.put("/edit/:id", postController.updatePost);
 
 // 게시글 삭제
-router.delete("/:id", postController.deletePost);
+router.delete("/delete/:id", postController.deletePost);
 
 module.exports = router;

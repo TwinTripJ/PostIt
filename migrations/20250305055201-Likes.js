@@ -34,6 +34,11 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
+    await queryInterface.addConstraint("likes", {
+      fields: ["user_id", "post_id"],
+      type: "unique",
+      name: "unique_user_post_like",
+    });
   },
 
   async down(queryInterface, Sequelize) {
