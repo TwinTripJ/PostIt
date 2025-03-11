@@ -42,30 +42,42 @@
           />
           <% } %>
           <div class="profileContainer">
-            <div
-              class="post-actions"
-              data-current-user-id="<%= currentUserId %>"
-              data-post-id="<%= postId %>"
-            >
-              <button class="edit-btn">수정</button>
-              <button class="delete-btn">삭제</button>
+            <div class="topContainer">
+              <p></p>
+              <!-- 카테고리 이름 가져오기 -->
+              <h1><%= modifiedPost.title %></h1>
+              <div class="profile">
+                <div class="userInfo">
+                  <img src="" alt="profile image" />
+                  <!-- 포스터 유저 이미지 넣기 -->
+                  <div class="flexColumn">
+                    <p class="nameText">dd</p>
+                    <!-- 포스터 유저 이름 넣기 -->
+                    <p>
+                      🕒 작성일: <%= new
+                      Date(modifiedPost.createdAt).toLocaleDateString() %>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="post-actions"
+                  data-current-user-id="<%= currentUserId %>"
+                  data-post-id="<%= postId %>"
+                >
+                  <button class="edit-btn">수정</button>
+                  <button class="delete-btn">삭제</button>
+                </div>
+              </div>
             </div>
           </div>
+          <hr />
           <div class="textContainer">
-            <h1><%= modifiedPost.title %></h1>
-            <p>
-              🕒 작성일: <%= new
-              Date(modifiedPost.createdAt).toLocaleDateString() %>
-            </p>
-
             <div class="post-content">
               <p><%- modifiedPost.content %></p>
             </div>
           </div>
         </div>
       </div>
-
-      <%- include("footer") %>
     </div>
     <script src="/static/js/postDetail.js"></script>
   </body>
