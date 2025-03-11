@@ -44,11 +44,12 @@ function moveWrite(url) {
 
 const getUserId = async () => {
   try {
-    const response = await axios.get(`/user/getUserId/${userId}`, {
+    const response = await axios.get(`/user/getUserId`, {
       withCredentials: true,
     });
 
     const userId = response.data.id;
+
     return userId;
   } catch (error) {
     console.error("유저 ID를 가져오는 데 실패했습니다.", error);
@@ -100,7 +101,7 @@ const getUserId = async () => {
 async function heart(event) {
   const iconImg = event.target;
   const icon = iconImg.parentElement;
-  const postId = icon.getAttribute("data-post-id"); // 직관적인 속성 사용
+  const postId = icon.getAttribute("data-post-id");
 
   if (!token) {
     alert("로그인이 필요합니다.");

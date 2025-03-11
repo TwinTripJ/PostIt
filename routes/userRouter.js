@@ -20,8 +20,8 @@ const upload = multer({ storage });
 
 router.get(
   "/allUsers",
-  userController.getAllUsers,
-  authMiddleware.authenticateToken
+  authMiddleware.authenticateToken,
+  userController.getAllUsers
 );
 
 router.get(
@@ -31,7 +31,11 @@ router.get(
 );
 
 // 특정 유저 확인 (id)
-router.get("/getUser", userController.getUserByIdNav);
+router.get(
+  "/getUser",
+  authMiddleware.authenticateToken,
+  userController.getUserByIdNav
+);
 
 router.get(
   "/profile",

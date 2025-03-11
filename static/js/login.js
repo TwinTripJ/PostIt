@@ -17,6 +17,12 @@ const loginCheck = () => {
     .post("/user/loginUser", data, { withCredentials: true })
     .then((res) => {
       if (res.status === 200) {
+        const token = res.data.token;
+        document.cookie = `token=${token}; path=/; max-age=${
+          24 * 60 * 60
+        }; secure; SameSite=Strict`;
+
+        // 페이지 이동
         window.location.href = "/";
       } else {
         Swal.fire({
@@ -37,7 +43,6 @@ const loginCheck = () => {
       });
     });
 };
-
 // 페이지 이동
 function moveUrl(url) {
   window.location.href = `/postit/${url}`;

@@ -125,8 +125,6 @@ const loginUser = async (req, res) => {
       maxAge: 3600000,
     });
 
-    console.log("Sdfsf", token);
-
     res.status(200).json({ message: "로그인 성공", token });
   } catch (err) {
     console.error(err);
@@ -138,7 +136,7 @@ const loginUser = async (req, res) => {
 const getUserByIdNav = async (req, res) => {
   try {
     const username = req.user.username;
-    console.log("ssdfsdfs", username);
+    // console.log("username:", req.user);
     const user = await User.findOne({ where: { username: username } });
 
     if (!user) {
@@ -235,6 +233,7 @@ const changePass = async (req, res) => {
 const getUserByIdWrite = async (req, res) => {
   try {
     const id = req.user.id;
+
     const user = await User.findOne({ where: { id: id } });
 
     if (!user) {
@@ -243,6 +242,7 @@ const getUserByIdWrite = async (req, res) => {
 
     res.status(200).json({
       id: user.id,
+      username: user.username,
     });
   } catch (err) {
     console.error(err);
