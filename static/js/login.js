@@ -1,23 +1,3 @@
-// 네이버 버튼 커스텀
-document.addEventListener("DOMContentLoaded", function () {
-  const targetNode = document.getElementById("naver_id_login");
-
-  const observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      const img = document.querySelector("#naver_id_login a img");
-      if (img) {
-        img.src = "/static/images/naver_login.png";
-        img.style.width = "150px";
-        observer.disconnect();
-      }
-    });
-  });
-
-  const config = { childList: true, subtree: true };
-
-  observer.observe(targetNode, config);
-});
-
 // 로그인
 const loginCheck = () => {
   const email = document.getElementById("email").value;
@@ -34,10 +14,9 @@ const loginCheck = () => {
   const data = { email, pass };
 
   axios
-    .post("/user/loginUser", data)
+    .post("/user/loginUser", data, { withCredentials: true })
     .then((res) => {
-      if (res.status === 200 && res.data.token) {
-        localStorage.setItem("token", res.data.token);
+      if (res.status === 200) {
         window.location.href = "/";
       } else {
         Swal.fire({
@@ -69,7 +48,7 @@ document
   .getElementById("naverLoginBtn")
   .addEventListener("click", async function () {
     await axios
-      .get("/user/naver")
+      .get("/user/naver", { withCredentials: true })
       .then((response) => {
         const { clientId, callbackUrl, state } = response.data;
 
@@ -95,7 +74,7 @@ axios
 
 function loginWithKakao() {
   axios
-    .get("/user/kakao")
+    .get("/user/kakao", { withCredentials: true })
     .then((res) => {
       const { clientId, redirectUri } = res.data;
 
@@ -120,8 +99,9 @@ window.onload = function () {
   const token = urlParams.get("token");
 
   if (token) {
-    localStorage.setItem("token", token);
-
+    document.cookie = `token=${token}; path=/; max-age=${
+      24 * 60 * 60
+    }; secure; SameSite=Strict`;
     window.location.href = "/";
   }
 };

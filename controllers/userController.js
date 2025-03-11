@@ -111,11 +111,16 @@ const loginUser = async (req, res) => {
     }
 
     // JWT 토큰 생성
-    const token = jwt.sign(
-      { id: user.id, email: user.email, username: user.username },
-      process.env.SECRET_KEY,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     res.status(200).json({ message: "로그인 성공", token });
   } catch (err) {
@@ -126,18 +131,15 @@ const loginUser = async (req, res) => {
 
 // JWT 인증 미들웨어
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.header("Authorization");
+  const token = req.cookies.token; // 쿠키에서 토큰 가져오기
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!token) {
     return res.status(403).json({ message: "유효한 토큰이 필요합니다" });
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded;
-    console.log(req.user, "sdf");
     next();
   } catch (err) {
     res
@@ -414,9 +416,6 @@ const naverLogin = (req, res) => {
 // 콜백 요청
 const callBack = async (req, res) => {
   const { code, state } = req.query;
-
-  console.log("코드", req.query.code);
-  console.log("상태", req.query.state);
 
   if (!code || !state) {
     return res
