@@ -11,6 +11,8 @@ const deletePost = async (postId) => {
   }
 };
 
+
+// 좋아요 토글
 document.addEventListener("DOMContentLoaded", function () {
   const postActions = document.querySelector(".post-actions");
   const currentUserId = postActions.dataset.currentUserId;

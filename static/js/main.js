@@ -68,38 +68,79 @@ async function getUserId() {
   }
 }
 
+// async function heart(event) {
+//   const iconImg = event.target;
+//   const icon = iconImg.parentElement;
+//   const att = icon.getAttribute("data-fav");
+//   const productId = iconImg
+//     .closest(".post-card")
+//     .querySelector("img")
+//     .getAttribute("data-id");
+//   const userId = await getUserId();
+
+//   const isLiked = att === "0";
+
+//   iconImg.src = isLiked
+//     ? "../static/images/favoriteFillIcon.png"
+//     : "../static/images/favoriteIcon.png";
+//   icon.setAttribute("data-fav", isLiked ? "1" : "0");
+
+//   try {
+//     await Promise.all([
+//       // 유저 테이블 요청
+//       axios.post("user/like", {
+//         id: userId,
+//         liked: isLiked,
+//       }),
+//       // 게시글 테이블 요청
+//       axios.post("post/like", {
+//         id: productId,
+//         userId: userId,
+//         liked: isLiked,
+//       }),
+//     ]);
+
+//     const likeCountElement = icon.nextElementSibling;
+//     let likeCount = parseInt(likeCountElement.textContent.split(" ")[0]);
+//     likeCountElement.textContent = `${
+//       isLiked ? likeCount + 1 : likeCount - 1
+//     } 좋아요`;
+//   } catch (error) {
+//     console.error("좋아요 처리 중 오류 발생:", error);
+//   }
+// }
+
 async function heart(event) {
   const iconImg = event.target;
   const icon = iconImg.parentElement;
-  const att = icon.getAttribute("data-fav");
-  const productId = iconImg
-    .closest(".post-card")
-    .querySelector("img")
-    .getAttribute("data-id");
-  const userId = await getUserId();
+  const postId = icon.getAttribute("data-post-id"); // 직관적인 속성 사용
+  const token = localStorage.getItem("token");
 
-  const isLiked = att === "0";
-
-  iconImg.src = isLiked
-    ? "../static/images/favoriteFillIcon.png"
-    : "../static/images/favoriteIcon.png";
-  icon.setAttribute("data-fav", isLiked ? "1" : "0");
+  if (!token) {
+    alert("로그인이 필요합니다.");
+    return;
+  }
 
   try {
-    await Promise.all([
-      // 유저 테이블 요청
-      axios.post("user/like", {
-        id: userId,
-        liked: isLiked,
-      }),
-      // 게시글 테이블 요청
-      axios.post("post/like", {
-        id: productId,
-        userId: userId,
-        liked: isLiked,
-      }),
-    ]);
+    // 서버에 좋아요 요청 (토글 기능)
+    const response = await axios.post(
+      `/post/${postId}/like`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
+    // 서버 응답에서 좋아요 상태 가져오기
+    const isLiked = response.data.liked;
+
+    // UI 업데이트
+    iconImg.src = isLiked
+      ? "../static/images/favoriteFillIcon.png"
+      : "../static/images/favoriteIcon.png";
+    icon.setAttribute("data-fav", isLiked ? "1" : "0");
+
+    // 좋아요 개수 업데이트
     const likeCountElement = icon.nextElementSibling;
     let likeCount = parseInt(likeCountElement.textContent.split(" ")[0]);
     likeCountElement.textContent = `${
@@ -113,8 +154,14 @@ async function heart(event) {
 // 좋아요 유지
 async function getUserLikes() {
   const userId = await getUserId();
-  const response = await axios.get(`/user/likes?userId=${userId}`);
-  return response.data.likedPosts;
+
+  try {
+    const response = await axios.get(`/user/likes?userId=${userId}`);
+    return response.data.likedPosts;
+  } catch (err) {
+    console.error("🚨 유저 좋아요 목록 조회 실패:", error);
+    return [];
+  }
 }
 
 async function setLikeStatus() {
