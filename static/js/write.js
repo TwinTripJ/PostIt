@@ -43,9 +43,7 @@ const getUserId = async (token) => {
   if (!token) return null;
   try {
     const response = await axios.get("/user/getUserId", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      withCredentials: true,
     });
 
     if (response.status === 200) {
@@ -137,11 +135,11 @@ const addWrite = async () => {
   const title = document.querySelector("input[name='title']").value.trim();
   const category = document.querySelector("select[name='category']").value;
   const content = editor.getHTML();
-  const token = localStorage.getItem("token");
   const image = document.getElementById("preview").dataset.imageUrl || null;
 
   try {
     const userId = await getUserId(token);
+
     const response = await axios.post(
       "/post/create",
       {
@@ -152,9 +150,7 @@ const addWrite = async () => {
         image_url: image,
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       }
     );
 

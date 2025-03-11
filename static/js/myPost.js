@@ -1,24 +1,11 @@
-const getTokenFromCookie = () => {
-  const name = "token=";
-  const decodedCookies = decodeURIComponent(document.cookie);
-  const cookieArray = decodedCookies.split(";");
-  for (let i = 0; i < cookieArray.length; i++) {
-    let cookie = cookieArray[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-  }
-  return "";
-};
-
-const token = getTokenFromCookie();
-
 const viewPost = (postId) => {
+  if (!token) {
+    alert("로그인 후 게시글을 볼 수 있습니다.");
+    return;
+  }
+
   axios
     .get(`/post/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       withCredentials: true,
     })
     .then((response) => {
@@ -31,11 +18,14 @@ const viewPost = (postId) => {
 };
 
 async function getUserId() {
+  if (!token) {
+    alert("로그인 후 유저 정보를 가져올 수 있습니다.");
+    return;
+  }
+
   try {
     const response = await axios.get("/user/getUserId", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      withCredentials: true,
     });
     console.log("유저 아이디", response.data.id);
     const userId = response.data.id;
