@@ -120,8 +120,8 @@ const loginUser = async (req, res) => {
     // 쿠키에 저장
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 3600000,
     });
 
@@ -135,6 +135,7 @@ const loginUser = async (req, res) => {
 // 로그인 후
 const getUserByIdNav = async (req, res) => {
   try {
+    console.log(req.user);
     const username = req.user.username;
 
     const user = await User.findOne({ where: { username: username } });
