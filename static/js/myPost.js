@@ -9,7 +9,6 @@ const viewPost = (postId) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log(response);
       window.location.href = `/post/${postId}`;
     })
     .catch((error) => {
@@ -27,7 +26,6 @@ async function getUserId() {
     const response = await axios.get("/user/getUserId", {
       withCredentials: true,
     });
-    console.log("유저 아이디", response.data.id);
     const userId = response.data.id;
 
     return userId;

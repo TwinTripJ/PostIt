@@ -43,16 +43,19 @@ function moveWrite(url) {
 // };
 
 const getUserId = async () => {
-  try {
-    const response = await axios.get(`/user/getUserId`, {
-      withCredentials: true,
-    });
+  if (token) {
+    console.log("로그인");
+    try {
+      const response = await axios.get(`/user/getUserId`, {
+        withCredentials: true,
+      });
 
-    const userId = response.data.id;
+      const userId = response.data.id;
 
-    return userId;
-  } catch (error) {
-    console.error("유저 ID를 가져오는 데 실패했습니다.", error);
+      return userId;
+    } catch (error) {
+      console.error("유저 ID를 가져오는 데 실패했습니다.", error);
+    }
   }
 };
 
@@ -162,7 +165,7 @@ async function setLikeStatus() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", setLikeStatus);
+// document.addEventListener("DOMContentLoaded", setLikeStatus);
 
 const moveToPost = (postId) => {
   if (token) {

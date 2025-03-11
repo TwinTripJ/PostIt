@@ -112,20 +112,26 @@ const loginUser = async (req, res) => {
 
     // JWT 토큰 생성
     const token = jwt.sign(
-      { id: user.id, email: user.email, username: user.username },
+      { userId: user.id, username: user.username },
       process.env.SECRET_KEY,
-      { expiresIn: "1h" }
+      {
+        expiresIn: "1d",
+      }
     );
 
-    // 쿠키에 저장
+    // 쿠키에 1일 간 저장
     res.cookie("token", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-      maxAge: 3600000,
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "로그인 성공", token });
+    res.status(200).json({
+      success: true,
+      message: "로그인 성공",
+      token: token,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "로그인 실패", error: err.message });
@@ -135,7 +141,6 @@ const loginUser = async (req, res) => {
 // 로그인 후
 const getUserByIdNav = async (req, res) => {
   try {
-    console.log(req.user);
     const username = req.user.username;
 
     const user = await User.findOne({ where: { username: username } });
@@ -370,7 +375,8 @@ const uploadImage = (req, res) => {
 // 프로필 사진, 주소 가져오기
 const getUserProfile = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
+
     const user = await User.findOne({ where: { id: userId } });
 
     if (!user) {
@@ -476,7 +482,7 @@ const callBack = async (req, res) => {
     // 토큰 생성
     const token = jwt.sign(
       {
-        id: user.id,
+        userId: user.id,
         email: user.email,
         provider: "naver",
         username: user.username,
@@ -565,7 +571,7 @@ const kakaoCallback = async (req, res) => {
 
     const token = jwt.sign(
       {
-        id: user.id,
+        userId: user.id,
         email: user.email,
         provider: "kakao",
         username: user.username,

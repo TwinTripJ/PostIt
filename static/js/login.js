@@ -21,8 +21,6 @@ const loginCheck = () => {
         document.cookie = `token=${token}; path=/; max-age=${
           24 * 60 * 60
         }; secure; SameSite=Strict`;
-
-        // 페이지 이동
         window.location.href = "/";
       } else {
         Swal.fire({
@@ -43,6 +41,7 @@ const loginCheck = () => {
       });
     });
 };
+
 // 페이지 이동
 function moveUrl(url) {
   window.location.href = `/postit/${url}`;
