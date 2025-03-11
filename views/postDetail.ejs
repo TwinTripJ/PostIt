@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>detail</title>
   </head>
   <body>
     <div class="container">
@@ -28,6 +28,15 @@
       <div class="modifiedPost-content">
         <p><%= modifiedPost.content %></p>
       </div>
+
+      <% if (userId && Number(modifiedPost.user_id) === Number(userId)) { %>
+      <div class="post-actions">
+        <a href="/post/edit/<%= modifiedPost.id %>" class="edit-btn">✏️ 수정</a>
+        <button onclick="deletePost(<%= modifiedPost.id %>)" class="delete-btn">
+          🗑 삭제
+        </button>
+      </div>
+      <% } %>
     </div>
   </body>
 </html>
