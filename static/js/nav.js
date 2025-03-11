@@ -4,7 +4,8 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-const token = getCookie("authToken");
+const token = getCookie("token");
+console.log(token);
 
 window.addEventListener("scroll", function () {
   let header = document.querySelector(".header");

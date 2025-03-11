@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 const authenticateToken = (req, res, next) => {
+  console.log("요청된 쿠키:", req.cookies);
   const token = req.cookies.token;
-
   if (!token) {
     return res.status(403).json({ message: "유효한 토큰이 필요합니다" });
   }
