@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middleware/userMiddleware");
 const likeController = require("../controllers/likeController");
 
 router.post(
   "/:postId/like",
-  likeController.authenticateToken,
+  authMiddleware.authenticateToken,
   likeController.toggleLike
 );
 
@@ -12,8 +13,8 @@ router.get("/:postId/likes", likeController.getLikeCount);
 
 router.get(
   "/:postId/liked",
-  likeController.authenticateToken,
-  likeController.checkIfLiked
+  authMiddleware.authenticateToken,
+  likeController.getUserLikePost
 );
 
 module.exports = router;

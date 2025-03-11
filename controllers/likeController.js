@@ -1,28 +1,5 @@
 const db = require("../models");
 const Like = db.Like;
-const jwt = require("jsonwebtoken");
-
-// JWT 인증 미들웨어
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.header("Authorization");
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(403).json({ message: "유효한 토큰이 필요합니다" });
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decoded;
-    console.log(req.user, "sdf");
-    next();
-  } catch (err) {
-    res
-      .status(401)
-      .json({ message: "토큰이 유효하지 않음", error: err.message });
-  }
-};
 
 // 좋아요 추가/취소
 const toggleLike = async (req, res) => {
@@ -83,7 +60,6 @@ const getUserLikePost = async (req, res) => {
 };
 
 module.exports = {
-  authenticateToken,
   toggleLike,
   getLikeCount,
   getUserLikePost,
