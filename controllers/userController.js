@@ -111,16 +111,21 @@ const loginUser = async (req, res) => {
     }
 
     // JWT 토큰 생성
-    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { id: user.id, email: user.email, username: user.username },
+      process.env.SECRET_KEY,
+      { expiresIn: "1h" }
+    );
 
+    // 쿠키에 저장
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-      maxAge: 24 * 60 * 60 * 1000,
+      secure: false,
+      sameSite: "Lax",
+      maxAge: 3600000,
     });
+
+    console.log("Sdfsf", token);
 
     res.status(200).json({ message: "로그인 성공", token });
   } catch (err) {
@@ -133,6 +138,7 @@ const loginUser = async (req, res) => {
 const getUserByIdNav = async (req, res) => {
   try {
     const username = req.user.username;
+    console.log("ssdfsdfs", username);
     const user = await User.findOne({ where: { username: username } });
 
     if (!user) {

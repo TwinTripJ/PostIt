@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const mainRouter = require("./routes/mainRouter");
@@ -16,6 +17,7 @@ const postController = require("./controllers/postController");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(cors());
 
 app.use("/static", express.static(path.join(__dirname, "static")));
