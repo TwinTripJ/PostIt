@@ -145,13 +145,13 @@ const getAllPosts = async () => {
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
     let currentUserId = null;
 
     if (token) {
       try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        currentUserId = decoded.id;
+        currentUserId = decoded.userId;
       } catch (err) {
         console.error("토큰 검증 실패:", err);
       }

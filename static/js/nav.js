@@ -46,7 +46,7 @@ function moveUrl(url) {
 const goToMyPost = async (url) => {
   try {
     const idResponse = await axios.get("/user/getUserId", {
-      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
     });
 
     const userId = idResponse.data.id;

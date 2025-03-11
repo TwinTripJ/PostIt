@@ -238,7 +238,7 @@ const changePass = async (req, res) => {
 
 const getUserByIdWrite = async (req, res) => {
   try {
-    const id = req.user.id;
+    const id = req.user.userId;
 
     const user = await User.findOne({ where: { id: id } });
 

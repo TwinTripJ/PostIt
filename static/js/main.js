@@ -171,9 +171,7 @@ const moveToPost = (postId) => {
   if (token) {
     axios
       .get(`/post/${postId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       })
       .then((response) => {
         window.location.href = `/post/${postId}`;
