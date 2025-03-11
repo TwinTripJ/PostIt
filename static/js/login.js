@@ -65,43 +65,45 @@ function moveUrl(url) {
 }
 
 // 네이버 로그인
-function initializeNaverLogin() {
-  axios
-    .get("/user/naver")
-    .then((response) => {
-      const config = response.data;
-
-      var naver_id_login = new window.naver_id_login(
-        config.clientId,
-        config.callbackUrl
-      );
-      var state = naver_id_login.getUniqState();
-      naver_id_login.setButton("white", 2, 40);
-      naver_id_login.setDomain(config.serviceUrl);
-      naver_id_login.setState(state);
-      naver_id_login.setPopup();
-      naver_id_login.init_naver_id_login();
-    })
-    .catch((error) => {
-      console.error("Error fetching Naver config:", error);
-    });
-}
-
-// document.getElementById("naverLoginBtn").addEventListener("click", function () {
+// function initializeNaverLogin() {
 //   axios
 //     .get("/user/naver")
 //     .then((response) => {
-//       const { clientId, redirectUri } = response.data;
+//       const config = response.data;
 
-//       const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
-
-//       window.location.href = loginUrl;
+//       var naver_id_login = new window.naver_id_login(
+//         config.clientId,
+//         config.callbackUrl
+//       );
+//       var state = naver_id_login.getUniqState();
+//       naver_id_login.setButton("white", 2, 40);
+//       naver_id_login.setDomain(config.serviceUrl);
+//       naver_id_login.setState(state);
+//       naver_id_login.setPopup();
+//       naver_id_login.init_naver_id_login();
 //     })
 //     .catch((error) => {
-//       console.error("네이버 로그인 설정 불러오기 실패:", error);
-//       alert("네이버 로그인 설정을 불러오는 중 문제가 발생했습니다.");
+//       console.error("Error fetching Naver config:", error);
 //     });
-// });
+// }
+
+document
+  .getElementById("naverLoginBtn")
+  .addEventListener("click", async function () {
+    await axios
+      .get("/user/naver")
+      .then((response) => {
+        const { clientId, callbackUrl, state } = response.data;
+
+        const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${callbackUrl}&state=${state}`;
+
+        window.location.href = loginUrl;
+      })
+      .catch((error) => {
+        console.error("네이버 로그인 설정 불러오기 실패:", error);
+        alert("네이버 로그인 설정을 불러오는 중 문제가 발생했습니다.");
+      });
+  });
 
 // 카카오 로그인
 axios
@@ -145,3 +147,16 @@ window.onload = function () {
     window.location.href = "/";
   }
 };
+
+// window.onload = function () {
+//   const token = "token"; // 서버에서 전달된 토큰을 사용
+//   const redirectUrl = "redirectUrl"; // 리다이렉트할 URL
+
+//   if (token) {
+//     window.localStorage.setItem("token", token);
+//     window.location.href = redirectUrl; // 리다이렉트 URL로 이동
+//   } else {
+//     alert("로그인 실패");
+//     window.location.href = "/login";
+//   }
+// };

@@ -1,28 +1,17 @@
 window.onload = function () {
-  const hashParams = new URLSearchParams(window.location.hash.slice(1));
-  const access_token = hashParams.get("access_token");
-  const state = hashParams.get("state");
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  const redirectUrl = urlParams.get("redirectUrl");
 
-  if (access_token && state) {
-    axios
-      .get(`/user/callback?access_token=${access_token}&state=${state}`)
-      .then((response) => {
-        if (response.data.success) {
-          window.opener.localStorage.setItem("token", response.data.token);
+  console.log(token);
 
-          setTimeout(() => {
-            window.close();
-            window.opener.location.href = "/";
-          }, 0.00001);
-        } else {
-          alert("로그인 실패: 서버에서 실패 응답");
-        }
-      })
-      .catch((error) => {
-        console.error("Error processing login callback:", error);
-        alert("로그인 처리 중 오류가 발생했습니다.");
-      });
+  if (token && redirectUrl) {
+    window.localStorage.setItem("token", token);
+
+    // 리다이렉트
+    window.location.href = decodeURIComponent(redirectUrl);
   } else {
-    alert("로그인 정보가 유효하지 않습니다.");
+    alert("로그인 실패");
+    window.location.href = "/user/login";
   }
 };
