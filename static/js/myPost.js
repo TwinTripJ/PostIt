@@ -1,4 +1,17 @@
-const token = localStorage.getItem("token");
+const getTokenFromCookie = () => {
+  const name = "token=";
+  const decodedCookies = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookies.split(";");
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+};
+
+const token = getTokenFromCookie();
 
 const viewPost = (postId) => {
   axios

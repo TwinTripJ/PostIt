@@ -1,6 +1,8 @@
 const db = require("../models");
 require("dotenv").config();
 
+const jwt = require("jsonwebtoken");
+
 const User = db.User;
 const Post = db.Post;
 const Like = db.Like;
@@ -59,10 +61,9 @@ const getAllPosts = async () => {
       order: [["createdAt", "DESC"]],
     });
 
-    // content에서 <p> 태그 제거
     const modifiedPosts = posts.map((post) => ({
       ...post.toJSON(),
-      content: post.content.replace(/<p[^>]*>(.*?)<\/p>/g, "$1\n"),
+      content: post.content.replace(/<[^>]*>/g, ""),
     }));
 
     return modifiedPosts;
@@ -73,26 +74,90 @@ const getAllPosts = async () => {
 };
 
 // 특정 게시글(카테고리명별로) 조회 및 좋아요 개수 (id)
+// const getPostById = async (req, res) => {
+//   try {
+//     const { categoryName, postId } = req.params;
+//     const token = req.headers.authorization?.split(" ")[1];
+//     console.log("Authorization 헤더:", req.headers.authorization);
+//     console.log("추출된 토큰:", token);
+//     let userId = null;
+
+//     if (token) {
+//       try {
+//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//         userId = decoded.id;
+//         console.log("디코딩된 userId:", userId);
+//       } catch (err) {
+//         console.error("토큰 검증 실패:", err);
+//       }
+//     } else {
+//       console.warn("토큰이 없습니다.");
+//     }
+
+//     const post = await Post.findOne({
+//       where: { id: postId },
+//       attributes: [
+//         "id",
+//         "user_id",
+//         "title",
+//         "content",
+//         "image_url",
+//         "createdAt",
+//         "category_id",
+//         [
+//           db.sequelize.literal(
+//             "(SELECT COUNT(*) FROM Likes WHERE Likes.post_id = Post.id)"
+//           ),
+//           "like_count",
+//         ],
+//       ],
+//       include: [
+//         {
+//           model: Category,
+//           as: "Category",
+//           attributes: ["id", "name"],
+//         },
+//       ],
+//     });
+
+//     if (!post) {
+//       return res.status(404);
+//     }
+
+//     console.log("요청한 사용자 ID:", userId);
+//     console.log("게시글 작성자 ID:", post.user_id);
+
+//     const modifiedPost = {
+//       ...post.toJSON(),
+//       content: post.content.replace(/<\/?p[^>]*>/g, ""),
+//     };
+
+//     res.render("postDetail", { modifiedPost, categoryName, userId });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).render("error", {
+//       message: "서버 오류가 발생했습니다.",
+//       error: err.message,
+//     });
+//   }
+// };
+
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
     const token = req.headers.authorization?.split(" ")[1];
-    console.log("Authorization 헤더:", req.headers.authorization);
-    console.log("추출된 토큰:", token);
-    let userId = null;
+    let currentUserId = null;
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        userId = decoded.id;
-        console.log("디코딩된 userId:", userId);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        currentUserId = decoded.id;
       } catch (err) {
         console.error("토큰 검증 실패:", err);
       }
-    } else {
-      console.warn("토큰이 없습니다.");
     }
 
+    // 게시글 데이터 가져오기
     const post = await Post.findOne({
       where: { id: postId },
       attributes: [
@@ -120,18 +185,15 @@ const getPostById = async (req, res) => {
     });
 
     if (!post) {
-      return res.status(404);
+      return res.status(404).json({ message: "게시글을 찾을 수 없습니다" });
     }
 
-    console.log("요청한 사용자 ID:", userId);
-    console.log("게시글 작성자 ID:", post.user_id);
-
-    const modifiedPost = {
-      ...post.toJSON(),
-      content: post.content.replace(/<\/?p[^>]*>/g, ""),
-    };
-
-    res.render("postDetail", { modifiedPost, categoryName, userId });
+    res.render("postDetail", {
+      modifiedPost: post,
+      categoryName,
+      currentUserId,
+      postId: post.user_id,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {

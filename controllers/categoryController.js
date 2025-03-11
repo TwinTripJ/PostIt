@@ -51,7 +51,15 @@ const getPostByCategoryId = async (req, res) => {
       return res.status(404).json({ message: "게시글 조회 실패" });
     }
 
-    res.render("category", { categoryName: category.name, posts });
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("category", {
+      categoryName: category.name,
+      posts: modifiedPosts,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });

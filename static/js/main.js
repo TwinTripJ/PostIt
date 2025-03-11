@@ -1,8 +1,12 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//   loadAllPosts();
-// });
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
 
-const token = localStorage.getItem("token");
+// 토큰을 쿠키에서 가져오기
+const token = getCookie("token");
 
 // 게시글 작성하기로 이동하기
 function moveWrite(url) {
@@ -58,7 +62,6 @@ async function getUserId() {
     });
 
     const userId = response.data.id;
-
     return userId;
   } catch (error) {
     console.error("유저 ID를 가져오는 데 실패했습니다.", error);
@@ -175,5 +178,20 @@ async function setLikeStatus() {
 document.addEventListener("DOMContentLoaded", setLikeStatus);
 
 const moveToPost = (postId) => {
-  window.location.href = `/post/${postId}`;
+  if (token) {
+    axios
+      .get(`/post/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        window.location.href = `/post/${postId}`;
+      })
+      .catch((error) => {
+        console.error("Error fetching post details:", error);
+      });
+  } else {
+    window.location.href = "/postit/login";
+  }
 };

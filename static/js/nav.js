@@ -1,8 +1,24 @@
+function getCookie(name) {
+  const cookieArr = document.cookie.split(";");
+  console.log("document.cookie", document.cookie); // 쿠키 전체 출력
+
+  for (let i = 0; i < cookieArr.length; i++) {
+    let cookie = cookieArr[i].trim();
+    if (cookie.startsWith(name + "=")) {
+      return cookie.substring(name.length + 1);
+    }
+  }
+  return null;
+}
+
+const token = getCookie("token");
+console.log("현재 쿠키 토큰:", token);
+
 window.addEventListener("scroll", function () {
   let header = document.querySelector(".header");
   if (window.scrollY > 0) {
     header.style.position = "fixed";
-    header.style.backgroundColor = "rgba(74, 68, 113, 0.7)";
+    header.style.backgroundColor = "rgb(74, 68, 113)";
   } else {
     header.style.position = "absolute";
     header.style.backgroundColor = "transparent";
@@ -37,7 +53,7 @@ function moveUrl(url) {
 // 내가 쓴 글 보기
 const goToMyPost = async (url) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = getCookie("token");
     const idResponse = await axios.get("/user/getUserId", {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -55,23 +71,22 @@ const goToMyPost = async (url) => {
 };
 
 function logout() {
-  localStorage.removeItem("token");
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location.href = "/";
 }
 
 // 로그인, 로그아웃
 document.addEventListener("DOMContentLoaded", async function () {
   const joinBox = document.querySelector(".joinBox");
-
   const loginBefore = document.querySelector(".loginBefore");
   const loginAfter = document.querySelector(".loginAfter");
 
-  const token = localStorage.getItem("token");
+  const token = getCookie("token");
+  console.log("현재 쿠키 토큰:", token);
 
   if (token) {
     loginBefore.style.display = "none";
     loginAfter.style.display = "block";
-
     try {
       const response = await axios(`/user/getUser`, {
         method: "GET",
@@ -96,16 +111,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       logoutBtn.textContent = "로그아웃";
 
       logoutBtn.addEventListener("click", function () {
-        localStorage.removeItem("token");
+        document.cookie = "token=; Max-Age=0; path=/";
         window.location.href = "/";
       });
 
       logoutDiv.appendChild(logoutBtn);
-
       joinBox.appendChild(userNameElem);
       joinBox.appendChild(logoutDiv);
     } catch (error) {
-      console.error(error);
+      console.error("사용자 정보 가져오기 실패:", error);
     }
   } else {
     loginBefore.style.display = "block";
@@ -115,6 +129,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // 카테고리별 게시글로 이동하기
 const moveToCategory = (categoryId) => {
+  const token = getCookie("token");
   if (token) {
     window.location.href = `/category/${categoryId}`;
   } else {

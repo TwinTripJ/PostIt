@@ -111,11 +111,16 @@ const loginUser = async (req, res) => {
     }
 
     // JWT 토큰 생성
-    const token = jwt.sign(
-      { id: user.id, email: user.email, username: user.username },
-      process.env.SECRET_KEY,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     res.status(200).json({ message: "로그인 성공", token });
   } catch (err) {
@@ -123,6 +128,7 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: "로그인 실패", error: err.message });
   }
 };
+
 
 // 로그인 후
 const getUserByIdNav = async (req, res) => {
@@ -376,31 +382,62 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+const generateState = () => Math.random().toString(36).substring(2, 15);
+
 // 네이버 로그인
 const naverLogin = (req, res) => {
+  const state = generateState();
   res.json({
     clientId: process.env.NAVER_CLIENT_ID,
     callbackUrl: process.env.NAVER_CALLBACK_URL,
     serviceUrl: process.env.NAVER_SERVICE_URL,
+    state: state,
   });
 };
 
 // 콜백 요청
 const callBack = async (req, res) => {
-  const { access_token, state } = req.query;
+  const { code, state } = req.query;
 
-  if (!access_token || !state) {
-    return res.render("callback");
+  if (!code || !state) {
+    return res
+      .status(400)
+      .json({ error: "Missing authorization code or state" });
   }
 
   try {
-    const response = await axios.get("https://openapi.naver.com/v1/nid/me", {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
+    // 네이버에서 토큰 발급받기
+    const tokenResponse = await axios.post(
+      "https://nid.naver.com/oauth2.0/token",
+      null,
+      {
+        params: {
+          grant_type: "authorization_code",
+          client_id: process.env.NAVER_CLIENT_ID,
+          client_secret: process.env.NAVER_CLIENT_SECRET,
+          redirect_uri: process.env.NAVER_CALLBACK_URL,
+          code: code,
+          state: state,
+        },
+      }
+    );
 
-    const profile = response.data.response;
+    const access_token = tokenResponse.data.access_token;
+
+    if (!access_token) {
+      return res.status(400).json({ error: "Failed to get access token" });
+    }
+
+    const userProfileResponse = await axios.get(
+      "https://openapi.naver.com/v1/nid/me",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+
+    const profile = userProfileResponse.data.response;
     if (!profile.email) {
       return res
         .status(400)
@@ -415,6 +452,7 @@ const callBack = async (req, res) => {
       "$1-$2-$3"
     );
 
+    // 디비 저장
     if (!user) {
       user = await User.create({
         email: profile.email,
@@ -427,6 +465,7 @@ const callBack = async (req, res) => {
       });
     }
 
+    // 토큰 생성
     const token = jwt.sign(
       {
         id: user.id,
@@ -440,13 +479,9 @@ const callBack = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.json({
-      success: true,
-      token,
-      message: "Login successful",
-    });
+    return res.redirect(`/user/login?token=${token}`);
   } catch (error) {
-    console.error("Error processing Naver callback", error);
+    console.error("Error processing Naver callback", error.message);
     res.status(500).json({ error: "Failed to process Naver callback" });
   }
 };

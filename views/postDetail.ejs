@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>detail</title>
   </head>
   <body>
-    <div class="container">
+    <%- include("nav") %>
+    <div class="backColor">
+      <div class="carosel">
+        <div class="caroselContainer">
+          <img
+            class="caroselImg"
+            src="/static/images/mainCarosel.jpg"
+            alt="carosel image"
+          />
+          <div class="overlay"></div>
+        </div>
+      </div>
       <div class="post-header">
         <h1><%= modifiedPost.title %></h1>
         <p>
@@ -25,21 +47,23 @@
       />
       <% } %>
 
-      <div class="modifiedPost-content">
-        <p><%= modifiedPost.content %></p>
+      <div class="post-content">
+        <p><%- modifiedPost.content %></p>
       </div>
 
-      <% if (userId && Number(modifiedPost.user_id) === Number(userId)) { %>
-      <div class="post-actions">
-        <a href="/post/edit/<%= modifiedPost.id %>" class="edit-btn"> 수정</a>
-        <button
-          onclick="deletePost('<%= modifiedPost.id %>')"
-          class="delete-btn"
-        >
-          삭제
-        </button>
+
+      <
+      <div
+        class="post-actions"
+        data-current-user-id="<%= currentUserId %>"
+        data-post-id="<%= postId %>"
+      >
+        <button class="edit-btn">수정</button>
+        <button class="delete-btn">삭제</button>
       </div>
-      <% } %>
+
+      <%- include("footer") %>
     </div>
+    <script src="/static/js/postDetail.js"></script>
   </body>
 </html>

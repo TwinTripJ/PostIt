@@ -13,3 +13,17 @@ const deletePost = async (postId) => {
 
 
 // 좋아요 토글
+document.addEventListener("DOMContentLoaded", function () {
+  const postActions = document.querySelector(".post-actions");
+  const currentUserId = postActions.dataset.currentUserId;
+  const postId = postActions.dataset.postId;
+
+  console.log("내 아이디:", postActions.dataset);
+  console.log("게시글 아이디:", postId);
+
+  if (currentUserId === postId) {
+    postActions.style.display = "block";
+  } else {
+    postActions.style.display = "none";
+  }
+});

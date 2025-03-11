@@ -1,0 +1,55 @@
+body {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.backColor {
+  background-color: rgba(181, 167, 183, 0.59);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carosel {
+  display: flex;
+  width: 100%;
+  position: relative;
+  top: 0;
+}
+
+.caroselContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.caroselImg {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.489) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  pointer-events: none;
+}

@@ -1,4 +1,10 @@
-const token = localStorage.getItem("token");
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
+
 // 카카오 앱 키
 axios
   .get("/get-kakao-api-key")
@@ -53,6 +59,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   const pass = document.getElementById("pass");
   const passCheck = document.getElementById("passCheck");
 
+  const token = getCookie("token");
+
   if (token) {
     try {
       const response = await axios(`/user/getUser`, {
@@ -85,6 +93,8 @@ window.onload = async function () {
   const address_main = document.getElementById("address");
   const address_detail = document.getElementById("detailAddress");
 
+  const token = getCookie("token");
+
   try {
     const response = await axios.get("/user/profile", {
       headers: {
@@ -114,68 +124,6 @@ window.onload = async function () {
     preview.src = "/static/images/profile.png";
   }
 };
-
-// 이미지 업로드 함수
-// async function uploadImage(file) {
-//   const formData = new FormData();
-//   formData.append("image", file);
-//   try {
-//     const res = await axios.post("/user/uploadImage", formData, {
-//       headers: { "Content-Type": "multipart/form-data" },
-//     });
-//     if (res.data.imageUrl) {
-//       return res.data.imageUrl;
-//     } else {
-//       alert("이미지 업로드 실패");
-//       return "";
-//     }
-//   } catch (error) {
-//     console.error("이미지 업로드 에러:", error);
-//     alert("이미지 업로드 중 오류 발생");
-//     return "";
-//   }
-// }
-
-// async function previewImage(event) {
-//   const file = event.target.files[0];
-//   const preview = document.getElementById("preview");
-//   const label = document.querySelector(".image-upload span");
-//   const imageUpload = document.querySelector(".image-upload");
-
-//   if (file) {
-//     try {
-//       const uploadedImageUrl = await uploadImage(file);
-//       if (uploadedImageUrl) {
-//         preview.src = uploadedImageUrl;
-//         preview.dataset.imageUrl = uploadedImageUrl;
-//       } else {
-//         alert("이미지 업로드 실패");
-//       }
-//     } catch (error) {
-//       console.error("이미지 업로드 중 오류 발생", error);
-//       alert("이미지 업로드 실패");
-//     }
-
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//       preview.src = e.target.result;
-//     };
-//     reader.readAsDataURL(file);
-
-//     preview.style.display = "block";
-//     label.style.display = "none";
-//     imageUpload.style.border = "none";
-//   } else {
-//     preview.style.display = "none";
-//     label.style.display = "none";
-//     imageUpload.style.border = "none";
-
-//     const defaultImageUrl =
-//       preview.dataset.imageUrl || "/path/to/default/image.jpg";
-//     preview.src = defaultImageUrl;
-//     preview.style.display = "block";
-//   }
-// }
 
 // 파일 선택 후 미리보기
 async function previewImage(event) {
@@ -280,6 +228,8 @@ async function changeInfo() {
   const imageInput = document.getElementById("imageInput");
   const preview = document.getElementById("preview");
 
+  const token = getCookie("token");
+
   const formData = new FormData();
 
   if (imageDeleted) {
@@ -331,6 +281,7 @@ async function changeInfo() {
 
 // 탈퇴 요청
 const deleteUser = async () => {
+  const token = getCookie("token");
   // 탈퇴 확인
   const result = await Swal.fire({
     title: "탈퇴하시겠습니까?",
