@@ -136,7 +136,7 @@ const loginUser = async (req, res) => {
 const getUserByIdNav = async (req, res) => {
   try {
     const username = req.user.username;
-    // console.log("username:", req.user);
+
     const user = await User.findOne({ where: { username: username } });
 
     if (!user) {
