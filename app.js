@@ -13,9 +13,9 @@ const categoryRouter = require("./routes/categoryRouter");
 const postRouter = require("./routes/postRouter");
 const postController = require("./controllers/postController");
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(cors());
 
 app.use("/static", express.static(path.join(__dirname, "static")));

@@ -3,7 +3,12 @@ const token = localStorage.getItem("token");
 
 const viewPost = (postId) => {
   axios
-    .get(`/post/${postId}`, { withCredentials: true })
+    .get(`/post/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    })
     .then((response) => {
       console.log(response);
       window.location.href = `/post/${postId}`;
@@ -15,13 +20,12 @@ const viewPost = (postId) => {
 
 async function getUserId() {
   try {
-    const response = await axios("/user/getUserId", {
-      method: "get",
+    const response = await axios.get("/user/getUserId", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    console.log("유저 아이디", response.data.id);
     const userId = response.data.id;
 
     return userId;

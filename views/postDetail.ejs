@@ -14,8 +14,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= post.title %></title>
-    <link rel="stylesheet" href="/static/css/postDetail.css" />
+    <title>detail</title>
   </head>
   <body>
     <%- include("nav") %>
@@ -48,7 +47,15 @@
       <div class="post-content">
         <p><%- post.content %></p>
       </div>
-      <%- include("footer") %>
+      <<<<<<< HEAD <%- include("footer") %> ======= <% if (userId &&
+      Number(modifiedPost.user_id) === Number(userId)) { %>
+      <div class="post-actions">
+        <a href="/post/edit/<%= modifiedPost.id %>" class="edit-btn">✏️ 수정</a>
+        <button onclick="deletePost(<%= modifiedPost.id %>)" class="delete-btn">
+          🗑 삭제
+        </button>
+      </div>
+      <% } %> >>>>>>> b466f96b421763257c7f29eb49738bffdb32383c
     </div>
   </body>
 </html>
