@@ -10,3 +10,6 @@ const deletePost = async (postId) => {
     }
   }
 };
+
+
+// 좋아요 토글

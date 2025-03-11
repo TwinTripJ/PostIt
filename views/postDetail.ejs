@@ -31,9 +31,12 @@
 
       <% if (userId && Number(modifiedPost.user_id) === Number(userId)) { %>
       <div class="post-actions">
-        <a href="/post/edit/<%= modifiedPost.id %>" class="edit-btn">✏️ 수정</a>
-        <button onclick="deletePost(<%= modifiedPost.id %>)" class="delete-btn">
-          🗑 삭제
+        <a href="/post/edit/<%= modifiedPost.id %>" class="edit-btn"> 수정</a>
+        <button
+          onclick="deletePost('<%= modifiedPost.id %>')"
+          class="delete-btn"
+        >
+          삭제
         </button>
       </div>
       <% } %>

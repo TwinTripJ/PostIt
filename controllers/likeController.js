@@ -1,5 +1,6 @@
 const db = require("../models");
 const Like = db.Like;
+const jwt = require("jsonwebtoken");
 
 // JWT 인증 미들웨어
 const authenticateToken = (req, res, next) => {
@@ -30,14 +31,14 @@ const toggleLike = async (req, res) => {
 
     const user_id = req.user.id;
 
-    const existingLike = await Like.findOne({ user_id, post_id });
+    const existingLike = await Like.findOne({ where: { user_id, post_id } });
 
     if (existingLike) {
-      await Like.destroy({ where: { user_id, post_id } });
-      return res.status(200).json({ message: "좋아요 취소" });
+      await existingLike.destroy();
+      return res.status(200).json({ message: "좋아요 취소", liked: false });
     } else {
       await Like.create({ user_id, post_id });
-      return res.status(200).json({ message: "좋아요 추가" });
+      return res.status(200).json({ message: "좋아요 추가", liked: true });
     }
   } catch (err) {
     console.error(err);
@@ -65,13 +66,14 @@ const getLikeCount = async (req, res) => {
 // 사용자가 좋아요한 게시글 목록 조회
 const getUserLikePost = async (req, res) => {
   try {
-    const { post_Id } = req.params;
     const user_Id = req.user.id;
 
-    const likePost = await Like.findAll({
-      where: { user_Id, post_Id },
+    const likePosts = await Like.findAll({
+      where: { user_Id },
+      attributes: ["post_id"],
     });
-    res.status(200).json(likePost);
+    const likedPostIds = likePosts.map((like) => like.post_id);
+    res.status(200).json({ likePosts: likedPostIds });
   } catch (err) {
     console.error(err);
     res
