@@ -129,7 +129,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-
 // 로그인 후
 const getUserByIdNav = async (req, res) => {
   try {
@@ -260,6 +259,8 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     let id = req.params.id;
+
+    console.log("params", req.params);
     let user = await User.findOne({ where: { id: id } });
 
     if (!user) {

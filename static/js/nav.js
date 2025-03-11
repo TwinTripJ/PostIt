@@ -1,18 +1,10 @@
 function getCookie(name) {
-  const cookieArr = document.cookie.split(";");
-  console.log("document.cookie", document.cookie); // 쿠키 전체 출력
-
-  for (let i = 0; i < cookieArr.length; i++) {
-    let cookie = cookieArr[i].trim();
-    if (cookie.startsWith(name + "=")) {
-      return cookie.substring(name.length + 1);
-    }
-  }
-  return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-const token = getCookie("token");
-console.log("현재 쿠키 토큰:", token);
+const token = getCookie("authToken");
 
 window.addEventListener("scroll", function () {
   let header = document.querySelector(".header");
@@ -53,7 +45,6 @@ function moveUrl(url) {
 // 내가 쓴 글 보기
 const goToMyPost = async (url) => {
   try {
-    const token = getCookie("token");
     const idResponse = await axios.get("/user/getUserId", {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -80,9 +71,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const joinBox = document.querySelector(".joinBox");
   const loginBefore = document.querySelector(".loginBefore");
   const loginAfter = document.querySelector(".loginAfter");
-
-  const token = getCookie("token");
-  console.log("현재 쿠키 토큰:", token);
 
   if (token) {
     loginBefore.style.display = "none";
@@ -129,7 +117,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // 카테고리별 게시글로 이동하기
 const moveToCategory = (categoryId) => {
-  const token = getCookie("token");
   if (token) {
     window.location.href = `/category/${categoryId}`;
   } else {

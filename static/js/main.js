@@ -1,13 +1,3 @@
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
-}
-
-// 토큰을 쿠키에서 가져오기
-const token = getCookie("token");
-
 // 게시글 작성하기로 이동하기
 function moveWrite(url) {
   if (token) {
@@ -52,13 +42,10 @@ function moveWrite(url) {
 //   } catch (err) {}
 // };
 
-async function getUserId() {
+const getUserId = async () => {
   try {
-    const response = await axios("/user/getUserId", {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const response = await axios.get(`/user/getUserId/${userId}`, {
+      withCredentials: true,
     });
 
     const userId = response.data.id;
@@ -66,7 +53,7 @@ async function getUserId() {
   } catch (error) {
     console.error("유저 ID를 가져오는 데 실패했습니다.", error);
   }
-}
+};
 
 // async function heart(event) {
 //   const iconImg = event.target;
@@ -114,7 +101,6 @@ async function heart(event) {
   const iconImg = event.target;
   const icon = iconImg.parentElement;
   const postId = icon.getAttribute("data-post-id"); // 직관적인 속성 사용
-  const token = localStorage.getItem("token");
 
   if (!token) {
     alert("로그인이 필요합니다.");
