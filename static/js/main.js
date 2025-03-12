@@ -88,7 +88,6 @@ async function getUserLikes() {
       return;
     }
     likeCountElement.textContent = response.data.like_count;
-    window.location.reload();
   } catch (err) {
     console.error("유저 좋아요 목록 조회 실패:", error);
     return [];

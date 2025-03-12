@@ -38,6 +38,7 @@ body {
   animation: moveUpLogo 1s forwards;
   z-index: 2;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 @keyframes moveUpLogo {
