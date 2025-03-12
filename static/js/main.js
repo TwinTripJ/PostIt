@@ -14,6 +14,7 @@ function moveWrite(url) {
   }
 }
 
+// 유저 아이디 불러오기
 const getUserId = async () => {
   if (token) {
     try {
@@ -78,7 +79,7 @@ async function heart(event) {
   }
 }
 
-// 좋아요
+// 메인 페이지 모든 글의 좋아요 상태
 async function getUserLikes() {
   try {
     const response = await axios.get(`/like/count/${postId}}`);
@@ -128,6 +129,7 @@ window.onload = function () {
   setLikeStatus();
 };
 
+// 게시물 바로가기
 const moveToPost = (postId) => {
   if (token) {
     axios

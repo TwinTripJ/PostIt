@@ -5,4 +5,9 @@ const moveUrl = (req, res) => {
   res.render(url);
 };
 
-module.exports = { moveUrl };
+const searchTitle = (req, res) => {
+  const name = req.query.name;
+  res.render("searchPage", { name });
+};
+
+module.exports = { moveUrl, searchTitle };
