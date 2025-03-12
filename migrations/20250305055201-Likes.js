@@ -1,5 +1,4 @@
 "use strict";
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -48,7 +47,6 @@ module.exports = {
       name: "unique_user_post_like",
     });
   },
-
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("likes");
   },
