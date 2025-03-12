@@ -441,6 +441,18 @@ input:focus {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .postsBox {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .postContainer {
+    width: 45%; /* 2개씩 배치 */
+    max-width: 200px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .categorys {
     top: -100px;
