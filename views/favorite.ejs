@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/favorite.css" />
+    <!-- 경고창 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Favorite</title>
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <%- include("nav") %>
+
+    <div class="login-box">
+      <div class="carosel">
+        <div class="caroselContainer">
+          <img
+            class="caroselImg"
+            src="/static/images/mainCarosel.jpg"
+            alt="carosel image"
+          />
+          <div class="overlay"></div>
+        </div>
+      </div>
+    </div>
+    <div class="backColor">
+      <div class="mainContainer">
+        <h2>즐겨찾기한 게시글</h2>
+
+        <% if (likedPostIds.length > 0) { %>
+        <div class="postsBox">
+          <% likedPostIds.forEach(post => { %>
+          <div class="postContainer">
+            <div class="post-card">
+              <img
+                src="<%= post.image_url ? post.image_url : '/static/images/default-image.png' %>"
+                alt="Post Image"
+                class="post-image"
+                onclick="moveToPost('<%= post.id %>')"
+                data-id="<%= post.id %>"
+              />
+              <div class="post-info">
+                <h4><%= post.title %></h4>
+                <p>
+                  <%= post.content ? post.content.substring(0, 50) : '내용 없음'
+                  %>...
+                </p>
+                <span><%= post.like_count || 0 %></span>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } else { %>
+        <p>즐겨찾기한 게시글이 없습니다.</p>
+        <% } %>
+      </div>
+    </div>
+
+    <%- include("footer") %>
+
+    <script src="/static/js/favorite.js"></script>
+  </body>
+</html>
