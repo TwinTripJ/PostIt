@@ -72,10 +72,7 @@ async function heart(event) {
       return;
     }
 
-    let likeCount = parseInt(likeCountElement.textContent.split(" ")[0]);
-    likeCountElement.textContent = `${
-      isLiked ? likeCount + 1 : likeCount - 1
-    } `;
+    likeCountElement.textContent = response.data.like_count;
   } catch (error) {
     console.error("좋아요 처리 중 오류 발생:", error);
   }
@@ -96,7 +93,7 @@ async function getUserLikes() {
     likeCountElement.textContent = response.data.like_count;
     window.location.reload();
   } catch (err) {
-    console.error("🚨 유저 좋아요 목록 조회 실패:", error);
+    console.error("유저 좋아요 목록 조회 실패:", error);
     return [];
   }
 }
