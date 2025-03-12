@@ -26,7 +26,7 @@ body {
   align-items: center;
   width: 100%;
   height: auto;
-  top: 100px;
+  top: 150px;
   opacity: 0;
   transform: translateY(50px);
   animation: moveUpLogo 1s forwards;
@@ -121,8 +121,8 @@ body {
   width: 95%;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
 .allPostsBox {
@@ -139,23 +139,26 @@ body {
 .allPostContainer {
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .all-post-card {
   display: flex;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.54);
+  background-color: rgba(255, 255, 255, 0.7);
   max-width: 1215px;
-  width: 1215px;
+  width: 1000px;
   height: 200px;
   border-radius: 10px;
   margin: 20px 0;
-  padding: 20px;
-  transition: background-color 0.3s ease-in;
+  padding: 20px 30px 20px 50px;
+  transition: transform 0.3s ease, background-color 0.3s ease-in;
 }
 
 .all-post-card:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.01);
 }
 
 .all-post-card img {
@@ -175,7 +178,6 @@ body {
 }
 
 .favoriteIcon {
-  margin-left: auto;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -192,13 +194,14 @@ body {
   display: flex;
   width: 100%;
   margin-top: -100px;
+  align-items: center;
   justify-content: center;
 }
 
 .emptyImg img {
   margin-top: 50px;
   width: 100%;
-  max-width: 900px;
+  max-width: 550px;
 }
 
 @media screen and (max-width: 1275px) {

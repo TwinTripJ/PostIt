@@ -10,15 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function moveToModify() {
-  const postId = document
-    .querySelector(".post-actions")
-    .getAttribute("data-post-id");
-
+function moveToModify(postId) {
   window.location.href = `/modify/${postId}`;
 }
-
-document.querySelector(".edit-btn").addEventListener("click", moveToModify);
 
 async function deletePost(id) {
   const result = await Swal.fire({

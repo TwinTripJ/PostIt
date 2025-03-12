@@ -5,7 +5,7 @@ const User = db.User;
 const Post = db.Post;
 const Like = db.Like;
 const Category = db.Category;
-
+// 글 작성
 const createPost = async (req, res) => {
   try {
     const { user_id, category_id, title, content, image_url, like_count } =

@@ -60,9 +60,9 @@
                     class="textBox"
                     onclick="moveToPost('<%= posts[i].id %>')"
                   >
-                    <h5><%= posts[i].title.substring(0, 20) %></h5>
+                    <h2><%= posts[i].title.substring(0, 20) %></h2>
                     <p>
-                      :시계_3시: 작성일: <%= new
+                      작성일: <%= new
                       Date(posts[i].createdAt).toLocaleDateString() %>
                     </p>
                     <p>
@@ -99,7 +99,10 @@
             </div>
             <% } %> <% } else { %>
             <div class="emptyImg">
-              <img src="/static/images/emptyPost.png" alt="empty image" />
+              <img
+                src="/static/images/postEmpty(white).png"
+                alt="empty image"
+              />
             </div>
             <% } %>
           </div>

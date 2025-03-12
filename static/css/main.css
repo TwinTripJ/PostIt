@@ -285,7 +285,8 @@ input:focus {
 
 .postsBox {
   display: flex;
-  width: 95%;
+  width: 100%;
+  max-width: 95%;
   gap: 15px;
   height: auto;
   flex-wrap: nowrap;
@@ -440,6 +441,9 @@ input:focus {
   .postsBox {
     justify-content: center;
   }
+  .postContainer {
+    max-width: 200px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -449,8 +453,12 @@ input:focus {
   }
 
   .postContainer {
-    width: 45%;
-    max-width: 200px;
+    max-width: 150px;
+    max-height: 250px;
+  }
+
+  .post-card .post-image {
+    height: 150px;
   }
 }
 
@@ -458,25 +466,47 @@ input:focus {
   .categorys {
     top: -100px;
   }
+
+  .postContainer {
+    max-width: 140px;
+    max-height: 240px;
+  }
+
+  .post-card .post-image {
+    height: 140px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .postsBox {
     display: flex;
-    overflow-x: auto;
+    flex-direction: column;
     scroll-snap-type: x mandatory;
     gap: 10px;
+    max-width: 100%;
+    width: 100%;
     padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mainContainer {
+    padding: 0 30px 30px 30px;
+    margin-top: 10px;
   }
 
   .postContainer {
-    flex: 0 0 auto;
-    scroll-snap-align: center;
-    width: 180px;
+    max-width: 90%;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   .post-card {
-    width: 100%;
+    max-width: 100%;
+  }
+
+  .post-card .post-image {
+    max-height: 100%;
   }
 }
 
@@ -493,10 +523,5 @@ input:focus {
   .postsBox {
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .postContainer {
-    width: 90%;
-    max-width: 200px;
   }
 }
