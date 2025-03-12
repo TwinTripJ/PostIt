@@ -105,6 +105,7 @@ body {
 }
 
 .mainContainer {
+  position: relative;
   display: flex;
   width: 100%;
   max-width: 1280px;
@@ -124,64 +125,47 @@ body {
   align-items: flex-start;
 }
 
-.postContainer {
-  position: relative;
+.allPostsBox {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.478);
-  border-radius: 10px;
-  width: 230px;
-  height: 300px;
+  width: 100%;
+  max-width: 1280px;
+  padding: 10px;
+  margin-top: 30px;
+  justify-content: center;
   align-items: center;
+}
+
+.allPostContainer {
+  width: 100%;
+  display: flex;
+}
+
+.all-post-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.54);
+  max-width: 1215px;
+  width: 1215px;
+  height: 200px;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
   transition: background-color 0.3s ease-in;
 }
 
-.postContainer img {
-  opacity: 0.8;
-  transition: opacity 0.5s ease-in;
-  border-radius: 10px 10px 0 0;
+.all-post-card:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.all-post-card img {
+  max-width: 200px;
+}
+
+.textBox,
+.favoriteIcon,
+.post-image {
   cursor: pointer;
-}
-
-.postContainer:hover {
-  background-color: rgba(255, 255, 255, 0.801);
-}
-
-.postContainer:hover img {
-  opacity: 1;
-}
-
-.contentBox {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  padding: 10px 10px 0 10px;
-  border-radius: 0 0 10px 10px;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: white;
-  overflow: hidden;
-  transition: height 0.6s ease-in-out, background-color 0.5s ease-in;
-  cursor: pointer;
-}
-
-.contentBox:hover {
-  height: 140px;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.post-card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.post-card .post-image {
-  width: 100%;
-  height: 200px;
-  margin-bottom: 5px;
 }
 
 .post-info {
