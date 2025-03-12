@@ -16,7 +16,6 @@ function moveWrite(url) {
 
 const getUserId = async () => {
   if (token) {
-    console.log("로그인");
     try {
       const response = await axios.get(`/user/getUserId`, {
         withCredentials: true,

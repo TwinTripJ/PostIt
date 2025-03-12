@@ -38,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      like_count: {
-        type: DataTypes.INTEGER(1000),
-      },
+      // like_count: {
+      //   type: DataTypes.INTEGER(1000),
+      // },
     },
     {
       timestamps: true,

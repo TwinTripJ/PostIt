@@ -73,7 +73,9 @@
                       src="<%= posts[i].favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
                     />
                   </div>
-                  <%= posts[i].like_count %>
+                  <span class="like-count"
+                    ><%= posts[i].like_count || 0 %>
+                  </span>
                 </div>
               </div>
               <div
