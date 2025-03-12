@@ -135,9 +135,8 @@ const addWrite = async (id) => {
     const userId = await getUserId(token);
 
     const response = await axios.put(
-      "post/edit/id",
+      `/post/edit/${id}`,
       {
-        postId: id,
         user_id: userId,
         title,
         category_id: category,
