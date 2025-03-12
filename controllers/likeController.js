@@ -6,7 +6,7 @@ const toggleLike = async (req, res) => {
   try {
     const { postId } = req.params;
 
-    const user_id = req.user.id;
+    const user_id = req.user.userId;
 
     const existingLike = await Like.findOne({
       where: { user_id: user_id, post_id: postId },
@@ -45,7 +45,7 @@ const getLikeCount = async (req, res) => {
 // 사용자가 좋아요한 게시글
 const getUserLikedPosts = async (req, res) => {
   try {
-    const user_Id = req.user.id;
+    const user_Id = req.user.userId;
 
     const likePosts = await Like.findAll({
       where: { user_Id },

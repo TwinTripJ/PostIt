@@ -118,7 +118,7 @@ async function heart(event) {
       `/like/${postId}`,
       {},
       {
-        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
       }
     );
 
@@ -167,7 +167,7 @@ async function heart(event) {
 async function setLikeStatus() {
   try {
     const response = await axios.get("/like/likedPosts", {
-      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
     });
 
     const likedPosts = response.data.likedPostIds || [];
