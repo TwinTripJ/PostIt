@@ -12,6 +12,7 @@ const mainRouter = require("./routes/mainRouter");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const postRouter = require("./routes/postRouter");
+const likeRouter = require("./routes/likeRouter");
 const postController = require("./controllers/postController");
 
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use("/postit", mainRouter);
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
 app.use("/post", postRouter);
+app.use("/like", likeRouter);
 
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
