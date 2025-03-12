@@ -4,7 +4,8 @@ const editor = new toastui.Editor({
   height: "300px",
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
-  initialValue: "상세 정보를 입력해주세요.",
+  initialValue: postContent, // 이 값을 에디터의 초기 값으로 사용
+
   hooks: {
     addImageBlobHook(blob, callback) {
       console.log(blob);
@@ -74,12 +75,9 @@ async function uploadImage(file) {
 
       return res.data.imageUrl;
     } else {
-      alert("이미지 업로드 실패");
       return "";
     }
   } catch (error) {
-    console.error("이미지 업로드 에러:", error);
-    alert("이미지 업로드 중 오류 발생");
     return "";
   }
 }
@@ -96,8 +94,6 @@ async function previewImage(event) {
   try {
     uploadedImageUrl = await uploadImage(file);
   } catch (error) {
-    console.error("이미지 업로드 중 오류 발생", error);
-    alert("이미지 업로드 실패");
     return;
   }
 
@@ -110,19 +106,17 @@ async function previewImage(event) {
       const img = new Image();
       img.onload = function () {
         preview.style.display = "block";
-        label.style.display = "none";
         imageUpload.style.border = "none";
       };
       img.onerror = function () {
-        alert("이미지 로드에 실패했습니다.");
+        return;
       };
       img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   } else {
-    preview.style.display = "none";
-    label.style.display = "block";
-    imageUpload.style.border = "2px dashed #ccc";
+    preview.style.display = "block";
+    imageUpload.style.border = "none";
   }
 
   if (uploadedImageUrl) {

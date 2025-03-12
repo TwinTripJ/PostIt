@@ -26,17 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function movePage(url) {
-  if (token) {
-    axios
-      .get(`/postit/${url}`)
-      .then((res) => {
-        window.location.href = `/postit/${url}`;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  } else {
-    window.location.href = "/postit/login";
-  }
+function moveToModify() {
+  const postId = document
+    .querySelector(".post-actions")
+    .getAttribute("data-post-id");
+
+  window.location.href = `/modify/${postId}`;
 }
+
+document.querySelector(".edit-btn").addEventListener("click", moveToModify);
