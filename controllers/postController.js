@@ -183,16 +183,20 @@ const getMyPost = async (req, res) => {
 // 게시글 수정
 const updatePost = async (req, res) => {
   try {
+    const { user_id, category_id, title, content, image_url } = req.body;
     const { id } = req.params;
-    const { title, content, image_url } = req.body;
 
-    const post = await Post.findOne({ where: { id: id } });
+    const post = await Post.findOne({ where: { id } });
 
     if (!post) {
       return res.status(404).json({ message: "게시글 조회 실패" });
     }
 
-    await Post.update({ title, content, image_url }, { where: { id: id } });
+    // 게시글 업데이트
+    await Post.update(
+      { user_id, title, category_id, content, image_url },
+      { where: { id } }
+    );
 
     res.status(200).json({ message: "게시글이 수정되었습니다" });
   } catch (err) {
@@ -206,13 +210,17 @@ const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const post = await Post.findOne({ where: { id: id } });
+    const postId = Number(id);
+
+    console.log("postID", postId);
+
+    const post = await Post.findOne({ where: { id: postId } });
 
     if (!post) {
       return res.status(404).json({ message: "게시글 조회 실패" });
     }
 
-    await Post.destroy({ where: { id: id } });
+    await Post.destroy({ where: { id: postId } });
     res.status(200).json({ message: "게시글이 삭제되었습니다" });
   } catch (err) {
     console.error(err);

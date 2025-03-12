@@ -52,8 +52,12 @@ const getUserLikedPosts = async (req, res) => {
       attributes: ["post_id"],
     });
     const likedPostIds = likePosts.map((like) => like.post_id);
-    console.log(likePosts);
-    res.status(200).json({ likePosts: likePosts, likedPostIds: likedPostIds });
+    console.log("like:", likedPostIds);
+
+    res.status(200).json({
+      likePosts,
+      likedPostIds,
+    });
   } catch (err) {
     console.error(err);
     res
@@ -61,8 +65,43 @@ const getUserLikedPosts = async (req, res) => {
       .json({ message: "좋아요 개수 조회 실패", error: err.message });
   }
 };
+
+const userPosts = async (req, res) => {
+  try {
+    const user_Id = req.user.userId;
+    const likePosts = await Like.findAll({
+      where: { user_Id },
+      attributes: ["post_id"],
+    });
+    const likedPostIds = likePosts.map((like) => like.post_id);
+
+    const posts = await Post.findAll({
+      where: {
+        id: likedPostIds,
+      },
+    });
+
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("favorite", {
+      modifiedPosts,
+      likePosts,
+      likedPostIds,
+    });
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "좋아요 개수 조회 실패", error: err.message });
+  }
+};
+
 module.exports = {
   toggleLike,
   getLikeCount,
   getUserLikedPosts,
+  userPosts,
 };

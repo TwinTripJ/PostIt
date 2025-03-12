@@ -289,8 +289,10 @@ const getUserById = async (req, res) => {
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
   try {
-    let userId = req.user.id;
-    console.log(userId);
+
+
+    let userId = req.user.userId;
+
     let updateData = req.body;
 
     if (updateData.password) {
@@ -313,7 +315,6 @@ const updateUser = async (req, res) => {
         );
 
         if (fs.existsSync(oldImagePath)) {
-          // 기존 경로 삭제
           fs.unlinkSync(oldImagePath);
         }
       }
