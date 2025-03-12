@@ -110,7 +110,7 @@
       <div class="mainContainer">
         <h1>Recent Post</h1>
         <div class="postsBox">
-          <% for (let i = 0; i < 5; i++) { %>
+          <% if (posts.length > 0) { %> <% for (let i = 0; i < 5; i++) { %>
           <div class="postContainer">
             <div class="post-card">
               <img
@@ -140,11 +140,14 @@
               <p><%= posts[i].content.substring(0, 30) %>...</p>
             </div>
           </div>
+          <% } %> <% } else { %>
+          <img src="/static/images/emptyPost.png" />
           <% } %>
         </div>
 
         <div class="allPostsBox">
-          <% for (let i = 5; i < posts.length; i++) { %>
+          <% if(posts.length > 0 ) { %> <% for (let i = 5; i < posts.length;
+          i++) { %>
           <div class="allPostContainer">
             <div class="all-post-card">
               <div class="allContentBox">
@@ -182,7 +185,7 @@
               />
             </div>
           </div>
-          <% } %>
+          <% } %> <% } %>
         </div>
       </div>
 
