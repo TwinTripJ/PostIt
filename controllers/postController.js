@@ -37,8 +37,10 @@ const createPost = async (req, res) => {
 };
 
 // 모든 게시글 조회 및 좋아요 개수
-const getAllPosts = async () => {
+const getAllPosts = async (page = 1, limit = 10) => {
   try {
+    const offset = (page - 1) * limit;
+
     const posts = await Post.findAll({
       attributes: [
         "id",
@@ -49,7 +51,7 @@ const getAllPosts = async () => {
         "image_url",
         "createdAt",
         "updatedAt",
-        [db.sequelize.fn("COUNT", db.sequelize.col("Likes.id")), "like_count"],
+        [db.sequelize.fn("COUNT", db.sequelize.col("likes.id")), "like_count"],
       ],
       include: [
         {
@@ -59,7 +61,13 @@ const getAllPosts = async () => {
       ],
       group: ["Post.id"],
       order: [["createdAt", "DESC"]],
+      limit,
+      offset,
     });
+
+    if (!posts || posts.length === 0) {
+      return [];
+    }
 
     const modifiedPosts = posts.map((post) => ({
       ...post.toJSON(),

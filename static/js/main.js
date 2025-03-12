@@ -1,3 +1,76 @@
+let page = 1; // 현재 페이지 번호
+let isFetching = false; // 중복 요청 방지
+const postContainer = document.querySelector(".postsBox");
+
+// 스크롤 이벤트 감지
+window.addEventListener("scroll", async function () {
+  if (isFetching) return;
+
+  // 스크롤이 페이지 하단에 도달했는지 확인
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+    isFetching = true; // 중복 요청 방지
+
+    try {
+      page++; // 페이지 증가
+      const response = await axios.get(`/?page=${page}`, {
+        withCredentials: true,
+      });
+
+      const newPosts = response.data.posts;
+
+      if (newPosts.length === 0) {
+        window.removeEventListener("scroll", arguments.callee); // 데이터가 없으면 이벤트 제거
+        return;
+      }
+
+      newPosts.forEach((post) => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("postContainer");
+        postElement.innerHTML = `
+          <div class="post-card">
+            <img 
+              src="${post.image_url || "/static/images/default-image.png"}"
+              alt="Post Image"
+              class="post-image"
+              onclick="moveToPost('${post.id}')"
+              data-id="${post.id}"
+            />
+
+            <div class="post-info">
+              <div 
+                class="favoriteIcon"
+                onclick="heart(event)"
+                data-fav="${post.favorite ? "1" : "0"}"
+                data-id="${post.id}"
+              >
+                <img 
+                  src="${
+                    post.favorite
+                      ? "../static/images/favoriteFillIcon.png"
+                      : "../static/images/favoriteIcon.png"
+                  }"
+                />
+              </div>
+              <span class="like-count">${post.like_count || 0}</span>
+            </div>
+          </div>
+
+          <div class="contentBox" onclick="moveToPost('${post.id}')">
+            <h5>${post.title.substring(0, 10)}</h5>
+            <hr />
+            <p>${post.content ? post.content.substring(0, 30) : "내용 없음"}</p>
+          </div>
+        `;
+        postContainer.appendChild(postElement);
+      });
+    } catch (error) {
+      console.error("게시글을 불러오는 중 오류 발생:", error);
+    } finally {
+      isFetching = false; // 데이터 로드 후 다시 요청 가능하도록 변경
+    }
+  }
+});
+
 // 게시글 작성하기로 이동하기
 function moveWrite(url) {
   if (token) {
