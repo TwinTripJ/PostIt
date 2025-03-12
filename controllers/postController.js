@@ -54,6 +54,7 @@ const getAllPosts = async () => {
       include: [
         {
           model: Like,
+          as: "Likes",
           attributes: [],
         },
       ],
