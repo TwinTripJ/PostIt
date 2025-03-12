@@ -44,36 +44,16 @@ router.get(
 );
 
 // 네이버 로그인
-router.get(
-  "/naver",
-  authMiddleware.authenticateToken,
-  userController.naverLogin
-);
+router.get("/naver", userController.naverLogin);
 
-router.get(
-  "/callback",
-  authMiddleware.authenticateToken,
-  userController.callBack
-);
+router.get("/callback", userController.callBack);
 
 // 카카오톡 로그인
-router.get(
-  "/kakao-key",
-  authMiddleware.authenticateToken,
-  userController.kakaoKey
-);
+router.get("/kakao-key", userController.kakaoKey);
 
-router.get(
-  "/kakao",
-  authMiddleware.authenticateToken,
-  userController.kakaoRedirect
-);
+router.get("/kakao", userController.kakaoRedirect);
 
-router.get(
-  "/kakao/callback",
-  authMiddleware.authenticateToken,
-  userController.kakaoCallback
-);
+router.get("/kakao/callback", userController.kakaoCallback);
 
 router.get("/login", (req, res) => {
   res.render("login");
