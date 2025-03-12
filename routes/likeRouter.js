@@ -4,15 +4,15 @@ const authMiddleware = require("../middleware/userMiddleware");
 const likeController = require("../controllers/likeController");
 
 router.post(
-  "/:postId/like",
+  "/:postId",
   authMiddleware.authenticateToken,
   likeController.toggleLike
 );
 
-router.get("/:postId/likes", likeController.getLikeCount);
+router.get("/count/:postId", likeController.getLikeCount);
 
 router.get(
-  "/:postId/liked",
+  "/likePost/:postId",
   authMiddleware.authenticateToken,
   likeController.getUserLikePost
 );

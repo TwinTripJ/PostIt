@@ -335,7 +335,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-// 사용자 삭제 > 탈퇴로 변경할 것 !!
+// 사용자 탈퇴
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.user;
@@ -347,13 +347,13 @@ const deleteUser = async (req, res) => {
     const deleted = await User.destroy({ where: { id: id } });
 
     if (!deleted) {
-      return res.status(404).json({ message: "삭제할 사용자 없음" });
+      return res.status(404).json({ message: "탈퇴할 사용자 없음" });
     }
 
-    res.status(200).json({ message: "사용자 삭제 완료" });
+    res.status(200).json({ message: "사용자 탈퇴 완료" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "사용자 삭제 실패", error: err.message });
+    res.status(500).json({ message: "사용자 탈퇴 실패", error: err.message });
   }
 };
 

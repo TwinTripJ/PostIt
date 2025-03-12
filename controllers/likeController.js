@@ -4,17 +4,21 @@ const Like = db.Like;
 // 좋아요 추가/취소
 const toggleLike = async (req, res) => {
   try {
-    const { post_id } = req.params;
+    const { postId } = req.params;
 
     const user_id = req.user.id;
 
-    const existingLike = await Like.findOne({ where: { user_id, post_id } });
+    console.log("sdfsdf", postId, user_id);
+
+    const existingLike = await Like.findOne({
+      where: { user_id: user_id, post_id: postId },
+    });
 
     if (existingLike) {
       await existingLike.destroy();
       return res.status(200).json({ message: "좋아요 취소", liked: false });
     } else {
-      await Like.create({ user_id, post_id });
+      await Like.create({ user_id, postId });
       return res.status(200).json({ message: "좋아요 추가", liked: true });
     }
   } catch (err) {

@@ -98,6 +98,7 @@ const getUserId = async () => {
 //   }
 // }
 
+// 좋아요 토글
 async function heart(event) {
   const iconImg = event.target;
   const icon = iconImg.parentElement;
@@ -111,7 +112,7 @@ async function heart(event) {
   try {
     // 서버에 좋아요 요청 (토글 기능)
     const response = await axios.post(
-      `/post/${postId}/like`,
+      `/like/${postId}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -143,7 +144,7 @@ async function getUserLikes() {
   const userId = await getUserId();
 
   try {
-    const response = await axios.get(`/user/likes?userId=${userId}`);
+    const response = await axios.get(`/like/count/${postId}}`);
     return response.data.likedPosts;
   } catch (err) {
     console.error("🚨 유저 좋아요 목록 조회 실패:", error);
