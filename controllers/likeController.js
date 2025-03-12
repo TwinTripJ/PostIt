@@ -8,8 +8,6 @@ const toggleLike = async (req, res) => {
 
     const user_id = req.user.id;
 
-    console.log("sdfsdf", postId, user_id);
-
     const existingLike = await Like.findOne({
       where: { user_id: user_id, post_id: postId },
     });
