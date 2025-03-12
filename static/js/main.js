@@ -14,34 +14,6 @@ function moveWrite(url) {
   }
 }
 
-// 모든 게시글 가져와 화면에 추가
-// const loadAllPosts = async () => {
-//   try {
-//     const response = await axios.get("/post/allPosts");
-//     if (response.status === 200) {
-//       const posts = response.data;
-//       const postContainer = document.querySelector(".mainContainer");
-//       posts.forEach((post) => {
-//         const postElement = document.querySelector(".postContainer");
-//         postElement.innerHTML = `
-
-//           <div class="post-card" onclick="moveToPost(${post.id})">
-//             <img src="${
-//               post.image_url
-//             }" alt="Post Image" class="post-image" width="100px" height="100px">
-//             <div class="post-info">
-//               <h4>${post.title}</h4>
-//               <p>${post.content.substring(0, 100)}...</p>
-//               <span>❤️ ${post.like_count || 0}</span>
-//             </div>
-//           </div>
-//         `;
-//         postContainer.appendChild(postElement);
-//       });
-//     }
-//   } catch (err) {}
-// };
-
 const getUserId = async () => {
   if (token) {
     console.log("로그인");
@@ -58,48 +30,6 @@ const getUserId = async () => {
     }
   }
 };
-
-// async function heart(event) {
-//   const iconImg = event.target;
-//   const icon = iconImg.parentElement;
-//   const att = icon.getAttribute("data-fav");
-//   const productId = iconImg
-//     .closest(".post-card")
-//     .querySelector("img")
-//     .getAttribute("data-id");
-//   const userId = await getUserId();
-
-//   const isLiked = att === "0";
-
-//   iconImg.src = isLiked
-//     ? "../static/images/favoriteFillIcon.png"
-//     : "../static/images/favoriteIcon.png";
-//   icon.setAttribute("data-fav", isLiked ? "1" : "0");
-
-//   try {
-//     await Promise.all([
-//       // 유저 테이블 요청
-//       axios.post("user/like", {
-//         id: userId,
-//         liked: isLiked,
-//       }),
-//       // 게시글 테이블 요청
-//       axios.post("post/like", {
-//         id: productId,
-//         userId: userId,
-//         liked: isLiked,
-//       }),
-//     ]);
-
-//     const likeCountElement = icon.nextElementSibling;
-//     let likeCount = parseInt(likeCountElement.textContent.split(" ")[0]);
-//     likeCountElement.textContent = `${
-//       isLiked ? likeCount + 1 : likeCount - 1
-//     } 좋아요`;
-//   } catch (error) {
-//     console.error("좋아요 처리 중 오류 발생:", error);
-//   }
-// }
 
 // 좋아요 토글
 async function heart(event) {
