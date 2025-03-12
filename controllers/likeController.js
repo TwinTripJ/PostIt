@@ -52,7 +52,6 @@ const getUserLikedPosts = async (req, res) => {
       attributes: ["post_id"],
     });
     const likedPostIds = likePosts.map((like) => like.post_id);
-    console.log("like:", likedPostIds);
 
     res.status(200).json({
       likePosts,
