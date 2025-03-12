@@ -28,6 +28,7 @@ const toggleLike = async (req, res) => {
     res.status(500).json({ message: "좋아요 처리 실패", error: err.message });
   }
 };
+
 // 게시글의 좋아요 개수 조회
 const getLikeCount = async (req, res) => {
   try {

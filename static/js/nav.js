@@ -50,6 +50,7 @@ const goToMyPost = async (url) => {
 
 // 즐겨찾기 페이지로 이동
 const goToMyFavorite = async () => {
+
   try {
     const idResponse = await axios.get("/user/getUserId", {
       withCredentials: true,
@@ -66,6 +67,7 @@ const goToMyFavorite = async () => {
     console.error("사용자 ID 가져오기 실패:", error);
     alert("로그인이 필요합니다.");
   }
+
 };
 
 function logout() {

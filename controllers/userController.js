@@ -289,7 +289,10 @@ const getUserById = async (req, res) => {
 // 사용자 정보 수정
 const updateUser = async (req, res) => {
   try {
+
+
     let userId = req.user.userId;
+
     let updateData = req.body;
 
     if (updateData.password) {
