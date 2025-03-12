@@ -9,7 +9,6 @@ const authenticateToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
     req.user = decoded;
     console.log("[서버] 인증된 사용자:", req.user);
     next();

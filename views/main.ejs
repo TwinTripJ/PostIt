@@ -130,7 +130,7 @@
                     src="<%= posts[i].favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
                   />
                 </div>
-                <%= posts[i].like_count %>
+                <span class="like-count"><%= posts[i].like_count %> </span>
               </div>
             </div>
             <div class="contentBox" onclick="moveToPost('<%= posts[i].id %>')">
