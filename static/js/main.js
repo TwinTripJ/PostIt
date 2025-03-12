@@ -150,18 +150,25 @@ async function heart(event) {
   }
 }
 
-// 좋아요 유지
-// async function getUserLikes() {
-//   const userId = await getUserId();
+// 좋아요
+async function getUserLikes() {
+  try {
+    const response = await axios.get(`/like/count/${postId}}`);
+    const likeCountElement = icon
+      .closest(".post-info")
+      .querySelector(".like-count");
 
-//   try {
-//     const response = await axios.get(`/like/count/${postId}}`);
-//     return response.data.likedPosts;
-//   } catch (err) {
-//     console.error("🚨 유저 좋아요 목록 조회 실패:", error);
-//     return [];
-//   }
-// }
+    if (!likeCountElement) {
+      console.warn("좋아요 개수를 표시할 요소가 없습니다!");
+      return;
+    }
+    likeCountElement.textContent = response.data.like_count;
+    window.location.reload();
+  } catch (err) {
+    console.error("🚨 유저 좋아요 목록 조회 실패:", error);
+    return [];
+  }
+}
 
 // 좋아요한 상태 유지
 async function setLikeStatus() {

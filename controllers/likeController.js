@@ -1,7 +1,8 @@
 const db = require("../models");
 const Like = db.Like;
+const Post = db.Post;
 
-// 좋아요 추가/취소
+// 좋아요 추가/취소 및 좋아요 개수 저장
 const toggleLike = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -14,11 +15,20 @@ const toggleLike = async (req, res) => {
 
     if (existingLike) {
       await existingLike.destroy();
-      return res.status(200).json({ message: "좋아요 취소", liked: false });
     } else {
       await Like.create({ user_id: user_id, post_id: postId });
-      return res.status(200).json({ message: "좋아요 추가", liked: true });
     }
+
+    const likeCount = await Like.count({ where: { post_id: postId } });
+
+    await Post.update({ like_count: likeCount }, { where: { id: postId } });
+
+    return res.status(200).json({
+      message: existingLike ? "좋아요 취소" : "좋아요 추가",
+      liked: !existingLike,
+      post_id: postId,
+      like_count: likeCount,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "좋아요 처리 실패", error: err.message });
