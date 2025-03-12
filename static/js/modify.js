@@ -125,7 +125,7 @@ async function previewImage(event) {
 }
 
 // 글 저장
-const addWrite = async () => {
+const addWrite = async (id) => {
   const title = document.querySelector("input[name='title']").value.trim();
   const category = document.querySelector("select[name='category']").value;
   const content = editor.getHTML();
@@ -134,9 +134,10 @@ const addWrite = async () => {
   try {
     const userId = await getUserId(token);
 
-    const response = await axios.post(
-      "/post/create",
+    const response = await axios.put(
+      "post/edit/id",
       {
+        postId: id,
         user_id: userId,
         title,
         category_id: category,
@@ -151,13 +152,13 @@ const addWrite = async () => {
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "글이 정상적으로 등록되었습니다!",
+        title: "글이 정상적으로 수정되었습니다!",
       }).then(() => {
         window.location.href = "/";
       });
     }
   } catch (error) {
-    alert("글 저장 실패");
+    alert("글 수정 실패");
     console.error("Error:", error);
   }
 };
