@@ -55,11 +55,18 @@ body {
   max-width: 100%;
 }
 
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .searchBox {
   width: 100%;
   max-width: 1280px;
-  display: flex;
   gap: 10px;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -279,6 +286,7 @@ input:focus {
   display: flex;
   width: 95%;
   gap: 15px;
+  height: auto;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -293,6 +301,7 @@ input:focus {
   width: 230px;
   max-width: 230px;
   height: 300px;
+  max-height: 300px;
   align-items: center;
   transition: background-color 0.3s ease-in;
 }
@@ -370,7 +379,7 @@ input:focus {
   flex-direction: column;
   width: 100%;
   max-width: 1280px;
-  padding: 10px;
+  padding: 10px 30px;
   margin-top: 30px;
   justify-content: center;
   align-items: center;
@@ -379,6 +388,12 @@ input:focus {
 .allPostContainer {
   width: 100%;
   display: flex;
+}
+
+.allContentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .all-post-card {
@@ -426,6 +441,18 @@ input:focus {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .postsBox {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .postContainer {
+    width: 45%; /* 2개씩 배치 */
+    max-width: 200px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .categorys {
     top: -100px;
@@ -438,6 +465,10 @@ input:focus {
   }
 
   .postContainer {
+    width: 100%;
+  }
+
+  .post-card {
     width: 100%;
   }
 }

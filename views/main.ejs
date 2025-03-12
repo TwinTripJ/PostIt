@@ -46,9 +46,13 @@
           <div class="logo">
             <img src="/static/images/postitLogo.png" alt="postit logo" />
 
-            <form action="/search" method="GET">
+            <form action="/postit/search" method="GET">
               <div class="searchBox">
-                <input class="search" placeholder="검색" name="name" />
+                <input
+                  class="search"
+                  placeholder="검색 키워드를 작성하여 주세요."
+                  name="name"
+                />
                 <button type="submit">검색</button>
               </div>
             </form>
@@ -167,7 +171,7 @@
                 <div class="textBox" onclick="moveToPost('<%= posts[i].id %>')">
                   <h5><%= posts[i].title.substring(0, 20) %></h5>
                   <p>
-                    :시계_3시: 작성일: <%= new
+                    작성일: <%= new
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
                   <p>
