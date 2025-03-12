@@ -12,9 +12,9 @@ router.post(
 router.get("/count/:postId", likeController.getLikeCount);
 
 router.get(
-  "/likePost/:postId",
+  "/likedPosts",
   authMiddleware.authenticateToken,
-  likeController.getUserLikePost
+  likeController.getUserLikedPosts
 );
 
 module.exports = router;

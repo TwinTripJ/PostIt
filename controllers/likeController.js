@@ -18,7 +18,7 @@ const toggleLike = async (req, res) => {
       await existingLike.destroy();
       return res.status(200).json({ message: "좋아요 취소", liked: false });
     } else {
-      await Like.create({ user_id, postId });
+      await Like.create({ user_id: user_id, post_id: postId });
       return res.status(200).json({ message: "좋아요 추가", liked: true });
     }
   } catch (err) {
@@ -44,8 +44,8 @@ const getLikeCount = async (req, res) => {
   }
 };
 
-// 사용자가 좋아요한 게시글 목록 조회
-const getUserLikePost = async (req, res) => {
+// 사용자가 좋아요한 게시글
+const getUserLikedPosts = async (req, res) => {
   try {
     const user_Id = req.user.id;
 
@@ -53,8 +53,10 @@ const getUserLikePost = async (req, res) => {
       where: { user_Id },
       attributes: ["post_id"],
     });
+
     const likedPostIds = likePosts.map((like) => like.post_id);
-    res.status(200).json({ likePosts: likedPostIds });
+    console.log(likePosts);
+    res.status(200).json({ likePosts: likePosts, likedPostIds: likedPostIds });
   } catch (err) {
     console.error(err);
     res
@@ -66,5 +68,5 @@ const getUserLikePost = async (req, res) => {
 module.exports = {
   toggleLike,
   getLikeCount,
-  getUserLikePost,
+  getUserLikedPosts,
 };
