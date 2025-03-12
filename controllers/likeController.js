@@ -6,7 +6,7 @@ const Post = db.Post;
 const toggleLike = async (req, res) => {
   try {
     const { postId } = req.params;
-
+    console.log(postId);
     const user_id = req.user.userId;
 
     const existingLike = await Like.findOne({
@@ -20,7 +20,7 @@ const toggleLike = async (req, res) => {
     }
 
     const likeCount = await Like.count({ where: { post_id: postId } });
-
+    console.log("sdfsdfsdf", likeCount);
     await Post.update({ like_count: likeCount }, { where: { id: postId } });
 
     return res.status(200).json({

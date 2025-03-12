@@ -51,6 +51,8 @@ async function heart(event) {
       }
     );
 
+    console.log(response.data.like_count);
+
     // 서버 응답에서 좋아요 상태 가져오기
     const isLiked = response.data.liked;
 
