@@ -1,10 +1,3 @@
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return null;
-}
-
 // 카카오 앱 키
 axios
   .get("/get-kakao-api-key")
@@ -203,9 +196,7 @@ function pwCheckCondition() {
   const check = document.querySelector(".check").textContent.trim();
   const alert = document.getElementById("alret").textContent.trim();
 
-  console.log(alert);
   if (check === "" && alert === "동일한 비밀번호입니다.") {
-    console.log("dd");
     changeBtn.disabled = false;
   } else {
     changeBtn.disabled = true;

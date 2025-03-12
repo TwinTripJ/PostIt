@@ -17,4 +17,10 @@ router.get(
   likeController.getUserLikedPosts
 );
 
+router.get(
+  "/favoritePosts",
+  authMiddleware.authenticateToken,
+  likeController.userPosts
+);
+
 module.exports = router;

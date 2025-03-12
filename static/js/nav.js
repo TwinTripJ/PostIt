@@ -61,7 +61,7 @@ const goToMyFavorite = async () => {
     }
 
     // 즐겨찾기 페이지로 이동
-    window.location.href = "/like/likedPosts";
+    window.location.href = "/like/favoritePosts";
   } catch (error) {
     console.error("사용자 ID 가져오기 실패:", error);
     alert("로그인이 필요합니다.");
