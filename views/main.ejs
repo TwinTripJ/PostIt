@@ -108,18 +108,22 @@
       </div>
 
       <div class="mainContainer">
-        <h1>Recent Post</h1>
+        <h2>Recent Posts</h2>
+
+        <% if (Array.isArray(posts) && posts.length > 0) { %>
         <div class="postsBox">
-          <% if (posts.length > 0) { %> <% for (let i = 0; i < 5; i++) { %>
+          <% for (let i = 0; i < Math.min(5, posts.length); i++) { %> <% if
+          (posts[i]) { %>
           <div class="postContainer">
             <div class="post-card">
               <img
-                src="<%= posts[i].image_url %>"
+                src="<%= posts[i] && posts[i].image_url ? posts[i].image_url : '/static/images/default-image.png' %>"
                 alt="Post Image"
                 class="post-image"
                 onclick="moveToPost('<%= posts[i].id %>')"
                 data-id="<%= posts[i].id %>"
               />
+
               <div class="post-info">
                 <div
                   class="favoriteIcon"
@@ -131,35 +135,45 @@
                     src="<%= posts[i].favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
                   />
                 </div>
-                <span class="like-count"><%= posts[i].like_count %> </span>
+                <span class="like-count"><%= posts[i].like_count || 0 %> </span>
               </div>
             </div>
+
             <div class="contentBox" onclick="moveToPost('<%= posts[i].id %>')">
               <h5><%= posts[i].title.substring(0, 10) %></h5>
               <hr />
-              <p><%= posts[i].content.substring(0, 30) %>...</p>
+              <p>
+                <%= posts[i].content ? posts[i].content.substring(0, 30) :
+                "내용없음" %>
+              </p>
             </div>
           </div>
-          <% } %> <% } else { %>
-          <img src="/static/images/emptyPost.png" />
-          <% } %>
+          <% } %> <% } %>
         </div>
+        <% } else { %>
+        <div class="emptyImg">
+          <img src="/static/images/emptyPost.png" alt="No Posts" />
+          <p>게시글이 없습니다.</p>
+        </div>
+        <% } %>
 
+        <h2>All Posts</h2>
+        <% if (Array.isArray(posts) && posts.length > 5) { %>
         <div class="allPostsBox">
-          <% if(posts.length > 0 ) { %> <% for (let i = 5; i < posts.length;
-          i++) { %>
+          <% for (let i = 5; i < posts.length; i++) { %> <% if (posts[i]) { %>
           <div class="allPostContainer">
             <div class="all-post-card">
               <div class="allContentBox">
                 <div class="textBox" onclick="moveToPost('<%= posts[i].id %>')">
                   <h5><%= posts[i].title.substring(0, 20) %></h5>
-
                   <p>
                     🕒 작성일: <%= new
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
-
-                  <p><%= posts[i].content.substring(0, 50) %>...</p>
+                  <p>
+                    <%= posts[i].content ? posts[i].content.substring(0, 50) :
+                    "내용 없음" %>...
+                  </p>
                 </div>
 
                 <div class="favoriteContainer">
@@ -177,7 +191,7 @@
                 </div>
               </div>
               <img
-                src="<%= posts[i].image_url %>"
+                src="<%= posts[i] && posts[i].image_url ? posts[i].image_url : '/static/images/default-image.png' %>"
                 alt="Post Image"
                 class="post-image"
                 onclick="moveToPost('<%= posts[i].id %>')"
@@ -187,6 +201,7 @@
           </div>
           <% } %> <% } %>
         </div>
+        <% } %>
       </div>
 
       <%- include("footer") %>
