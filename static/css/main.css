@@ -279,6 +279,7 @@ input:focus {
   display: flex;
   width: 95%;
   gap: 15px;
+  height: auto;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -293,6 +294,7 @@ input:focus {
   width: 230px;
   max-width: 230px;
   height: 300px;
+  max-height: 300px;
   align-items: center;
   transition: background-color 0.3s ease-in;
 }
@@ -370,7 +372,7 @@ input:focus {
   flex-direction: column;
   width: 100%;
   max-width: 1280px;
-  padding: 10px;
+  padding: 10px 30px;
   margin-top: 30px;
   justify-content: center;
   align-items: center;
@@ -379,6 +381,12 @@ input:focus {
 .allPostContainer {
   width: 100%;
   display: flex;
+}
+
+.allContentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .all-post-card {
@@ -438,6 +446,10 @@ input:focus {
   }
 
   .postContainer {
+    width: 100%;
+  }
+
+  .post-card {
     width: 100%;
   }
 }

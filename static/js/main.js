@@ -37,12 +37,11 @@ async function heart(event) {
   const postId = icon.getAttribute("data-id");
 
   if (!token) {
-    alert("로그인이 필요합니다.");
+    window.location.href = "/user/login";
     return;
   }
 
   try {
-    // 서버에 좋아요 요청 (토글 기능)
     const response = await axios.post(
       `/like/${postId}`,
       {},
@@ -51,9 +50,6 @@ async function heart(event) {
       }
     );
 
-    console.log(response.data.like_count);
-
-    // 서버 응답에서 좋아요 상태 가져오기
     const isLiked = response.data.liked;
 
     // UI 업데이트
