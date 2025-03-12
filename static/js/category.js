@@ -25,6 +25,24 @@ async function getUserId() {
   }
 }
 
+// 게시물 바로가기
+const moveToPost = (postId) => {
+  if (token) {
+    axios
+      .get(`/post/${postId}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        window.location.href = `/post/${postId}`;
+      })
+      .catch((error) => {
+        console.error("Error fetching post details:", error);
+      });
+  } else {
+    window.location.href = "/postit/login";
+  }
+};
+
 // async function heart(event) {
 //   const iconImg = event.target;
 //   const icon = iconImg.parentElement;
@@ -165,3 +183,27 @@ async function setLikeStatus() {
 window.onload = function () {
   setLikeStatus();
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  const posts = document.querySelectorAll(".allPostContainer");
+
+  const observerOptions = {
+    root: null,
+    threshold: 0.8,
+  };
+
+  const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  posts.forEach((post) => {
+    observer.observe(post);
+  });
+});

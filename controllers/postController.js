@@ -110,7 +110,6 @@ const getPostById = async (req, res) => {
       where: { id: post.user_id },
       attributes: ["id", "username", "image_url"],
     });
-    console.log("Sdfsdfsdfsdfsdfsdfsd", author);
     res.render("postDetail", {
       modifiedPost: post,
       categoryName,
@@ -158,7 +157,13 @@ const getMyPost = async (req, res) => {
         .status(404)
         .json({ message: "사용자 정보를 찾을 수 없습니다." });
     }
-    res.render("myPost", { user, posts });
+
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("myPost", { user, modifiedPosts });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });
