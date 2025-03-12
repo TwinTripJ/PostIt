@@ -119,9 +119,7 @@ async function setLikeStatus() {
         icon.querySelector("img").src = "../static/images/favoriteIcon.png";
       }
     });
-  } catch (err) {
-    console.error("좋아요 상태 불러오기 실패:", err);
-  }
+  } catch (err) {}
 }
 
 // 좋아요 상태
