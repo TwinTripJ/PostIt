@@ -81,7 +81,7 @@ const getAllPosts = async (page = 1, limit = 10) => {
   }
 };
 
-// 게시글 하나씩 보기
+// 게시글 하나씩 보기 및 글쓴이 정보 가지고 오기
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
@@ -128,15 +128,23 @@ const getPostById = async (req, res) => {
       return res.status(404).json({ message: "게시글을 찾을 수 없습니다" });
     }
 
+    const author = await User.findOne({
+      where: { id: post.user_id },
+      attributes: ["id", "username", "image_url"],
+    });
+
+    console.log("Sdfsdfsdfsdfsdfsdfsd", author);
+
     res.render("postDetail", {
       modifiedPost: post,
       categoryName,
       currentUserId,
       postId: post.user_id,
+      author,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).render("error", {
+    res.status(500).error("error", {
       message: "서버 오류가 발생했습니다.",
       error: err.message,
     });
