@@ -285,9 +285,7 @@ const deleteUser = async () => {
   if (result.isConfirmed) {
     try {
       const response = await axios.delete("/user/deleteUser", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       });
 
       Swal.fire({
@@ -296,7 +294,8 @@ const deleteUser = async () => {
         icon: "success",
         confirmButtonText: "확인",
       }).then(() => {
-        localStorage.removeItem("token");
+        document.cookie =
+          "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.href = "/";
       });
     } catch (error) {

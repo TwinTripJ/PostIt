@@ -210,13 +210,17 @@ const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const post = await Post.findOne({ where: { id: id } });
+    const postId = Number(id);
+
+    console.log("postID", postId);
+
+    const post = await Post.findOne({ where: { id: postId } });
 
     if (!post) {
       return res.status(404).json({ message: "게시글 조회 실패" });
     }
 
-    await Post.destroy({ where: { id: id } });
+    await Post.destroy({ where: { id: postId } });
     res.status(200).json({ message: "게시글이 삭제되었습니다" });
   } catch (err) {
     console.error(err);
