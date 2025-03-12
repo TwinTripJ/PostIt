@@ -43,16 +43,19 @@ function moveWrite(url) {
 // };
 
 const getUserId = async () => {
-  try {
-    const response = await axios.get(`/user/getUserId`, {
-      withCredentials: true,
-    });
+  if (token) {
+    console.log("로그인");
+    try {
+      const response = await axios.get(`/user/getUserId`, {
+        withCredentials: true,
+      });
 
-    const userId = response.data.id;
+      const userId = response.data.id;
 
-    return userId;
-  } catch (error) {
-    console.error("유저 ID를 가져오는 데 실패했습니다.", error);
+      return userId;
+    } catch (error) {
+      console.error("유저 ID를 가져오는 데 실패했습니다.", error);
+    }
   }
 };
 
@@ -194,9 +197,7 @@ const moveToPost = (postId) => {
   if (token) {
     axios
       .get(`/post/${postId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       })
       .then((response) => {
         window.location.href = `/post/${postId}`;

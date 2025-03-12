@@ -9,7 +9,6 @@ const viewPost = (postId) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log(response);
       window.location.href = `/post/${postId}`;
     })
     .catch((error) => {
@@ -27,7 +26,6 @@ async function getUserId() {
     const response = await axios.get("/user/getUserId", {
       withCredentials: true,
     });
-    console.log("유저 아이디", response.data.id);
     const userId = response.data.id;
 
     return userId;
@@ -35,3 +33,20 @@ async function getUserId() {
     console.error("유저 ID를 가져오는 데 실패했습니다.", error);
   }
 }
+
+const moveToPost = (postId) => {
+  if (token) {
+    axios
+      .get(`/post/${postId}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        window.location.href = `/post/${postId}`;
+      })
+      .catch((error) => {
+        console.error("Error fetching post details:", error);
+      });
+  } else {
+    window.location.href = "/postit/login";
+  }
+};

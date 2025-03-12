@@ -3,6 +3,7 @@ function getCookie(name) {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
+
 const token = getCookie("token");
 
 window.addEventListener("scroll", function () {
@@ -45,7 +46,7 @@ function moveUrl(url) {
 const goToMyPost = async (url) => {
   try {
     const idResponse = await axios.get("/user/getUserId", {
-      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
     });
 
     const userId = idResponse.data.id;
@@ -75,11 +76,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     loginBefore.style.display = "none";
     loginAfter.style.display = "block";
     try {
-      const response = await axios(`/user/getUser`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await axios.get("/user/getUser", {
+        withCredentials: true,
       });
 
       // 기존 버튼들 삭제

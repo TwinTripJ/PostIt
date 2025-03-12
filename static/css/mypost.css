@@ -1,0 +1,130 @@
+body {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.postsContainer {
+  position: relative;
+}
+
+.carosel {
+  display: flex;
+  width: 100%;
+  position: relative;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: -200px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: moveUpLogo 1s forwards;
+  z-index: 2;
+}
+
+@keyframes moveUpLogo {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo img {
+  max-width: 400px;
+  margin-left: -20px;
+}
+
+.caroselContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.caroselImg {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.489) 70%,
+    rgba(0, 0, 0, 0)
+  );
+  pointer-events: none;
+}
+
+.favoriteIcon {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+/* 좋아요 버튼 */
+.favoriteIcon img {
+  width: 20px;
+}
+
+/* 모든 게시글 */
+.allPostsBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  padding: 10px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-post-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.54);
+  max-width: 1215px;
+  width: 1215px;
+  height: 200px;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.all-post-card img {
+  max-width: 200px;
+}
+
+.textBox,
+.favoriteIcon,
+.post-image {
+  cursor: pointer;
+}

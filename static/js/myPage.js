@@ -59,15 +59,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   const pass = document.getElementById("pass");
   const passCheck = document.getElementById("passCheck");
 
-  const token = getCookie("token");
-
   if (token) {
     try {
       const response = await axios(`/user/getUser`, {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       });
 
       const user = response.data;
@@ -93,13 +89,9 @@ window.onload = async function () {
   const address_main = document.getElementById("address");
   const address_detail = document.getElementById("detailAddress");
 
-  const token = getCookie("token");
-
   try {
     const response = await axios.get("/user/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      withCredentials: true,
     });
     const imageUrl = response.data.imageUrl;
     const mainAddr = response.data.address_main;
@@ -228,8 +220,6 @@ async function changeInfo() {
   const imageInput = document.getElementById("imageInput");
   const preview = document.getElementById("preview");
 
-  const token = getCookie("token");
-
   const formData = new FormData();
 
   if (imageDeleted) {
@@ -257,8 +247,8 @@ async function changeInfo() {
     const response = await axios.put(`/user/info`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     });
 
     if (response.status === 200) {

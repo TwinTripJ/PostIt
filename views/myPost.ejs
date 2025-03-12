@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <link rel="stylesheet" href="/static/css/mypost.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>내가 쓴 게시글</title>
@@ -9,33 +10,62 @@
   <body>
     <%- include("nav") %>
 
-    <div class="container">
-      <h1>내가 작성한 게시글</h1>
-
-      <% if (!posts || posts.length === 0) { %>
-      <p>작성한 게시글이 없습니다.</p>
-      <% } else { %>
-      <div class="post-list">
-        <% posts.forEach(function(post) { %>
-        <div class="post">
-          <h3>
-            <a href="#" onclick="viewPost('<%= post.id %>')"
-              ><%= post.title %></a
-            >
-          </h3>
-          <p>
-            <%= post.content.length > 100 ? post.content.substring(0, 100) +
-            "..." : post.content %>
-          </p>
-          <small
-            >🕒 작성 날짜: <%= new Date(post.createdAt).toLocaleDateString()
-            %></small
-          >
-          <p>❤️ 좋아요: <%= post.like_count || 0 %></p>
+    <div class="postsContainer">
+      <div class="carosel">
+        <div class="caroselContainer">
+          <img
+            class="caroselImg"
+            src="/static/images/mainCarosel.jpg"
+            alt="carosel image"
+          />
+          <div class="overlay"></div>
         </div>
-        <% }); %>
+        <div class="logo">
+          <img src="/static/images/loginLogo.png" alt="login logo" />
+        </div>
       </div>
-      <% } %>
+
+      <div class="allPostsBox">
+        <% if (!Array.isArray(posts) || posts.length === 0) { %>
+        <img src="/static/images/postEmpty(white).png" alt="post empty image" />
+        <% } else { %> <% posts.forEach(function(post) { %>
+        <div class="allPostContainer">
+          <div class="all-post-card">
+            <div class="allContentBox">
+              <div class="textBox" onclick="moveToPost('<%= post.id %>')">
+                <h5><%= (post.title || '제목 없음').substring(0, 20) %></h5>
+                <p>
+                  🕒 작성일: <%= new Date(post.createdAt).toLocaleDateString()
+                  %>
+                </p>
+                <p><%= (post.content || '내용 없음').substring(0, 50) %>...</p>
+              </div>
+
+              <div class="favoriteContainer">
+                <div
+                  class="favoriteIcon"
+                  onclick="heart(event)"
+                  data-fav="<%= post.favorite === true ? '1' : '0' %>"
+                  data-id="<%= post.id %>"
+                >
+                  <img
+                    src="<%= post.favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
+                  />
+                </div>
+                <%= post.like_count || 0 %>
+              </div>
+            </div>
+            <img
+              src="<%= post.image_url || '/static/images/defaultImage.png' %>"
+              alt="Post Image"
+              class="post-image"
+              onclick="moveToPost('<%= post.id %>')"
+              data-id="<%= post.id %>"
+            />
+          </div>
+        </div>
+        <% }) %> <% } %>
+      </div>
     </div>
 
     <%- include("footer") %>
