@@ -212,8 +212,6 @@ const deletePost = async (req, res) => {
 
     const postId = Number(id);
 
-    console.log("postID", postId);
-
     const post = await Post.findOne({ where: { id: postId } });
 
     if (!post) {
