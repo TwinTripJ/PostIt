@@ -50,22 +50,7 @@ const goToMyPost = async (url) => {
 
 // 즐겨찾기 페이지로 이동
 const goToMyFavorite = async () => {
-  try {
-    const idResponse = await axios.get("/user/getUserId", {
-      withCredentials: true,
-    });
-
-    if (!idResponse.data.id) {
-      alert("로그인이 필요합니다.");
-      return;
-    }
-
-    // 즐겨찾기 페이지로 이동
-    window.location.href = "/like/likedPosts";
-  } catch (error) {
-    console.error("사용자 ID 가져오기 실패:", error);
-    alert("로그인이 필요합니다.");
-  }
+  window.location.href = "/like/likedPosts";
 };
 
 function logout() {

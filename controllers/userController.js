@@ -290,6 +290,7 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     let userId = req.user.id;
+    console.log(userId);
     let updateData = req.body;
 
     if (updateData.password) {

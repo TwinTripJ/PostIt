@@ -44,35 +44,71 @@ router.get(
 );
 
 // 네이버 로그인
-router.get("/naver", userController.naverLogin);
+router.get(
+  "/naver",
+  authMiddleware.authenticateToken,
+  userController.naverLogin
+);
 
-router.get("/callback", userController.callBack);
+router.get(
+  "/callback",
+  authMiddleware.authenticateToken,
+  userController.callBack
+);
 
 // 카카오톡 로그인
-router.get("/kakao-key", userController.kakaoKey);
+router.get(
+  "/kakao-key",
+  authMiddleware.authenticateToken,
+  userController.kakaoKey
+);
 
-router.get("/kakao", userController.kakaoRedirect);
+router.get(
+  "/kakao",
+  authMiddleware.authenticateToken,
+  userController.kakaoRedirect
+);
 
-router.get("/kakao/callback", userController.kakaoCallback);
+router.get(
+  "/kakao/callback",
+  authMiddleware.authenticateToken,
+  userController.kakaoCallback
+);
 
 router.get("/login", (req, res) => {
   res.render("login");
 });
 
 // 아이디 중복 확인
-router.post("/check", userController.checkEmail);
+router.post(
+  "/check",
+  authMiddleware.authenticateToken,
+  userController.checkEmail
+);
 
 // 전화번호 중복 확인
-router.post("/phoneCheck", userController.checkPhone);
+router.post(
+  "/phoneCheck",
+  authMiddleware.authenticateToken,
+  userController.checkPhone
+);
 
 // 유저 추가
-router.post("/addUser", userController.registerUser);
+router.post(
+  "/addUser",
+  authMiddleware.authenticateToken,
+  userController.registerUser
+);
 
-router.post("/loginUser", userController.loginUser);
+router.post(
+  "/loginUser",
+  authMiddleware.authenticateToken,
+  userController.loginUser
+);
 
-router.post("/findId", userController.findId);
+router.post("/findId", authMiddleware.authenticateToken, userController.findId);
 
-router.post("/findPw", userController.findPw);
+router.post("/findPw", authMiddleware.authenticateToken, userController.findPw);
 
 router.post(
   "/uploadImage",
@@ -81,9 +117,17 @@ router.post(
 );
 
 // 특정 유저 확인 (id)
-router.get("/:id", userController.getUserById);
+router.get(
+  "/:id",
+  authMiddleware.authenticateToken,
+  userController.getUserById
+);
 
-router.put("/changePass", userController.changePass);
+router.put(
+  "/changePass",
+  authMiddleware.authenticateToken,
+  userController.changePass
+);
 
 // 유저 정보 수정
 router.put(
