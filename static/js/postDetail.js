@@ -16,9 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentUserId = postActions.dataset.currentUserId;
   const postId = postActions.dataset.postId;
 
+  console.log(currentUserId);
+  console.log(postId);
+
   if (currentUserId === postId) {
     postActions.style.display = "block";
   } else {
     postActions.style.display = "none";
   }
 });
+
+function movePage(url) {
+  if (token) {
+    axios
+      .get(`/postit/${url}`)
+      .then((res) => {
+        window.location.href = `/postit/${url}`;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    window.location.href = "/postit/login";
+  }
+}

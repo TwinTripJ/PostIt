@@ -330,6 +330,11 @@ body {
   align-items: center;
 }
 
+.allPostContainer {
+  width: 100%;
+  display: flex;
+}
+
 .all-post-card {
   display: flex;
   justify-content: space-between;

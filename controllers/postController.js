@@ -192,7 +192,7 @@ const getPostById = async (req, res) => {
       modifiedPost: post,
       categoryName,
       currentUserId,
-      postId: post.id,
+      postId: post.user_id,
     });
   } catch (err) {
     console.error(err);
