@@ -210,6 +210,7 @@ async function changeInfo() {
   const address_detail = document.getElementById("detailAddress").value;
   const imageInput = document.getElementById("imageInput");
   const preview = document.getElementById("preview");
+  const introduce = document.querySelector(".textarea").value;
 
   const formData = new FormData();
 

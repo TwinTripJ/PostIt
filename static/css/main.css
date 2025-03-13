@@ -339,7 +339,7 @@ input:focus {
 
 .contentBox:hover {
   height: 140px;
-  background-color: rgba(67, 63, 96, 0.775);
+  background-color: rgb(67, 63, 96);
 }
 
 .post-card {
