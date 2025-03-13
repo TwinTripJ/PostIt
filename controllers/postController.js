@@ -226,6 +226,7 @@ const getAuthorInfo = async (req, res) => {
       attributes: ["username"],
     });
 
+
     if (!id) {
       return res.status(404).json({ message: "작가 정보를 찾을 수 없습니다." });
     }
