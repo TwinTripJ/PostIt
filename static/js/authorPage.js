@@ -111,6 +111,7 @@ async function heart(event) {
     console.error("좋아요 처리 중 오류 발생:", error);
   }
 }
+
 // 메인 페이지 모든 글의 좋아요 상태
 async function getUserLikes() {
   try {

@@ -57,3 +57,7 @@ async function deletePost(id) {
     });
   }
 }
+
+const moveAuthor = (id) => {
+  window.location.href = `/post/authorInfo/${id}`;
+};

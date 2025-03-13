@@ -102,6 +102,8 @@
                               src="<%= author.image_url ? author.image_url : '/static/images/profile.png' %>"
                               alt="profile image"
                             />
+                            <p><%= author.username %></p>
+                            <hr />
                             <p><%= author.introduction %></p>
                           </div>
                         </div>
@@ -149,10 +151,8 @@
                     </div>
                   </div>
 
-                  <!-- 포스터 유저 이미지 넣기 -->
                   <div class="flexColumn">
                     <p class="nameText"><%= author.username %></p>
-                    <!-- 포스터 유저 이름 넣기 -->
                     <p>
                       🕒 작성일: <%= new
                       Date(modifiedPost.createdAt).toLocaleDateString() %>
