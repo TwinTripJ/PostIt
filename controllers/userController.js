@@ -377,6 +377,7 @@ const getUserProfile = async (req, res) => {
       imageUrl: user.image_url || "/static/images/profile.png",
       address_main: user.address_main,
       address_detail: user.address_detail,
+      introduction: user.introduction,
     });
   } catch (err) {
     console.error(err);

@@ -70,6 +70,7 @@ const getAllPosts = async () => {
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
+
     const token = req.cookies.token;
     let currentUserId = null;
     if (token) {

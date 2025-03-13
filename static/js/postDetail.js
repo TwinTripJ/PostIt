@@ -1,3 +1,5 @@
+// const { default: axios } = require("axios");
+
 document.addEventListener("DOMContentLoaded", function () {
   const postActions = document.querySelector(".post-actions");
   const currentUserId = postActions.dataset.currentUserId;
@@ -12,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function moveToModify(postId) {
   window.location.href = `/modify/${postId}`;
+}
+
+function moveUrl(url) {
+  window.location.href = `/postit/${url}`;
 }
 
 async function deletePost(id) {
@@ -51,5 +57,3 @@ async function deletePost(id) {
     });
   }
 }
-
-function moveAuthor(id) {}
