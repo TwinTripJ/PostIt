@@ -219,24 +219,26 @@ const deletePost = async (req, res) => {
 // author 프로필 및 쓴 글 보기
 const getAuthorInfo = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { id } = req.params;
 
-    const author = await Post.findOne;
+    const author = await User.findOne({
+      where: { id: id },
+      attributes: ["username"],
+    });
 
-    if (!author) {
+
+    if (!id) {
       return res.status(404).json({ message: "작가 정보를 찾을 수 없습니다." });
     }
 
-    // 작가의 모든 게시글 데이터 가져오기
     const posts = await Post.findAll({
-      where: { user_id: userId },
+      where: { user_id: id },
       attributes: [
         "id",
         "title",
         "content",
         "image_url",
         "createdAt",
-        "introduction",
         [db.sequelize.fn("COUNT", db.sequelize.col("likes.id")), "like_count"],
       ],
       include: [
@@ -253,13 +255,18 @@ const getAuthorInfo = async (req, res) => {
       return res.status(404).json({ message: "게시글을 찾을 수 없습니다" });
     }
 
-    res.render("author", {
-      modifiedPost: posts,
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("authorPage", {
+      modifiedPosts,
       author,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).error("error", {
+    res.error("error", {
       message: "서버 오류가 발생했습니다.",
       error: err.message,
     });

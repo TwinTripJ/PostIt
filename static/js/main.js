@@ -26,6 +26,7 @@ const getUserId = async () => {
     }
   }
 };
+
 // 좋아요 토글
 async function heart(event) {
   const iconImg = event.target;
@@ -128,27 +129,24 @@ const moveToPost = (postId) => {
   }
 };
 
-// 버튼 클릭시 위로 이동
-const rollUp = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
+// 떠오르는 css
+document.addEventListener("DOMContentLoaded", function () {
+  const posts = document.querySelectorAll(".allPostContainer");
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const posts = document.querySelectorAll(".allPostContainer");
-//   const observerOptions = {
-//     root: null,
-//     threshold: 0.4,
-//   };
-//   const observerCallback = (entries, observer) => {
-//     entries.forEach((entry) => {
-//       if (entry.isIntersecting) {
-//         entry.target.classList.add("show");
-//         observer.unobserve(entry.target);
-//       }
-//     });
-//   };
-//   const observer = new IntersectionObserver(observerCallback, observerOptions);
-//   posts.forEach((post) => {
-//     observer.observe(post);
-//   });
-// });
+  const observerOptions = {
+    root: null,
+    threshold: 0.4,
+  };
+  const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  posts.forEach((post) => {
+    observer.observe(post);
+  });
+});

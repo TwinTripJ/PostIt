@@ -1,3 +1,4 @@
+// 상세 페이지로 이동
 const viewPost = (postId) => {
   if (!token) {
     alert("로그인 후 게시글을 볼 수 있습니다.");
@@ -130,6 +131,7 @@ async function getUserLikes() {
     return [];
   }
 }
+
 // 좋아요한 상태 유지
 async function setLikeStatus() {
   try {
