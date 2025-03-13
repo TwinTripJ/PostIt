@@ -27,7 +27,7 @@
   <body>
     <%- include("nav") %>
 
-    <div class="login-box">
+    <div class="backColor">
       <div class="carosel">
         <div class="caroselContainer">
           <img
@@ -37,39 +37,61 @@
           />
           <div class="overlay"></div>
         </div>
+        <div class="logo">
+          <img
+            class="caroselImg"
+            src="/static/images/Bookmark.png"
+            alt="bookmark image"
+          />
+        </div>
       </div>
-    </div>
-    <div class="backColor">
-      <div class="mainContainer">
-        <h2>즐겨찾기한 게시글</h2>
 
+      <div class="mainContainer">
         <% if (likedPostIds.length > 0) { %>
-        <div class="postsBox">
+        <div class="allPostsBox">
           <% modifiedPosts.forEach(post => { %>
-          <div class="postContainer">
-            <div class="post-card">
+          <div class="allPostContainer">
+            <div class="all-post-card">
+              <div class="allContentBox">
+                <div class="textBox" onclick="moveToPost('<%= post.id %>')">
+                  <h2><%= post.title.substring(0, 20) %></h2>
+                  <p>
+                    작성일: <%= new Date(post.createdAt).toLocaleDateString() %>
+                  </p>
+                  <%= post.content ? post.content.substring(0, 50) : '내용 없음'
+                  | escape %>...
+                </div>
+                <div class="favoriteContainer">
+                  <div class="post-info">
+                    <div
+                      class="favoriteIcon"
+                      onclick="heart(event)"
+                      data-fav="<%= post.favorite !== undefined ? (post.favorite ? '1' : '0') : '0' %>"
+                      data-id="<%= post.id %>"
+                    >
+                      <img
+                        src="<%= post.favorite ? '/static/images/favoriteFillIcon.png' : '/static/images/favoriteIcon.png' %>"
+                      />
+                    </div>
+                    <span class="like-count"><%= post.like_count || 0 %> </span>
+                  </div>
+                </div>
+              </div>
               <img
-                src="<%= post.image_url ? post.image_url : '/static/images/default-image.png' %>"
+                src="<%= post && post.image_url ? post.image_url : '/static/images/default-image.png' %>"
                 alt="Post Image"
-                class="post-image"
+                class="postImage"
                 onclick="moveToPost('<%= post.id %>')"
                 data-id="<%= post.id %>"
               />
-              <div class="post-info">
-                <h4><%= post.title %></h4>
-                <p>
-                  <%= post.content ? post.content.substring(0, 50) : '내용 없음'
-                  %>...
-                </p>
-                <span><%= post.like_count || 0 %></span>
-              </div>
             </div>
           </div>
-          <% }); %>
+          <% }); %><% } else { %>
+          <div class="emptyImg">
+            <img src="/static/images/postEmpty(white).png" alt="empty image" />
+          </div>
+          <% } %>
         </div>
-        <% } else { %>
-        <p>즐겨찾기한 게시글이 없습니다.</p>
-        <% } %>
       </div>
     </div>
 

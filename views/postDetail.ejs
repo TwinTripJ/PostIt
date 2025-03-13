@@ -68,7 +68,12 @@
                   data-current-user-id="<%= currentUserId %>"
                   data-post-id="<%= postId %>"
                 >
-                  <button class="edit-btn">수정</button>
+                  <button
+                    class="edit-btn"
+                    onclick="moveToModify('<%= modifiedPost.id %>')"
+                  >
+                    수정
+                  </button>
                   <button
                     class="delete-btn"
                     onclick="deletePost('<%= modifiedPost.id %>')"

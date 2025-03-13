@@ -53,7 +53,7 @@ body {
 }
 
 .logo img {
-  max-width: 100%;
+  max-width: 98%;
 }
 
 form {
@@ -250,7 +250,7 @@ input:focus {
   color: white;
   text-align: center;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   z-index: 2;
 }
@@ -285,7 +285,8 @@ input:focus {
 
 .postsBox {
   display: flex;
-  width: 95%;
+  width: 100%;
+  max-width: 95%;
   gap: 15px;
   height: auto;
   flex-wrap: nowrap;
@@ -349,18 +350,37 @@ input:focus {
   align-items: flex-end;
 }
 
+.postImg {
+  position: relative;
+  display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .post-card .post-image {
   width: 100%;
-  height: 200px;
   margin-bottom: 5px;
 }
 
-.post-info {
+.post-image {
+  height: 200px;
+  border-radius: 10px;
+}
+
+.postImage {
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+}
+
+.post-info,
+.postInfo {
   display: flex;
   gap: 10px;
   padding: 7px 15px 0 0;
 }
 
+/* 좋아요 버튼 */
 .favoriteIcon {
   margin-left: auto;
   display: flex;
@@ -369,7 +389,6 @@ input:focus {
   margin-top: 3px;
 }
 
-/* 좋아요 버튼 */
 .favoriteIcon img {
   width: 20px;
 }
@@ -381,7 +400,7 @@ input:focus {
   width: 100%;
   max-width: 1280px;
   padding: 10px 30px;
-  margin-top: 30px;
+  margin: 30px;
   justify-content: center;
   align-items: center;
 }
@@ -389,15 +408,25 @@ input:focus {
 .allPostContainer {
   width: 100%;
   display: flex;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.allPostContainer.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .allContentBox {
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 .all-post-card {
+  position: relative;
   display: flex;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.54);
@@ -406,12 +435,15 @@ input:focus {
   height: 200px;
   border-radius: 10px;
   margin: 20px 0;
-  padding: 20px;
-  transition: background-color 0.3s ease-in;
+  padding: 20px 0 20px 20px;
+  transition: transform 0.3s ease, background-color 0.3s ease-in;
+  align-items: center;
+  overflow: hidden;
 }
 
 .all-post-card:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.01);
 }
 
 .all-post-card img {
@@ -424,6 +456,13 @@ input:focus {
   cursor: pointer;
 }
 
+.textBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 /* 준비 중 이미지 */
 .emptyImg {
   width: 100%;
@@ -432,6 +471,7 @@ input:focus {
   align-items: center;
   overflow: hidden;
 }
+
 .emptyImg img {
   max-width: 100%;
 }
@@ -439,6 +479,9 @@ input:focus {
 @media screen and (max-width: 1275px) {
   .postsBox {
     justify-content: center;
+  }
+  .postContainer {
+    max-width: 200px;
   }
 }
 
@@ -449,54 +492,169 @@ input:focus {
   }
 
   .postContainer {
-    width: 45%;
-    max-width: 200px;
+    max-width: 180px;
+    max-height: 280px;
+  }
+
+  .post-card .post-image {
+    height: 180px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .categorys {
-    top: -100px;
+    display: none;
+  }
+
+  .searchBox {
+    margin-top: 20px;
+  }
+
+  .write {
+    margin-top: 20px;
+  }
+
+  .mainContainer {
+    margin-top: 30px;
+  }
+
+  .postContainer {
+    max-width: 160px;
+    max-height: 260px;
+  }
+
+  .post-card .post-image {
+    height: 160px;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .allContentBox .favoriteIcon img {
+    width: 30px;
+  }
+
   .postsBox {
     display: flex;
-    overflow-x: auto;
+    flex-direction: column;
     scroll-snap-type: x mandatory;
     gap: 10px;
+    max-width: 100%;
+    width: 100%;
     padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .all-post-card {
+    padding: 0;
+  }
+
+  .mainContainer {
+    margin-top: 10px;
   }
 
   .postContainer {
-    flex: 0 0 auto;
-    scroll-snap-align: center;
-    width: 180px;
+    max-width: 90%;
+    width: 100%;
+    margin-bottom: 20px;
   }
 
   .post-card {
-    width: 100%;
+    max-width: 100%;
+  }
+
+  .post-card .post-image {
+    max-height: 100%;
+  }
+
+  .allContentBox {
+    padding: 20px 30px 0 30px;
+  }
+
+  .allContentBox .content {
+    display: none;
+  }
+
+  .allPostsBox {
+    padding: 20px;
+  }
+
+  .post-info {
+    position: relative;
+  }
+
+  .postInfo {
+    position: relative;
+    top: 120px;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .categorys {
-    display: none;
-  }
   .mainContainer {
     margin-top: 40px;
+  }
+
+  .all-post-card {
+    flex-direction: column;
+    position: relative;
+    height: 300px;
+  }
+
+  .all-post-card img {
+    max-width: 100%;
+    max-height: 180px;
+  }
+
+  .allContentBox {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .allPostsBox {
+    padding: 30px;
+  }
+
+  .postInfo {
+    top: 0px;
+  }
+
+  .allPostContainer {
+    width: 100%;
+  }
+
+  .postImg {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .postImage {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0 0 10px 10px;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .allContentBox .favoriteIcon img {
+    width: 35px;
+  }
+
   .postsBox {
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .postContainer {
-    width: 90%;
-    max-width: 200px;
   }
 }

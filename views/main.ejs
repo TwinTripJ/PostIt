@@ -172,12 +172,12 @@
             <div class="all-post-card">
               <div class="allContentBox">
                 <div class="textBox" onclick="moveToPost('<%= posts[i].id %>')">
-                  <h5><%= posts[i].title.substring(0, 20) %></h5>
+                  <h5><%= posts[i].title.substring(0, 10) %></h5>
                   <p>
                     작성일: <%= new
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
-                  <p>
+                  <p class="content">
                     <%= posts[i].content ? posts[i].content.substring(0, 50) :
                     "내용 없음" %>...
                   </p>
@@ -200,13 +200,15 @@
                   </div>
                 </div>
               </div>
-              <img
-                src="<%= posts[i] && posts[i].image_url ? posts[i].image_url : '/static/images/default-image.png' %>"
-                alt="Post Image"
-                class="post-image"
-                onclick="moveToPost('<%= posts[i].id %>')"
-                data-id="<%= posts[i].id %>"
-              />
+              <div class="postImg">
+                <img
+                  src="<%= posts[i] && posts[i].image_url ? posts[i].image_url : '/static/images/default-image.png' %>"
+                  alt="Post Image"
+                  class="postImage"
+                  onclick="moveToPost('<%= posts[i].id %>')"
+                  data-id="<%= posts[i].id %>"
+                />
+              </div>
             </div>
           </div>
           <% } %> <% } %>

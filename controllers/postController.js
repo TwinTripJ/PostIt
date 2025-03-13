@@ -5,7 +5,7 @@ const User = db.User;
 const Post = db.Post;
 const Like = db.Like;
 const Category = db.Category;
-
+// 글 작성
 const createPost = async (req, res) => {
   try {
     const { user_id, category_id, title, content, image_url, like_count } =
@@ -110,7 +110,6 @@ const getPostById = async (req, res) => {
       where: { id: post.user_id },
       attributes: ["id", "username", "image_url"],
     });
-    console.log("Sdfsdfsdfsdfsdfsdfsd", author);
     res.render("postDetail", {
       modifiedPost: post,
       categoryName,
@@ -158,7 +157,13 @@ const getMyPost = async (req, res) => {
         .status(404)
         .json({ message: "사용자 정보를 찾을 수 없습니다." });
     }
-    res.render("myPost", { user, posts });
+
+    const modifiedPosts = posts.map((post) => ({
+      ...post.toJSON(),
+      content: post.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("myPost", { user, modifiedPosts });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });
