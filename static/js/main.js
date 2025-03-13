@@ -149,4 +149,21 @@ document.addEventListener("DOMContentLoaded", function () {
   posts.forEach((post) => {
     observer.observe(post);
   });
+
+  const contentBoxes = document.querySelectorAll(".contentBox");
+
+  contentBoxes.forEach((contentBox) => {
+    const postContainer = contentBox.closest(".postContainer");
+    const postImage = postContainer.querySelector(".post-image");
+
+    contentBox.addEventListener("mouseenter", () => {
+      postImage.style.transition = "filter 0.5s ease-in-out";
+      postImage.style.filter = "brightness(50%)";
+    });
+
+    contentBox.addEventListener("mouseleave", () => {
+      postImage.style.transition = "filter 0.5s ease-in-out";
+      postImage.style.filter = "brightness(100%)";
+    });
+  });
 });
