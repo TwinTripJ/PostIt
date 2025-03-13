@@ -70,6 +70,7 @@ const getAllPosts = async () => {
 const getPostById = async (req, res) => {
   try {
     const { categoryName, postId } = req.params;
+
     const token = req.cookies.token;
     let currentUserId = null;
     if (token) {
@@ -114,7 +115,6 @@ const getPostById = async (req, res) => {
       where: { id: post.user_id },
 
       attributes: ["id", "username", "image_url", "introduction"],
-
     });
 
     res.render("postDetail", {

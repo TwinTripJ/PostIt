@@ -82,7 +82,6 @@
                     id="exampleModal"
                     tabindex="-1"
                     aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
                   >
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -107,6 +106,29 @@
                           </div>
                         </div>
                         <div class="modal-footer">
+                          <% if(author.id === currentUserId){ %>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="goToMyPost('myPost')"
+                          >
+                            내 글 보러가기
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="moveUrl('myPage')"
+                          >
+                            내 정보 변경하기
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <% } else { %>
                           <button
                             type="button"
                             class="btn btn-primary"
@@ -121,6 +143,7 @@
                           >
                             Close
                           </button>
+                          <% } %>
                         </div>
                       </div>
                     </div>
