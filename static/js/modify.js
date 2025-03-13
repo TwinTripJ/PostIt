@@ -4,7 +4,7 @@ const editor = new toastui.Editor({
   height: "300px",
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
-  initialValue: postContent, // 이 값을 에디터의 초기 값으로 사용
+  initialValue: postContent,
 
   hooks: {
     addImageBlobHook(blob, callback) {
@@ -126,23 +126,38 @@ async function previewImage(event) {
 
 // 글 저장
 const addWrite = async (id) => {
+  const title = document.querySelector("input[name='title']").value.trim();
+  const category = document.querySelector("select[name='category']").value;
+  const content = editor.getHTML();
+  const image = document.getElementById("preview").dataset.imageUrl || null;
+
   try {
     const userId = await getUserId(token);
 
-    const response = await axios.put(`/post/delete/${id}`, {
-      withCredentials: true,
-    });
+    const response = await axios.put(
+      `/post/edit/${id}`,
+      {
+        user_id: userId,
+        title,
+        category_id: category,
+        content,
+        image_url: image,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "글이 정상적으로 삭제되었습니다!",
+        title: "글이 정상적으로 수정되었습니다!",
       }).then(() => {
         window.location.href = "/";
       });
     }
   } catch (error) {
-    alert("글 삭제 실패");
+    alert("글 수정 실패");
     console.error("Error:", error);
   }
 };
