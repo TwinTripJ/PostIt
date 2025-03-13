@@ -342,13 +342,13 @@ const updateUser = async (req, res) => {
 // 사용자 탈퇴
 const deleteUser = async (req, res) => {
   try {
-    const { id } = req.user;
+    const { userId } = req.user;
 
-    if (!id) {
+    if (!userId) {
       return res.status(400).json({ message: "사용자 ID가 필요합니다" });
     }
 
-    const deleted = await User.destroy({ where: { id: id } });
+    const deleted = await User.destroy({ where: { id: userId } });
 
     if (!deleted) {
       return res.status(404).json({ message: "탈퇴할 사용자 없음" });
