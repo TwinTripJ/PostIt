@@ -60,16 +60,7 @@ const checkPhone = async (req, res) => {
 // 회원가입
 const registerUser = async (req, res) => {
   try {
-    const {
-      email,
-      username,
-      password,
-      address_main,
-      address_detail,
-      gender,
-      birthDate,
-      phone,
-    } = req.body;
+    const { email, username, password, gender, birthDate, phone } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const formatBirth = new Date(birthDate).toISOString().split("T")[0];
@@ -78,8 +69,6 @@ const registerUser = async (req, res) => {
       email,
       username,
       password: hashedPassword,
-      address_main,
-      address_detail,
       gender,
       birthDate: formatBirth,
       phone,

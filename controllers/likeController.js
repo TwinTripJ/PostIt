@@ -25,7 +25,7 @@ const toggleLike = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "좋아요 처리 실패", error: err.message });
+    res.json({ message: "좋아요 처리 실패", error: err.message });
   }
 };
 
@@ -38,9 +38,7 @@ const getLikeCount = async (req, res) => {
     res.status(200).json({ post_id, like_count: likeCount });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ message: "좋아요 개수 조회 실패", error: err.message });
+    res.json({ message: "좋아요 개수 조회 실패", error: err.message });
   }
 };
 // 사용자가 좋아요한 게시글
@@ -58,9 +56,7 @@ const getUserLikedPosts = async (req, res) => {
       likedPostIds,
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "좋아요 개수 조회 실패", error: err.message });
+    res.json({ message: "좋아요 개수 조회 실패", error: err.message });
   }
 };
 
@@ -91,9 +87,7 @@ const userPosts = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ message: "좋아요 개수 조회 실패", error: err.message });
+    res.json({ message: "좋아요 개수 조회 실패", error: err.message });
   }
 };
 
