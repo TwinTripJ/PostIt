@@ -77,6 +77,7 @@ const getPostById = async (req, res) => {
         console.error("토큰 검증 실패:", err);
       }
     }
+
     // 게시글 데이터 가져오기
     const post = await Post.findOne({
       where: { id: postId },
@@ -125,6 +126,7 @@ const getPostById = async (req, res) => {
     });
   }
 };
+
 // 내 글 보기
 const getMyPost = async (req, res) => {
   try {
@@ -169,6 +171,7 @@ const getMyPost = async (req, res) => {
     res.status(500).json({ message: "게시글 조회 실패", error: err.message });
   }
 };
+
 // 게시글 수정
 const updatePost = async (req, res) => {
   try {
@@ -189,6 +192,7 @@ const updatePost = async (req, res) => {
     res.status(500).json({ message: "게시글 수정 실패", error: err.message });
   }
 };
+
 // 게시글 삭제
 const deletePost = async (req, res) => {
   try {
@@ -205,6 +209,49 @@ const deletePost = async (req, res) => {
     res.status(500).json({ message: "게시글 삭제 실패", error: err.message });
   }
 };
+
+// author 쓴 글 보기
+const getAuthorInfo = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // 작가의 모든 게시글 데이터 가져오기
+    const posts = await Post.findAll({
+      where: { user_id: userId },
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "image_url",
+        "createdAt",
+        [db.sequelize.fn("COUNT", db.sequelize.col("likes.id")), "like_count"],
+      ],
+      include: [
+        {
+          model: Like,
+          attributes: [],
+        },
+      ],
+      group: ["Post.id"],
+      order: [["createdAt", "DESC"]],
+    });
+
+    if (!posts) {
+      return res.status(404).json({ message: "게시글을 찾을 수 없습니다" });
+    }
+
+    res.render("author", {
+      posts,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).error("error", {
+      message: "서버 오류가 발생했습니다.",
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   createPost,
   getAllPosts,
@@ -212,4 +259,5 @@ module.exports = {
   updatePost,
   deletePost,
   getMyPost,
+  getAuthorInfo,
 };
