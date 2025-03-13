@@ -236,7 +236,7 @@ async function changeInfo() {
   }
 
   if (introduce.trim()) {
-    formData.append("introdution", introduce);
+    formData.append("introduction", introduce);
   }
 
   try {
