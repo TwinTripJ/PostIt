@@ -279,8 +279,6 @@ const updateUser = async (req, res) => {
   try {
     let userId = req.user.userId;
 
-    console.log(req.body);
-
     let updateData = req.body;
 
     if (updateData.password) {
