@@ -127,22 +127,28 @@ const moveToPost = (postId) => {
     window.location.href = "/postit/login";
   }
 };
-document.addEventListener("DOMContentLoaded", function () {
-  const posts = document.querySelectorAll(".allPostContainer");
-  const observerOptions = {
-    root: null,
-    threshold: 0.4,
-  };
-  const observerCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target);
-      }
-    });
-  };
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-  posts.forEach((post) => {
-    observer.observe(post);
-  });
-});
+
+// 버튼 클릭시 위로 이동
+const rollUp = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const posts = document.querySelectorAll(".allPostContainer");
+//   const observerOptions = {
+//     root: null,
+//     threshold: 0.4,
+//   };
+//   const observerCallback = (entries, observer) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         entry.target.classList.add("show");
+//         observer.unobserve(entry.target);
+//       }
+//     });
+//   };
+//   const observer = new IntersectionObserver(observerCallback, observerOptions);
+//   posts.forEach((post) => {
+//     observer.observe(post);
+//   });
+// });
