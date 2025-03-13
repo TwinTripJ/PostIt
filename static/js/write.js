@@ -8,7 +8,7 @@ const editor = new toastui.Editor({
 });
 
 editor.addHook("addImageBlobHook", async (blob, callback) => {
-  const maxSize = 5 * 1024 * 1024; // 5MB 제한
+  const maxSize = 5 * 1024 * 1024;
 
   if (blob.size > maxSize) {
     Swal.fire({

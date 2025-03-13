@@ -18,6 +18,6 @@ router.put("/edit/:id", postController.updatePost);
 router.delete("/delete/:id", postController.deletePost);
 
 // 작가 정보 및 모든 글
-router.get("/authorInfo", postController.getAuthorInfo);
+router.get("/authorInfo/:id", postController.getAuthorInfo);
 
 module.exports = router;

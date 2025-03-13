@@ -48,7 +48,13 @@ const searchTitle = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: "게시글을 찾을 수 없습니다" });
     }
-    res.render("searchPage", { name, posts: post });
+
+    const posts = post.map((p) => ({
+      ...p.toJSON(),
+      content: p.content.replace(/<[^>]*>/g, ""),
+    }));
+
+    res.render("searchPage", { name, posts });
   } catch (err) {
     console.error(err);
     res.status(500).render("error", {

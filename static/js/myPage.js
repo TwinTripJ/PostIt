@@ -81,6 +81,7 @@ window.onload = async function () {
   const imageUpload = document.querySelector(".image-upload");
   const address_main = document.getElementById("address");
   const address_detail = document.getElementById("detailAddress");
+  const introduce = document.querySelector("#intro");
 
   try {
     const response = await axios.get("/user/profile", {
@@ -89,9 +90,11 @@ window.onload = async function () {
     const imageUrl = response.data.imageUrl;
     const mainAddr = response.data.address_main;
     const detailAddr = response.data.address_detail;
+    const introInfo = response.data.introduction;
 
     address_main.value = mainAddr;
     address_detail.value = detailAddr;
+    introduce.value = introInfo;
 
     if (imageUrl && imageUrl.trim() !== "") {
       preview.src = `${imageUrl}`;
@@ -228,14 +231,14 @@ async function changeInfo() {
   if (password.trim()) {
     formData.append("password", password);
   }
-  if (address_main.trim()) {
+  if (address_main.trim() || address_main.trim() === "") {
     formData.append("address_main", address_main);
   }
-  if (address_detail.trim()) {
+  if (address_detail.trim() || address_detail.trim() === "") {
     formData.append("address_detail", address_detail);
   }
 
-  if (introduce.trim()) {
+  if (introduce.trim() || introduce.trim() === "") {
     formData.append("introduction", introduce);
   }
 

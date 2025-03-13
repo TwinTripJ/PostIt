@@ -193,6 +193,7 @@ body {
 }
 
 .postImage {
+  height: 100%;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
 }
@@ -247,6 +248,7 @@ body {
 
 .allContentBox {
   width: 100%;
+  margin-left: 30px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -262,7 +264,6 @@ body {
   height: 200px;
   border-radius: 10px;
   margin: 20px 0;
-  padding: 20px 0 20px 20px;
   transition: transform 0.3s ease, background-color 0.3s ease-in;
   align-items: center;
   overflow: hidden;
@@ -297,6 +298,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin: 50px 0;
 }
 
 .emptyImg img {
@@ -396,6 +398,7 @@ body {
 
   .allContentBox {
     padding: 20px 30px 0 30px;
+    margin-left: 0px;
   }
 
   .allContentBox .content {

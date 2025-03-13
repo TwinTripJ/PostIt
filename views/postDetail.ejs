@@ -58,15 +58,29 @@
           <% } %>
           <div class="profileContainer">
             <div class="topContainer">
-              <p></p>
-              <!-- 카테고리 이름 가져오기 -->
-              <h1><%= modifiedPost.title %></h1>
+              <div class="post-card">
+                <h1><%= modifiedPost.title %></h1>
+                <div class="  ">
+                  <div
+                    class="favoriteIcon"
+                    onclick="heart(event)"
+                    data-fav="<%= modifiedPost.favorite ? '1' : '0' %>"
+                    data-id="<%= modifiedPost.id %>"
+                  >
+                    <img
+                      src="<%= modifiedPost.favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
+                    />
+                  </div>
+                  <span class="like-count"
+                    ><%= modifiedPost.like_count || 0 %>
+                  </span>
+                </div>
+              </div>
               <div class="profile">
                 <div class="userInfo">
-                  <!-- 모달 버튼 -->
                   <button
                     type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary modalBtn"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                   >
@@ -81,14 +95,13 @@
                     class="modal fade"
                     id="exampleModal"
                     tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
+                    data-bs-focus="false"
                   >
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            <%= author.username %> 님
+                            <%= author.username %> 님 프로필
                           </h1>
                           <button
                             type="button"
@@ -98,21 +111,47 @@
                           ></button>
                         </div>
                         <div class="modal-body">
-                          <div class="profileImg">
-                            <img
-                              src="<%= author.image_url ? author.image_url : '/static/images/profile.png' %>"
-                              alt="profile image"
-                            />
+                          <div class="topModal">
+                            <div class="profileImg">
+                              <img
+                                src="<%= author.image_url ? author.image_url : '/static/images/profile.png' %>"
+                                alt="profile image"
+                              />
+                              <p><%= author.username %></p>
+                              <hr />
+                              <p><%= author.introduction %></p>
+                            </div>
+                          </div>
+
+                          <div class="btnContainer">
+                            <% if(author.id === currentUserId){ %>
+                            <button
+                              type="button"
+                              class="postBtn"
+                              onclick="goToMyPost('myPost')"
+                            >
+                              내 글 보러가기
+                            </button>
+                            <button
+                              type="button"
+                              class="postBtn"
+                              onclick="moveUrl('myPage')"
+                            >
+                              내 정보 변경하기
+                            </button>
+                            <% } else { %>
+                            <button
+                              type="button"
+                              class="postBtn"
+                              onclick="moveAuthor('<%= author.id %>')"
+                            >
+                              작성자 글 보러가기
+                            </button>
+
+                            <% } %>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-primary"
-                            onclick="moveAuthor('<%= author.id %>')"
-                          >
-                            작성자 글 보러가기
-                          </button>
                           <button
                             type="button"
                             class="btn btn-secondary"
@@ -125,10 +164,8 @@
                     </div>
                   </div>
 
-                  <!-- 포스터 유저 이미지 넣기 -->
                   <div class="flexColumn">
                     <p class="nameText"><%= author.username %></p>
-                    <!-- 포스터 유저 이름 넣기 -->
                     <p>
                       🕒 작성일: <%= new
                       Date(modifiedPost.createdAt).toLocaleDateString() %>
@@ -165,6 +202,9 @@
         </div>
       </div>
     </div>
+    <button class="upBtn" onclick="rollUp()">
+      <img src="/static/images/arrowupward.png" alt="arrow upward icon" />
+    </button>
     <script src="/static/js/postDetail.js"></script>
   </body>
 </html>

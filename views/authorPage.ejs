@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
-    <link rel="stylesheet" href="/static/css/favorite.css" />
-    <!-- 경고창 -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap"
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="/static/css/authorPage.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Favorite</title>
-
-    <!-- axios -->
+    <title>내가 쓴 게시글</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
@@ -38,69 +28,72 @@
           <div class="overlay"></div>
         </div>
         <div class="logo">
-          <img
-            class="caroselImg"
-            src="/static/images/Bookmark.png"
-            alt="bookmark image"
-          />
+          <h1><%=author.username %> 님의 게시물</h1>
         </div>
       </div>
 
       <div class="mainContainer">
-        <% if (likedPostIds.length > 0) { %>
+        <% if (Array.isArray(modifiedPosts) && modifiedPosts.length > 0) { %>
         <div class="allPostsBox">
-          <% modifiedPosts.forEach(post => { %>
+          <% for (let i = 0; i < modifiedPosts.length; i++) { %>
           <div class="allPostContainer">
             <div class="all-post-card">
               <div class="allContentBox">
-                <div class="textBox" onclick="moveToPost('<%= post.id %>')">
-                  <h2><%= post.title.substring(0, 20) %></h2>
+                <div
+                  class="textBox"
+                  onclick="moveToPost('<%= modifiedPosts[i].id %>')"
+                >
+                  <h2><%= modifiedPosts[i].title.substring(0, 20) %></h2>
                   <p>
-                    작성일: <%= new Date(post.createdAt).toLocaleDateString() %>
+                    작성일: <%= new
+                    Date(modifiedPosts[i].createdAt).toLocaleDateString() %>
                   </p>
-                  <%= post.content ? post.content.substring(0, 50) : '내용 없음'
-                  | escape %>...
+                  <p>
+                    <%= modifiedPosts[i].content ?
+                    modifiedPosts[i].content.substring(0, 50) : "내용 없음"
+                    %>...
+                  </p>
                 </div>
                 <div class="favoriteContainer">
                   <div class="post-info">
                     <div
                       class="favoriteIcon"
                       onclick="heart(event)"
-                      data-fav="<%= post.favorite !== undefined ? (post.favorite ? '1' : '0') : '0' %>"
-                      data-id="<%= post.id %>"
+                      data-fav="<%= modifiedPosts[i].favorite ? '1' : '0' %>"
+                      data-id="<%= modifiedPosts[i].id %>"
                     >
                       <img
-                        src="<%= post.favorite ? '/static/images/favoriteFillIcon.png' : '/static/images/favoriteIcon.png' %>"
+                        src="<%= modifiedPosts[i].favorite ? '/static/images/favoriteFillIcon.png' : '/static/images/favoriteIcon.png' %>"
                       />
                     </div>
-                    <span class="like-count"><%= post.like_count || 0 %> </span>
+                    <span class="like-count"
+                      ><%= modifiedPosts[i].like_count || 0 %>
+                    </span>
                   </div>
                 </div>
               </div>
               <img
-                src="<%= post && post.image_url ? post.image_url : '/static/images/default-image.png' %>"
+                src="<%= modifiedPosts[i] && modifiedPosts[i].image_url ? modifiedPosts[i].image_url : '/static/images/default-image.png' %>"
                 alt="Post Image"
                 class="postImage"
-                onclick="moveToPost('<%= post.id %>')"
-                data-id="<%= post.id %>"
+                onclick="moveToPost('<%= modifiedPosts[i].id %>')"
+                data-id="<%= modifiedPosts[i].id %>"
               />
             </div>
           </div>
-          <% }); %><% } else { %>
+          <% } %> <% } else { %>
           <div class="emptyImg">
             <img src="/static/images/postEmpty(white).png" alt="empty image" />
           </div>
           <% } %>
         </div>
       </div>
+
+      <%- include("footer") %>
     </div>
-
-    <%- include("footer") %>
-
     <button class="upBtn" onclick="rollUp()">
       <img src="/static/images/arrowupward.png" alt="arrow upward icon" />
     </button>
-
-    <script src="/static/js/favorite.js"></script>
   </body>
+  <script src="/static/js/authorPage.js"></script>
 </html>

@@ -8,7 +8,7 @@ const editor = new toastui.Editor({
 });
 
 editor.addHook("addImageBlobHook", async (blob, callback) => {
-  const maxSize = 5 * 1024 * 1024; // 5MB 제한
+  const maxSize = 5 * 1024 * 1024;
 
   if (blob.size > maxSize) {
     Swal.fire({
@@ -161,7 +161,7 @@ const addWrite = async (id) => {
   const title = document.querySelector("input[name='title']").value.trim();
   const category = document.querySelector("select[name='category']").value;
   const content = editor.getHTML();
-  const image = document.getElementById("preview").dataset.imageUrl || null;
+  const image = document.getElementById("preview").dataset.imageUrl;
 
   try {
     const userId = await getUserId(token);
