@@ -5,13 +5,45 @@ const editor = new toastui.Editor({
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
   initialValue: postContent,
+});
 
-  hooks: {
-    addImageBlobHook(blob, callback) {
-      console.log(blob);
-      console.log(callback);
-    },
-  },
+editor.addHook("addImageBlobHook", async (blob, callback) => {
+  const maxSize = 5 * 1024 * 1024; // 5MB 제한
+
+  if (blob.size > maxSize) {
+    Swal.fire({
+      icon: "warning",
+      title: "이미지 용량 초과",
+      text: "최대 5MB 이하의 이미지만 업로드할 수 있습니다.",
+    });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", blob);
+
+  try {
+    const res = await axios.post("/user/uploadImage", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    if (res.data.imageUrl) {
+      callback(res.data.imageUrl, "업로드된 이미지");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "업로드 실패",
+        text: "이미지 업로드 중 문제가 발생했습니다.",
+      });
+    }
+  } catch (error) {
+    console.error("이미지 업로드 실패:", error);
+    Swal.fire({
+      icon: "error",
+      title: "업로드 실패",
+      text: "서버와 통신 중 문제가 발생했습니다.",
+    });
+  }
 });
 
 const saveButton = document.querySelector(".saveBtn");
