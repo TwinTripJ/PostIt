@@ -44,7 +44,9 @@
             alt="carosel image"
           />
           <div class="logo">
-            <img src="/static/images/postitLogo.png" alt="postit logo" />
+            <a href="/">
+              <img src="/static/images/postitLogo.png" alt="postit logo" />
+            </a>
 
             <form action="/postit/search" method="GET">
               <div class="searchBox">
@@ -60,7 +62,6 @@
         </div>
       </div>
       <div class="mainContainer">
-        <h1>Recent Posts</h1>
         <% if (Array.isArray(posts) && posts.length > 0) { %>
         <div class="postsBox">
           <% for (let i = 0; i < Math.min(5, posts.length); i++) { %> <% if

@@ -97,6 +97,10 @@ body {
   border-radius: 10px 10px 0 0;
 }
 
+.modifiedPost-image {
+  opacity: 0.9;
+}
+
 .topContainer {
   width: 100%;
   display: flex;

@@ -35,9 +35,27 @@ app.use("/modify", modifyRouter);
 app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
 
+// app.get("/", async (req, res) => {
+//   const page = parseInt(req.query.page) || 1;
+//   const limit = parseInt(req.query.limit) || 10;
+
+//   try {
+//     const posts = await postController.getAllPosts(page, limit);
+//     res.render("main", { posts });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "서버 오류 발생" });
+//   }
+// });
+
 app.get("/", async (req, res) => {
-  const posts = await postController.getAllPosts();
-  res.render("main", { posts });
+  try {
+    const posts = await postController.getAllPosts();
+    res.render("main", { posts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "서버 오류 발생" });
+  }
 });
 
 app.get("/get-kakao-api-key", (req, res) => {
