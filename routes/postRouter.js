@@ -17,4 +17,7 @@ router.put("/edit/:id", postController.updatePost);
 // 게시글 삭제
 router.delete("/delete/:id", postController.deletePost);
 
+// 작가 정보 및 모든 글
+router.get("/authorInfo", postController.getAuthorInfo);
+
 module.exports = router;
