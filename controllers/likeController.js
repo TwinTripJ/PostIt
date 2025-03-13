@@ -58,7 +58,6 @@ const getUserLikedPosts = async (req, res) => {
       likedPostIds,
     });
   } catch (err) {
-    console.error(err);
     res
       .status(500)
       .json({ message: "좋아요 개수 조회 실패", error: err.message });
