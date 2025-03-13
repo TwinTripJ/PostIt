@@ -50,7 +50,6 @@ const goToMyPost = async (url) => {
 
 // 즐겨찾기 페이지로 이동
 const goToMyFavorite = async () => {
-
   try {
     const idResponse = await axios.get("/user/getUserId", {
       withCredentials: true,
@@ -67,7 +66,6 @@ const goToMyFavorite = async () => {
     console.error("사용자 ID 가져오기 실패:", error);
     alert("로그인이 필요합니다.");
   }
-
 };
 
 function logout() {
@@ -129,3 +127,27 @@ const moveToCategory = (categoryId) => {
     window.location.href = "/postit/login";
   }
 };
+
+// 버튼 클릭시 위로 이동
+const rollUp = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  const upBtn = document.querySelector(".upBtn");
+
+  window.addEventListener("scroll", function () {
+    const scrollPercent =
+      (window.scrollY /
+        (document.documentElement.scrollHeight - window.innerHeight)) *
+      100;
+
+    if (scrollPercent > 20) {
+      upBtn.style.transform = "translateX(0)";
+      upBtn.style.opacity = "1";
+    } else {
+      upBtn.style.transform = "translateX(100px)";
+      upBtn.style.opacity = "0";
+    }
+  });
+});

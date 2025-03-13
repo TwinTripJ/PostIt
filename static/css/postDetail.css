@@ -75,6 +75,7 @@ body {
   position: relative;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
+  width: 100%;
 }
 
 .profileContainer hr {
@@ -95,10 +96,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .modifiedPost-image {
-  width: 1000px;
+  width: 100%;
   max-width: 1500px;
   max-height: 400px;
   object-fit: cover;
@@ -138,6 +140,32 @@ body {
   width: 70px;
   height: 70px;
   border-radius: 50%;
+}
+
+.post-card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 15px 0 0;
+}
+
+.favoriteIcon {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+.favoriteIcon img {
+  width: 20px;
 }
 
 .post-actions {
@@ -193,6 +221,70 @@ body {
 .post-content img {
   max-width: 100%;
   margin: 0 auto;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+.postBtn {
+  width: 170px;
+  padding: 5px 10px;
+  margin: 0 0 10px 10px;
+  font-size: 16px;
+  text-align: center;
+  color: #444;
+  background-color: rgba(0, 0, 0, 0.26);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.postBtn:hover {
+  background-color: rgba(0, 0, 0, 0.437);
+  transform: scale(1.05);
+  color: white;
+}
+
+/* 위로 가는 버튼 */
+.upBtn {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 50px;
+  right: 30px;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.54);
+  border: none;
+  border-radius: 10%;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.upBtn:focus {
+  border: none;
+  outline: none;
+}
+
+.upBtn img {
+  max-width: 30px;
+  max-height: 30px;
 }
 
 @media screen and (max-width: 1020px) {
