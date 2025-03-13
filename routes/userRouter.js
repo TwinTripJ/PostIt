@@ -60,35 +60,19 @@ router.get("/login", (req, res) => {
 });
 
 // 아이디 중복 확인
-router.post(
-  "/check",
-  authMiddleware.authenticateToken,
-  userController.checkEmail
-);
+router.post("/check", userController.checkEmail);
 
 // 전화번호 중복 확인
-router.post(
-  "/phoneCheck",
-  authMiddleware.authenticateToken,
-  userController.checkPhone
-);
+router.post("/phoneCheck", userController.checkPhone);
 
 // 유저 추가
-router.post(
-  "/addUser",
-  authMiddleware.authenticateToken,
-  userController.registerUser
-);
+router.post("/addUser", userController.registerUser);
 
-router.post(
-  "/loginUser",
-  authMiddleware.authenticateToken,
-  userController.loginUser
-);
+router.post("/loginUser", userController.loginUser);
 
-router.post("/findId", authMiddleware.authenticateToken, userController.findId);
+router.post("/findId", userController.findId);
 
-router.post("/findPw", authMiddleware.authenticateToken, userController.findPw);
+router.post("/findPw", userController.findPw);
 
 router.post(
   "/uploadImage",
@@ -103,11 +87,7 @@ router.get(
   userController.getUserById
 );
 
-router.put(
-  "/changePass",
-  authMiddleware.authenticateToken,
-  userController.changePass
-);
+router.put("/changePass", userController.changePass);
 
 // 유저 정보 수정
 router.put(

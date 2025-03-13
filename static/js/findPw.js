@@ -1,5 +1,3 @@
-const token = getCookie("token");
-
 // 버튼 활성화, 비활성화
 let passwordsMatch = false;
 let passwordsOkay = false;
@@ -15,32 +13,34 @@ const enableJoinButton = () => {
 };
 
 // 비밀번호 확인
+// function passCheck() {
+//   const pass = document.getElementById("pass").value;
+//   const passCheckVal = document.getElementById("passCheck").value;
+//   const alret = document.getElementById("alretCheck");
+
+//   if (pass === "" || passCheckVal === "") {
+//     Swal.fire({
+//       icon: "error",
+//       text: "비밀번호가 비어있습니다.",
+//     });
+//   } else {
+//     if (pass === passCheckVal) {
+//       alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+//       passwordsMatch = true;
+//     } else {
+//       alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+//       passwordsMatch = false;
+//     }
+//     enableJoinButton();
+//   }
+// }
+
+// 비밀번호 유효성 검사
 function passCheck() {
   const pass = document.getElementById("pass").value;
   const passCheckVal = document.getElementById("passCheck").value;
-  const alret = document.getElementById("alretCheck");
-
-  if (pass === "" || passCheckVal === "") {
-    Swal.fire({
-      icon: "error",
-      text: "비밀번호가 비어있습니다.",
-    });
-  } else {
-    if (pass === passCheckVal) {
-      alret.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
-      passwordsMatch = true;
-    } else {
-      alret.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
-      passwordsMatch = false;
-    }
-    enableJoinButton();
-  }
-}
-
-// 비밀번호 유효성 검사
-document.getElementById("pass").addEventListener("input", function () {
-  const pass = document.getElementById("pass").value;
   const alertDiv = document.querySelector(".alret");
+  const check = document.getElementById("alretCheck");
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
 
@@ -52,8 +52,24 @@ document.getElementById("pass").addEventListener("input", function () {
     alertDiv.innerHTML = "";
     passwordsOkay = true;
   }
+
+  if (pass !== "" && passCheckVal !== "") {
+    if (pass === passCheckVal) {
+      check.innerHTML = "<div class='green'>동일한 비밀번호입니다.</div>";
+      passwordsMatch = true;
+    } else {
+      check.innerHTML = "<div class='red'>비밀번호가 다릅니다.</div>";
+      passwordsMatch = false;
+    }
+  } else {
+    check.innerHTML = "";
+    passwordsMatch = false;
+  }
   enableJoinButton();
-});
+}
+
+document.getElementById("pass").addEventListener("input", passCheck);
+document.getElementById("passCheck").addEventListener("input", passCheck);
 
 // 비밃번호 변경
 const pwChange = async () => {
@@ -100,11 +116,7 @@ const idCheck = async () => {
   const data = { email };
 
   try {
-    const res = await axios.post("/user/findPw", data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await axios.post("/user/findPw", data);
 
     if (res.data.email) {
       Swal.fire({
@@ -118,13 +130,6 @@ const idCheck = async () => {
             Array.from(document.querySelectorAll(".passInput")).map((el) => {
               el.style.display = "flex";
             });
-
-            const checkBtn = document.querySelector(".check-btn");
-
-            checkBtn.style.display = "flex";
-
-            checkBtn.innerHTML =
-              "<div onclick='passCheck()'>비밀번호 확인</div>";
 
             document.querySelector(".loginBtn").innerHTML =
               '<div class="checkBtn" onclick="pwChange()" disabled>비밀번호 변경</div>';
