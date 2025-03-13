@@ -112,8 +112,11 @@ const getPostById = async (req, res) => {
     }
     const author = await User.findOne({
       where: { id: post.user_id },
+
       attributes: ["id", "username", "image_url", "introduction"],
+
     });
+
     res.render("postDetail", {
       modifiedPost: post,
       categoryName,

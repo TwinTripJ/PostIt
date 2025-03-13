@@ -51,3 +51,5 @@ async function deletePost(id) {
     });
   }
 }
+
+function moveAuthor(id) {}

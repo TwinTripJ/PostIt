@@ -266,7 +266,7 @@ const deleteUser = async () => {
   // 탈퇴 확인
   const result = await Swal.fire({
     title: "탈퇴하시겠습니까?",
-    text: "탈퇴 후 복구가 불가능합니다.",
+    text: "탈퇴 후 게시글이 삭제되며 복구가 불가능합니다.",
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "확인",

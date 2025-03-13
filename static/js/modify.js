@@ -4,14 +4,46 @@ const editor = new toastui.Editor({
   height: "300px",
   initialEditType: "wysiwyg",
   previewStyle: "vertical",
-  initialValue: postContent, // 이 값을 에디터의 초기 값으로 사용
+  initialValue: postContent,
+});
 
-  hooks: {
-    addImageBlobHook(blob, callback) {
-      console.log(blob);
-      console.log(callback);
-    },
-  },
+editor.addHook("addImageBlobHook", async (blob, callback) => {
+  const maxSize = 5 * 1024 * 1024; // 5MB 제한
+
+  if (blob.size > maxSize) {
+    Swal.fire({
+      icon: "warning",
+      title: "이미지 용량 초과",
+      text: "최대 5MB 이하의 이미지만 업로드할 수 있습니다.",
+    });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", blob);
+
+  try {
+    const res = await axios.post("/user/uploadImage", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    if (res.data.imageUrl) {
+      callback(res.data.imageUrl, "업로드된 이미지");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "업로드 실패",
+        text: "이미지 업로드 중 문제가 발생했습니다.",
+      });
+    }
+  } catch (error) {
+    console.error("이미지 업로드 실패:", error);
+    Swal.fire({
+      icon: "error",
+      title: "업로드 실패",
+      text: "서버와 통신 중 문제가 발생했습니다.",
+    });
+  }
 });
 
 const saveButton = document.querySelector(".saveBtn");
@@ -126,23 +158,38 @@ async function previewImage(event) {
 
 // 글 저장
 const addWrite = async (id) => {
+  const title = document.querySelector("input[name='title']").value.trim();
+  const category = document.querySelector("select[name='category']").value;
+  const content = editor.getHTML();
+  const image = document.getElementById("preview").dataset.imageUrl || null;
+
   try {
     const userId = await getUserId(token);
 
-    const response = await axios.put(`/post/delete/${id}`, {
-      withCredentials: true,
-    });
+    const response = await axios.put(
+      `/post/edit/${id}`,
+      {
+        user_id: userId,
+        title,
+        category_id: category,
+        content,
+        image_url: image,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
-        title: "글이 정상적으로 삭제되었습니다!",
+        title: "글이 정상적으로 수정되었습니다!",
       }).then(() => {
         window.location.href = "/";
       });
     }
   } catch (error) {
-    alert("글 삭제 실패");
+    alert("글 수정 실패");
     console.error("Error:", error);
   }
 };
