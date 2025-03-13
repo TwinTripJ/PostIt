@@ -443,12 +443,12 @@ input:focus {
 
 @media screen and (max-width: 1024px) {
   .postsBox {
-    flex-wrap: wrap;
+    width: 95%;
     justify-content: center;
   }
 
   .postContainer {
-    width: 45%; /* 2개씩 배치 */
+    width: 45%;
     max-width: 200px;
   }
 }
@@ -461,11 +461,17 @@ input:focus {
 
 @media screen and (max-width: 768px) {
   .postsBox {
-    padding: 30px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding-bottom: 10px;
   }
 
   .postContainer {
-    width: 100%;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: 180px;
   }
 
   .post-card {
@@ -479,5 +485,17 @@ input:focus {
   }
   .mainContainer {
     margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .postsBox {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .postContainer {
+    width: 90%;
+    max-width: 200px;
   }
 }
