@@ -279,8 +279,6 @@ const updateUser = async (req, res) => {
   try {
     let userId = req.user.userId;
 
-    console.log(req.body);
-
     let updateData = req.body;
 
     if (updateData.password) {
@@ -379,6 +377,7 @@ const getUserProfile = async (req, res) => {
       imageUrl: user.image_url || "/static/images/profile.png",
       address_main: user.address_main,
       address_detail: user.address_detail,
+      introduction: user.introduction,
     });
   } catch (err) {
     console.error(err);
