@@ -135,19 +135,20 @@ const rollUp = () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   const upBtn = document.querySelector(".upBtn");
+  if (upBtn) {
+    window.addEventListener("scroll", function () {
+      const scrollPercent =
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+        100;
 
-  window.addEventListener("scroll", function () {
-    const scrollPercent =
-      (window.scrollY /
-        (document.documentElement.scrollHeight - window.innerHeight)) *
-      100;
-
-    if (scrollPercent > 20) {
-      upBtn.style.transform = "translateX(0)";
-      upBtn.style.opacity = "1";
-    } else {
-      upBtn.style.transform = "translateX(100px)";
-      upBtn.style.opacity = "0";
-    }
-  });
+      if (scrollPercent > 20) {
+        upBtn.style.transform = "translateX(0)";
+        upBtn.style.opacity = "1";
+      } else {
+        upBtn.style.transform = "translateX(100px)";
+        upBtn.style.opacity = "0";
+      }
+    });
+  }
 });
