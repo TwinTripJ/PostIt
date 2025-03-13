@@ -210,7 +210,7 @@ async function changeInfo() {
   const address_detail = document.getElementById("detailAddress").value;
   const imageInput = document.getElementById("imageInput");
   const preview = document.getElementById("preview");
-  const introduce = document.querySelector(".textarea").value;
+  const introduce = document.querySelector("#intro").value;
 
   const formData = new FormData();
 
@@ -233,6 +233,10 @@ async function changeInfo() {
   }
   if (address_detail.trim()) {
     formData.append("address_detail", address_detail);
+  }
+
+  if (introduce.trim()) {
+    formData.append("introdution", introduce);
   }
 
   try {
