@@ -48,11 +48,13 @@
       <div class="detailContainer">
         <div class="detailBox">
           <% if (modifiedPost.image_url) { %>
-          <img
-            class="modifiedPost-image"
-            src="<%= modifiedPost.image_url %>"
-            alt="게시글 이미지"
-          />
+          <div class="modifyImg">
+            <img
+              class="modifiedPost-image"
+              src="<%= modifiedPost.image_url %>"
+              alt="게시글 이미지"
+            />
+          </div>
           <% } %>
           <div class="profileContainer">
             <div class="topContainer">
@@ -86,9 +88,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            <!-- 버튼 눌렀을 때 onclick으로 보내기 -->
-                            <%= author.username %> <%= author.image_url %> <%=
-                            author.email %>
+                            <%= author.username %> 님
                           </h1>
                           <button
                             type="button"
@@ -97,7 +97,14 @@
                             aria-label="Close"
                           ></button>
                         </div>
-                        <div class="modal-body">...</div>
+                        <div class="modal-body">
+                          <div class="profileImg">
+                            <img
+                              src="<%= author.image_url ? author.image_url : '/static/images/profile.png' %>"
+                              alt="profile image"
+                            />
+                          </div>
+                        </div>
                         <div class="modal-footer">
                           <button
                             type="button"
