@@ -5,6 +5,7 @@ const User = db.User;
 const Post = db.Post;
 const Like = db.Like;
 const Category = db.Category;
+
 // 글 작성
 const createPost = async (req, res) => {
   try {
@@ -29,6 +30,7 @@ const createPost = async (req, res) => {
     res.status(500).json({ message: "게시글 작성 실패", error: err.message });
   }
 };
+
 // 모든 게시글 조회 및 좋아요 개수
 const getAllPosts = async () => {
   try {
@@ -63,6 +65,7 @@ const getAllPosts = async () => {
     return [];
   }
 };
+
 // 게시글 하나씩 보기 및 글쓴이 정보 가지고 오기
 const getPostById = async (req, res) => {
   try {
@@ -109,7 +112,9 @@ const getPostById = async (req, res) => {
     }
     const author = await User.findOne({
       where: { id: post.user_id },
-      attributes: ["id", "username", "image_url", "email"],
+
+      attributes: ["id", "username", "image_url", "introduction"],
+
     });
 
     res.render("postDetail", {
@@ -229,6 +234,7 @@ const getAuthorInfo = async (req, res) => {
         "content",
         "image_url",
         "createdAt",
+        "introduction",
         [db.sequelize.fn("COUNT", db.sequelize.col("likes.id")), "like_count"],
       ],
       include: [

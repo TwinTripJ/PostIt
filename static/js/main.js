@@ -84,27 +84,32 @@ async function getUserLikes() {
 
 // 좋아요한 상태 유지
 async function setLikeStatus() {
-  try {
-    const response = await axios.get("/like/likedPosts", {
-      withCredentials: true,
-    });
-    const likedPosts = response.data.likedPostIds || [];
-    document.querySelectorAll(".favoriteIcon").forEach((icon) => {
-      const postId = icon.getAttribute("data-id");
-      if (likedPosts.includes(Number(postId))) {
-        icon.setAttribute("data-fav", "1");
-        icon.querySelector("img").src = "../static/images/favoriteFillIcon.png";
-      } else {
-        icon.setAttribute("data-fav", "0");
-        icon.querySelector("img").src = "../static/images/favoriteIcon.png";
-      }
-    });
-  } catch (err) {}
+  if (token) {
+    try {
+      const response = await axios.get("/like/likedPosts", {
+        withCredentials: true,
+      });
+      const likedPosts = response.data.likedPostIds || [];
+      document.querySelectorAll(".favoriteIcon").forEach((icon) => {
+        const postId = icon.getAttribute("data-id");
+        if (likedPosts.includes(Number(postId))) {
+          icon.setAttribute("data-fav", "1");
+          icon.querySelector("img").src =
+            "../static/images/favoriteFillIcon.png";
+        } else {
+          icon.setAttribute("data-fav", "0");
+          icon.querySelector("img").src = "../static/images/favoriteIcon.png";
+        }
+      });
+    } catch (err) {}
+  }
 }
+
 // 좋아요 상태
 window.onload = function () {
   setLikeStatus();
 };
+
 // 게시물 바로가기
 const moveToPost = (postId) => {
   if (token) {
