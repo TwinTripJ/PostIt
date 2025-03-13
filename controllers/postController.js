@@ -211,10 +211,14 @@ const deletePost = async (req, res) => {
   }
 };
 
-// author 쓴 글 보기
+// author 프로필 및 쓴 글 보기
 const getAuthorInfo = async (req, res) => {
   try {
     const { userId } = req.params;
+
+    if (!author) {
+      return res.status(404).json({ message: "작가 정보를 찾을 수 없습니다." });
+    }
 
     // 작가의 모든 게시글 데이터 가져오기
     const posts = await Post.findAll({
@@ -242,7 +246,8 @@ const getAuthorInfo = async (req, res) => {
     }
 
     res.render("author", {
-      posts,
+      modifiedPost: posts,
+      author,
     });
   } catch (err) {
     console.error(err);

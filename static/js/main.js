@@ -103,7 +103,6 @@ async function setLikeStatus() {
 window.onload = function () {
   setLikeStatus();
 };
-
 // 게시물 바로가기
 const moveToPost = (postId) => {
   if (token) {
@@ -121,15 +120,12 @@ const moveToPost = (postId) => {
     window.location.href = "/postit/login";
   }
 };
-
 document.addEventListener("DOMContentLoaded", function () {
   const posts = document.querySelectorAll(".allPostContainer");
-
   const observerOptions = {
     root: null,
     threshold: 0.4,
   };
-
   const observerCallback = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -138,9 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   };
-
   const observer = new IntersectionObserver(observerCallback, observerOptions);
-
   posts.forEach((post) => {
     observer.observe(post);
   });
