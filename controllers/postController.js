@@ -114,7 +114,6 @@ const getPostById = async (req, res) => {
       where: { id: post.user_id },
 
       attributes: ["id", "username", "image_url", "introduction"],
-
     });
 
     res.render("postDetail", {
@@ -220,6 +219,8 @@ const deletePost = async (req, res) => {
 const getAuthorInfo = async (req, res) => {
   try {
     const { userId } = req.params;
+
+    const author = await Post.findOne;
 
     if (!author) {
       return res.status(404).json({ message: "작가 정보를 찾을 수 없습니다." });
