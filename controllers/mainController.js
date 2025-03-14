@@ -67,7 +67,5 @@ const searchTitle = async (req, res) => {
 
 module.exports = {
   moveUrl,
-  popUp,
-  closePopup,
   searchTitle,
 };
