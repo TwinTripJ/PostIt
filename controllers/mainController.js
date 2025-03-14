@@ -11,28 +11,6 @@ const moveUrl = (req, res) => {
   res.render(url);
 };
 
-// 팝업창
-const popUp = (req, res) => {
-  try {
-    let showPopUp = req.cookies.popupClosed !== "N";
-
-    if (!req.cookies.popupClosed) {
-      res.cookie("popupClosed", "Y", cookieConfig);
-    }
-
-    res.render("index", { showPopUp });
-  } catch (err) {
-    console.error("팝업 오류:", err);
-    res.status(500).send("서버 오류 발생");
-  }
-};
-
-// 팝업창 닫기
-const closePopup = (req, res) => {
-  res.cookie("popupClosed", "N", { maxAge: 30000, httpOnly: true });
-  res.send("팝업이 닫혔습니다. 30초 동안 다시 표시되지 않습니다.");
-};
-
 // 제목으로 검색
 const searchTitle = async (req, res) => {
   const name = req.query.name;
