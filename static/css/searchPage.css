@@ -240,6 +240,7 @@ input:focus {
 }
 
 .postImage {
+  width: 100%;
   height: 100%;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
