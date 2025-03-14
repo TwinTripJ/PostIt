@@ -130,26 +130,32 @@
                 onclick="moveToPost('<%= posts[i].id %>')"
                 data-id="<%= posts[i].id %>"
               />
-              <div class="post-info">
-                <div
-                  class="favoriteIcon"
-                  onclick="heart(event)"
-                  data-fav="<%= posts[i].favorite ? '1' : '0' %>"
-                  data-id="<%= posts[i].id %>"
-                >
-                  <img
-                    src="<%= posts[i].favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favoriteIcon.png' %>"
-                  />
-                </div>
-                <span class="like-count"><%= posts[i].like_count || 0 %> </span>
-              </div>
             </div>
-            <div class="contentBox" onclick="moveToPost('<%= posts[i].id %>')">
-              <h5><%= posts[i].title.substring(0, 10) %></h5>
+            <div class="contentBox">
+              <div class="flexContainer">
+                <h5 onclick="moveToPost('<%= posts[i].id %>')">
+                  <%= posts[i].title.substring(0, 10) %>
+                </h5>
+                <div class="post-info">
+                  <div
+                    class="favoriteIcon"
+                    onclick="heart(event)"
+                    data-fav="<%= posts[i].favorite ? '1' : '0' %>"
+                    data-id="<%= posts[i].id %>"
+                  >
+                    <img
+                      src="<%= posts[i].favorite ? '../static/images/favoriteFillIcon.png' : '../static/images/favriteIcon.png' %>"
+                    />
+                  </div>
+                  <span class="like-count"
+                    ><%= posts[i].like_count || 0 %>
+                  </span>
+                </div>
+              </div>
               <hr />
-              <p>
-                <%= posts[i].content ? posts[i].content.substring(0, 30) :
-                "내용없음" %>
+              <p onclick="moveToPost('<%= posts[i].id %>')">
+                <%= posts[i].content ? posts[i].content.substring(0, 10) :
+                "내용없음" %>...
               </p>
             </div>
           </div>
@@ -173,7 +179,7 @@
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
                   <p class="content">
-                    <%= posts[i].content ? posts[i].content.substring(0, 50) :
+                    <%= posts[i].content ? posts[i].content.substring(0, 20) :
                     "내용 없음" %>...
                   </p>
                 </div>

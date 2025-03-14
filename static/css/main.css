@@ -2,7 +2,6 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
-
 .backColor {
   background-color: rgba(181, 167, 183, 0.59);
   display: flex;
@@ -10,20 +9,17 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 /* 맨 위 이미지 */
 .topContainer {
   position: relative;
   width: 100%;
 }
-
 .carosel {
   display: flex;
   width: 100%;
   position: relative;
   top: 0;
 }
-
 .logo {
   display: flex;
   flex-direction: column;
@@ -40,7 +36,6 @@ body {
   margin-bottom: 10px;
   cursor: pointer;
 }
-
 @keyframes moveUpLogo {
   0% {
     opacity: 0;
@@ -51,18 +46,15 @@ body {
     transform: translateY(0);
   }
 }
-
 .logo img {
   max-width: 98%;
 }
-
 form {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .searchBox {
   width: 100%;
   max-width: 1280px;
@@ -71,7 +63,6 @@ form {
   justify-content: center;
   align-items: center;
 }
-
 .search {
   padding: 10px 15px;
   border: none;
@@ -83,11 +74,9 @@ form {
   overflow: hidden;
   border-radius: 10px;
 }
-
 .search::placeholder {
   color: rgba(255, 255, 255, 0.596);
 }
-
 .searchBox button {
   width: 100px;
   padding: 10px 0;
@@ -99,16 +88,13 @@ form {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .searchBox button:hover {
   background-color: #ffffff;
   transform: scale(1.05);
 }
-
 input:focus {
   outline: none;
 }
-
 .write {
   display: flex;
   width: 300px;
@@ -123,13 +109,11 @@ input:focus {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   font-family: "Gothic A1", sans-serif;
   font-weight: 600;
   font-style: normal;
   color: rgb(101, 100, 100);
 }
-
 .caroselImg {
   width: 100%;
   height: 70vh;
@@ -145,7 +129,6 @@ input:focus {
     rgba(0, 0, 0, 0)
   );
 }
-
 /* 카테고리 */
 .categorys {
   position: relative;
@@ -157,7 +140,6 @@ input:focus {
   top: -100px;
   z-index: 1;
 }
-
 .category {
   position: relative;
   margin-right: 20px;
@@ -170,27 +152,21 @@ input:focus {
   animation: moveUp 1s forwards;
   cursor: pointer;
 }
-
 .category:nth-child(1) {
   animation-delay: 0.3s;
 }
-
 .category:nth-child(2) {
   animation-delay: 0.6s;
 }
-
 .category:nth-child(3) {
   animation-delay: 0.9s;
 }
-
 .category:nth-child(4) {
   animation-delay: 1.2s;
 }
-
 .category:nth-child(5) {
   animation-delay: 1.5s;
 }
-
 @keyframes moveUp {
   0% {
     opacity: 0;
@@ -201,7 +177,6 @@ input:focus {
     transform: translateY(0);
   }
 }
-
 .imgContainer {
   position: relative;
   width: 100%;
@@ -211,11 +186,9 @@ input:focus {
   align-items: center;
   transition: transform 0.2s ease;
 }
-
 .imgContainer:hover {
   transform: scale(1.05);
 }
-
 .imgContainer img {
   width: 100%;
   height: auto;
@@ -231,7 +204,6 @@ input:focus {
     rgba(0, 0, 0, 0)
   );
 }
-
 .overlay {
   position: absolute;
   top: 0;
@@ -241,7 +213,6 @@ input:focus {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0));
   pointer-events: none;
 }
-
 .text {
   position: absolute;
   top: 50%;
@@ -254,13 +225,11 @@ input:focus {
   font-weight: bold;
   z-index: 2;
 }
-
 .text h4 {
   font-family: "Lobster", sans-serif;
   font-weight: 400;
   font-style: italic;
 }
-
 /* 게시글 */
 .mainContainer {
   display: flex;
@@ -272,17 +241,14 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-
 .mainContainer h1,
 .allPostsBox h1 {
   color: white;
   margin-bottom: 20px;
-
   font-family: "Lobster", sans-serif;
   font-weight: 400;
   font-style: italic;
 }
-
 .postsBox {
   display: flex;
   width: 100%;
@@ -294,7 +260,6 @@ input:focus {
   align-items: flex-start;
   margin-bottom: 30px;
 }
-
 .postContainer {
   position: relative;
   display: flex;
@@ -308,28 +273,23 @@ input:focus {
   align-items: flex-start;
   transition: background-color 0.5s ease-in;
 }
-
 .flexContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .postContainer img {
   opacity: 0.8;
   transition: opacity 0.5s ease-in;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
 }
-
 .postContainer:hover {
   background-color: rgba(255, 255, 255, 0.801);
 }
-
 .postContainer:hover img {
   opacity: 1;
 }
-
 .contentBox {
   position: absolute;
   bottom: 0;
@@ -343,12 +303,10 @@ input:focus {
   transition: height 0.6s ease-in-out, background-color 0.5s ease-in;
   cursor: pointer;
 }
-
 .contentBox:hover {
   height: 140px;
   background-color: rgb(67, 63, 96);
 }
-
 .post-card {
   width: 100%;
   height: 100%;
@@ -357,7 +315,6 @@ input:focus {
   justify-content: start;
   align-items: flex-start;
 }
-
 .postImg {
   position: relative;
   display: flex;
@@ -366,36 +323,30 @@ input:focus {
   align-items: center;
   justify-content: flex-end;
 }
-
 .post-card .post-image {
   width: 100%;
   margin-bottom: 5px;
 }
-
 .post-image {
   height: 200px;
   border-radius: 10px;
 }
-
 .postImage {
   height: 100%;
   object-fit: cover;
   border-radius: 0 10px 10px 0;
   cursor: pointer;
 }
-
 .postInfo {
   display: flex;
   gap: 10px;
   padding: 7px 15px 0 0;
 }
-
 .post-info {
   display: flex;
   gap: 10px;
   margin-right: 5px;
 }
-
 /* 좋아요 버튼 */
 .favoriteIcon {
   margin-left: auto;
@@ -404,11 +355,9 @@ input:focus {
   cursor: pointer;
   margin-top: 3px;
 }
-
 .favoriteIcon img {
   width: 20px;
 }
-
 /* 모든 게시글 */
 .allPostsBox {
   display: flex;
@@ -420,7 +369,6 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-
 .allPostContainer {
   width: 100%;
   display: flex;
@@ -428,12 +376,10 @@ input:focus {
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .allPostContainer.show {
   opacity: 1;
   transform: translateY(0);
 }
-
 .allContentBox {
   width: 100%;
   margin-left: 30px;
@@ -441,7 +387,6 @@ input:focus {
   align-items: flex-start;
   justify-content: space-between;
 }
-
 .all-post-card {
   position: relative;
   display: flex;
@@ -456,29 +401,24 @@ input:focus {
   align-items: center;
   overflow: hidden;
 }
-
 .all-post-card:hover {
   background-color: rgba(255, 255, 255, 0.8);
   transform: scale(1.01);
 }
-
 .all-post-card img {
   max-width: 200px;
 }
-
 .textBox,
 .favoriteIcon,
 .post-image {
   cursor: pointer;
 }
-
 .textBox {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 /* 준비 중 이미지 */
 .emptyImg {
   width: 100%;
@@ -487,11 +427,9 @@ input:focus {
   align-items: center;
   overflow: hidden;
 }
-
 .emptyImg img {
   max-width: 100%;
 }
-
 @media screen and (max-width: 1275px) {
   .postsBox {
     justify-content: center;
@@ -505,59 +443,47 @@ input:focus {
     height: 160px;
   }
 }
-
 @media screen and (max-width: 1024px) {
   .postsBox {
     width: 95%;
     justify-content: center;
   }
-
   .postContainer {
     max-width: 180px;
     max-height: 280px;
   }
-
   .post-card {
     height: 180px;
   }
 }
-
 @media screen and (max-width: 900px) {
   .categorys {
     display: none;
   }
-
   .searchBox {
     margin-top: 20px;
   }
-
   .write {
     margin-top: 20px;
   }
-
   .mainContainer {
     margin-top: 30px;
   }
-
   .postContainer {
     max-width: 160px;
     max-height: 260px;
   }
-
   .post-card .post-image {
     height: 160px;
   }
 }
-
 @media screen and (max-width: 768px) {
   .allContentBox .favoriteIcon img {
     width: 30px;
   }
-
   .allContentBox {
     margin-left: 0px;
   }
-
   .postsBox {
     display: flex;
     flex-direction: column;
@@ -569,91 +495,72 @@ input:focus {
     justify-content: center;
     align-items: center;
   }
-
   .post-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
   .all-post-card {
     padding: 0;
   }
-
   .mainContainer {
     margin-top: 10px;
   }
-
   .postContainer {
     max-width: 90%;
     width: 100%;
     margin-bottom: 20px;
   }
-
   .post-card {
     max-width: 100%;
   }
-
   .post-card .post-image {
     max-height: 100%;
   }
-
   .allContentBox {
     padding: 20px 30px 0 30px;
   }
-
   .allContentBox .content {
     display: none;
   }
-
   .allPostsBox {
     padding: 20px;
   }
-
   .post-info {
     position: relative;
   }
-
   .postInfo {
     position: relative;
     top: 120px;
   }
 }
-
 @media screen and (max-width: 700px) {
   .mainContainer {
     margin-top: 40px;
   }
-
   .all-post-card {
     flex-direction: column;
     position: relative;
     height: 300px;
   }
-
   .all-post-card img {
     max-width: 100%;
     max-height: 180px;
   }
-
   .allContentBox {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
   }
-
   .allPostsBox {
     padding: 30px;
   }
-
   .postInfo {
     top: 0px;
   }
-
   .allPostContainer {
     width: 100%;
   }
-
   .postImg {
     position: relative;
     display: flex;
@@ -663,7 +570,6 @@ input:focus {
     max-width: 100%;
     height: auto;
   }
-
   .postImage {
     width: 100%;
     max-width: 1000px;
@@ -672,12 +578,10 @@ input:focus {
     border-radius: 0 0 10px 10px;
   }
 }
-
 @media screen and (max-width: 480px) {
   .allContentBox .favoriteIcon img {
     width: 35px;
   }
-
   .postsBox {
     justify-content: center;
     flex-wrap: wrap;
