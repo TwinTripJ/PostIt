@@ -54,11 +54,11 @@
             <div class="all-post-card">
               <div class="allContentBox">
                 <div class="textBox" onclick="moveToPost('<%= post.id %>')">
-                  <h2><%= post.title.substring(0, 20) %></h2>
+                  <h2><%= post.title.substring(0, 10) %></h2>
                   <p>
                     작성일: <%= new Date(post.createdAt).toLocaleDateString() %>
                   </p>
-                  <%= post.content ? post.content.substring(0, 50) : '내용 없음'
+                  <%= post.content ? post.content.substring(0, 20) : '내용 없음'
                   | escape %>...
                 </div>
                 <div class="favoriteContainer">

@@ -42,13 +42,13 @@
             <div class="all-post-card">
               <div class="allContentBox">
                 <div class="textBox" onclick="moveToPost('<%= posts[i].id %>')">
-                  <h2><%= posts[i].title.substring(0, 20) %></h2>
+                  <h2><%= posts[i].title.substring(0, 10) %></h2>
                   <p>
                     작성일: <%= new
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
                   <p>
-                    <%= posts[i].content ? posts[i].content.substring(0, 50) :
+                    <%= posts[i].content ? posts[i].content.substring(0, 20) :
                     "내용 없음" %>...
                   </p>
                 </div>
