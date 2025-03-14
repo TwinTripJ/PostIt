@@ -48,7 +48,7 @@ async function heart(event) {
     // UI 업데이트
     iconImg.src = isLiked
       ? "../static/images/favoriteFillIcon.png"
-      : "../static/images/favoriteIcon.png";
+      : "../static/images/favriteIcon.png";
     icon.setAttribute("data-fav", isLiked ? "1" : "0");
     // 좋아요 개수 업데이트
     const likeCountElement = icon
@@ -99,7 +99,7 @@ async function setLikeStatus() {
             "../static/images/favoriteFillIcon.png";
         } else {
           icon.setAttribute("data-fav", "0");
-          icon.querySelector("img").src = "../static/images/favoriteIcon.png";
+          icon.querySelector("img").src = "../static/images/favriteIcon.png";
         }
       });
     } catch (err) {}
