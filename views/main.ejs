@@ -36,21 +36,21 @@
   <body>
     <%- include("nav") %>
 
-    <div class="popUp">
+    <div class="popUp" id="popup">
+      <div class="popuptexts">
+        <p id="hideFor7Days">7일 간 보지 않기</p>
+        <img
+          class="close"
+          src="/static/images/closeImg.png"
+          alt="close image"
+        />
+      </div>
       <div class="popupImgs">
         <img
           class="popupImg"
           src="/static/images/postit(popup).webp"
           alt="popup image"
         />
-      </div>
-      <div class="popuptexts">
-        <img
-          class="close"
-          src="/static/images/closeImg.png"
-          alt="close image"
-        />
-        <p>7일 간 보지 않기</p>
       </div>
     </div>
     <div class="backColor">

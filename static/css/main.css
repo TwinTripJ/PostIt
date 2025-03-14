@@ -32,24 +32,26 @@ body {
 }
 
 .popuptexts {
-  width: 95%;
+  top: -330px;
+  width: 600px;
+  max-width: 90%;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  align-items: center;
+  position: absolute;
   color: white;
-  text-align: end;
+  background-color: rgba(0, 0, 0, 0.533);
+  z-index: 101;
 }
 
 .popuptexts p {
-  position: absolute;
-  bottom: 0;
+  cursor: pointer;
+  margin: 1px 0 0 5px;
 }
 
 .close {
-  position: absolute;
   width: 30px;
-  right: 0;
+  height: 30px;
   cursor: pointer;
 }
 

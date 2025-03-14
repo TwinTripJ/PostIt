@@ -167,3 +167,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// 팝업창 쿠키
+function setCookie(name, value, days) {
+  let date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+}
+
+function getCookie(name) {
+  let cookies = document.cookie.split("; ");
+  for (let i = 0; i < cookies.length; i++) {
+    let [key, value] = cookies[i].split("=");
+    if (key === name) return value;
+  }
+  return null;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  let popup = document.getElementById("popup");
+  let closeBtn = document.querySelector(".close");
+  let hideFor7DaysBtn = document.getElementById("hideFor7Days");
+
+  // 페이지 로드 시 쿠키 확인 후 팝업 숨기기
+  if (getCookie("popupHidden") === "true") {
+    popup.style.display = "none";
+  }
+
+  // 닫기 버튼 클릭 시 팝업 숨기기
+  closeBtn.addEventListener("click", function () {
+    popup.style.display = "none";
+  });
+
+  // 7일간 보지 않기 버튼 클릭 시 쿠키 저장 및 팝업 숨기기
+  hideFor7DaysBtn.addEventListener("click", function () {
+    setCookie("popupHidden", "true", 7);
+    popup.style.display = "none";
+  });
+});
