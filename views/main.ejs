@@ -154,8 +154,8 @@
               </div>
               <hr />
               <p onclick="moveToPost('<%= posts[i].id %>')">
-                <%= posts[i].content ? posts[i].content.substring(0, 30) :
-                "내용없음" %>
+                <%= posts[i].content ? posts[i].content.substring(0, 10) :
+                "내용없음" %>...
               </p>
             </div>
           </div>
@@ -179,7 +179,7 @@
                     Date(posts[i].createdAt).toLocaleDateString() %>
                   </p>
                   <p class="content">
-                    <%= posts[i].content ? posts[i].content.substring(0, 50) :
+                    <%= posts[i].content ? posts[i].content.substring(0, 20) :
                     "내용 없음" %>...
                   </p>
                 </div>
