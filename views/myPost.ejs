@@ -40,7 +40,7 @@
                   class="textBox"
                   onclick="moveToPost('<%= modifiedPosts[i].id %>')"
                 >
-                  <h2><%= modifiedPosts[i].title.substring(0, 20) %></h2>
+                  <h2><%= modifiedPosts[i].title.substring(0, 7) %></h2>
                   <p>
                     작성일: <%= new
                     Date(modifiedPosts[i].createdAt).toLocaleDateString() %>

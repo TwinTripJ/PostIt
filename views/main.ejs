@@ -35,6 +35,25 @@
   </head>
   <body>
     <%- include("nav") %>
+
+    <div class="popUp">
+      <div class="popupImgs">
+        <img
+          class="popupImg"
+          src="/static/images/postit(popup).webp"
+          alt="popup image"
+        />
+
+        <div class="popuptexts">
+          <img
+            class="close"
+            src="/static/images/closeImg.png"
+            alt="close image"
+          />
+          <p>7일 간 보지 않기</p>
+        </div>
+      </div>
+    </div>
     <div class="backColor">
       <div class="topContainer">
         <div class="carosel">
@@ -134,7 +153,7 @@
             <div class="contentBox">
               <div class="flexContainer">
                 <h5 onclick="moveToPost('<%= posts[i].id %>')">
-                  <%= posts[i].title.substring(0, 10) %>
+                  <%= posts[i].title.substring(0, 7) %>
                 </h5>
                 <div class="post-info">
                   <div
