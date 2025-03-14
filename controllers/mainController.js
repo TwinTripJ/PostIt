@@ -4,7 +4,6 @@ var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const Category = db.Category;
 const Post = db.Post;
-const cookieConfig = { maxAge: 30000, httpOnly: true };
 
 const moveUrl = (req, res) => {
   const url = req.params.url;
