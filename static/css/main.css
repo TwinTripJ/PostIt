@@ -46,7 +46,7 @@ body {
 
 .popuptexts p {
   cursor: pointer;
-  margin: 1px 0 0 5px;
+  margin: 0 0 0 10px;
 }
 
 .close {
@@ -725,7 +725,95 @@ input:focus {
   }
 }
 
+@media screen and (max-width: 673px) {
+  .popuptexts {
+    top: -325px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .popuptexts {
+    top: -320px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .popuptexts {
+    top: -315px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .popuptexts {
+    top: -310px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .popuptexts {
+    top: -305px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .popuptexts {
+    top: -290px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .popuptexts {
+    top: -285px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .popuptexts {
+    top: -280px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .popuptexts {
+    top: -275px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .popuptexts {
+    top: -270px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .popuptexts {
+    top: -265px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .popuptexts {
+    top: -260px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .popuptexts {
+    top: -255px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .popuptexts {
+    top: -250px;
+  }
+}
+
 @media screen and (max-width: 480px) {
+  .popuptexts {
+    top: -240px;
+  }
+
   .allContentBox .favoriteIcon img {
     width: 35px;
   }
@@ -733,5 +821,65 @@ input:focus {
   .postsBox {
     justify-content: center;
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .popuptexts {
+    top: -235px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .popuptexts {
+    top: -230px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .popuptexts {
+    top: -225px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .popuptexts {
+    top: -220px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .popuptexts {
+    top: -215px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .popuptexts {
+    top: -210px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .popuptexts {
+    top: -205px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .popuptexts {
+    top: -200px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .popuptexts {
+    top: -195px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .popuptexts {
+    top: -190px;
   }
 }
