@@ -431,6 +431,7 @@ const callBack = async (req, res) => {
       return res.status(400).json({ error: "Failed to get access token" });
     }
 
+    // 토큰을 통해 엔드포인트 호출해 사용자 정보 가져오기
     const userProfileResponse = await axios.get(
       "https://openapi.naver.com/v1/nid/me",
       {
@@ -530,6 +531,7 @@ const kakaoCallback = async (req, res) => {
 
     const accessToken = accessTokenResponse.data.access_token;
 
+    // 위에서 발급받은 토큰으로 사용자 정보 가져오기
     const userProfileResponse = await axios.get(
       "https://kapi.kakao.com/v2/user/me",
       {

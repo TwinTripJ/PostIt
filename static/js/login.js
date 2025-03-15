@@ -67,6 +67,7 @@ document
   });
 
 // 카카오 로그인
+// sdk 초기화
 axios
   .get("/user/kakao-key")
   .then((response) => {
