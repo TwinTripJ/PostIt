@@ -114,7 +114,7 @@ async function heart(event) {
 // 메인 페이지 모든 글의 좋아요 상태
 async function getUserLikes() {
   try {
-    const response = await axios.get(`/like/count/${postId}}`);
+    const response = await axios.get(`/like/count/${postId}`);
     const likeCountElement = icon
       .closest(".post-info")
       .querySelector(".like-count");
@@ -125,7 +125,7 @@ async function getUserLikes() {
     likeCountElement.textContent = response.data.like_count;
     window.location.reload();
   } catch (err) {
-    console.error("유저 좋아요 목록 조회 실패:", error);
+    console.error("유저 좋아요 목록 조회 실패:", err);
     return [];
   }
 }
