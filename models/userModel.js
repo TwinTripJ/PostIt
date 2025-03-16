@@ -19,18 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING(255),
         allowNull: false,
-        // validate: {
-        //   len: [8, 255],
-        //   isStrongPassword(value) {
-        //     const regex =
-        //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        //     if (!regex.test(value)) {
-        //       throw new Error(
-        //         "비밀번호는 최소 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다."
-        //       );
-        //     }
-        //   },
-        // },
       },
       username: {
         type: DataTypes.STRING(35),
