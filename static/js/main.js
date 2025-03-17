@@ -101,7 +101,7 @@ async function setLikeStatus() {
             "../static/images/favoriteFillIcon.png";
         } else {
           icon.setAttribute("data-fav", "0");
-          icon.querySelector("img").src = "../static/images/favriteIcon.png";
+          icon.querySelector("img").src = "../static/images/favoriteIcon.png";
         }
       });
     } catch (err) {}
