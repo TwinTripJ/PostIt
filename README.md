@@ -194,7 +194,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp유저 정보를 DB에 저장하여 계정 생성</h4>
 <div align="center">
  
-  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  ![Image](https://github.com/user-attachments/assets/e2672643-b05d-4499-b26f-2ac8004af0e7)
   
 </div>
 
@@ -230,7 +230,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp아이디로 조회하여 해당 계정의 비밀번호 변경</h4>
 <div align="center">
  
-  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  ![Image](https://github.com/user-attachments/assets/061e0276-e1ad-4d1f-8210-230c4b010a60)
   
 </div>
 
