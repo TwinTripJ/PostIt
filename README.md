@@ -13,11 +13,12 @@
 ---
 
 >  **UI & 기능 소개**
-> 
-> 📌 [⑤  프로토타입](#-프로토타입)  
-> 📌 [⑥  화면 구성](#-화면-구성)  
-> 📌 [⑦  반응형 화면 구성](#-반응형-화면-구성)  
-> 📌 [⑧  주요 기능](#-주요-기능)  
+>
+> 📌 [⑤ ERD](#-erd)  
+> 📌 [⑥  프로토타입](#-프로토타입)  
+> 📌 [⑦  화면 구성](#-화면-구성)  
+> 📌 [⑧  반응형 화면 구성](#-반응형-화면-구성)  
+> 📌 [⑨  주요 기능](#-주요-기능)  
 
 <br/>
 
@@ -67,18 +68,42 @@
 # 🖥 개발 환경
 
 <div align="center">
- <h2> 프로그래밍 언어 </h2>
-  <img src="https://img.shields.io/badge/html5-F0A228.svg?&style=for-the-badge&logo=html5&logoColor=white" alt="HTML5 Badge" /> <img src="https://img.shields.io/badge/css-%231572B6.svg?&style=for-the-badge&logo=css&logoColor=white"  alt="CSS Badge" /> <img src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript Badge" />
+ <h2>프론트엔드</h2>
+  <img src="https://img.shields.io/badge/html5-F0A228.svg?&style=for-the-badge&logo=html5&logoColor=white" alt="HTML5 Badge" />
+  <img src="https://img.shields.io/badge/css-%231572B6.svg?&style=for-the-badge&logo=css&logoColor=white" alt="CSS Badge" />
+  <img src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?&style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript Badge" />
+  <img src="https://img.shields.io/badge/ejs-%23A91E3E.svg?&style=for-the-badge&logo=ejs&logoColor=white" alt="EJS Badge" />
 
-  <h2> 개발 도구 </h2> 
-  <img src="https://img.shields.io/badge/visual%20studio%20code-%23007ACC.svg?&style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
+  <h2>백엔드</h2>
+  <img src="https://img.shields.io/badge/node.js-%234285F4.svg?&style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js Badge" />
+  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?&style=for-the-badge&logo=express&logoColor=white" alt="Express Badge" />
 
-  <h2> 버전 관리 </h2> 
-  <img src="https://img.shields.io/badge/git-%23F05032.svg?&style=for-the-badge&logo=git&logoColor=white" /> <img src="https://img.shields.io/badge/github-%23181717.svg?&style=for-the-badge&logo=github&logoColor=white" />
+  <h2>데이터베이스</h2>
+  <img src="https://img.shields.io/badge/mysql-%234479A1.svg?&style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge" />
 
-  <h2> 라이브러리 </h2>
+  <h2>개발 도구</h2>
+  <img src="https://img.shields.io/badge/visual%20studio%20code-%23007ACC.svg?&style=for-the-badge&logo=visual%20studio%20code&logoColor=white" alt="VS Code Badge" />
+  <img src="https://img.shields.io/badge/mysql Workbench-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQLWorkbench Badge" />
+
+  <h2>버전 관리</h2>
+  <img src="https://img.shields.io/badge/git-%23F05032.svg?&style=for-the-badge&logo=git&logoColor=white" alt="Git Badge" />
+  <img src="https://img.shields.io/badge/github-%23181717.svg?&style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge" />
+
+  <h2>라이브러리</h2>
   <img src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white" />
+  <img src="https://img.shields.io/badge/Toast_UI_Editor-FFDD00?style=for-the-badge&logo=ToastUI&logoColor=black" />
+  <img src="https://img.shields.io/badge/sequelize-%234479A1.svg?style=for-the-badge&logo=sequelize&logoColor=white" />
 
+</div>
+
+<br/>
+
+# 🗺 ERD
+
+<div align="center">
+
+ ![Image](https://github.com/user-attachments/assets/3076859e-1177-443f-a050-47be8d6d4150)
+ 
 </div>
 
 <br/>
@@ -86,16 +111,7 @@
 # 📝 프로토타입
 
 <div align="center">
- <table>
-  <tr>
-   <th> WEB </th>
-   <th> MOBILE </th>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/760efe69-0674-4b8f-8486-9ade4e38ea40" width="400" height="600"></td>
-    <td><img src="https://github.com/user-attachments/assets/b5bdbd4b-c828-4468-97f9-ff3c87a3f11c" width="400" height="600"></td>
-  </tr>
- </table>
+ 
 </div>
 
 <br/>
