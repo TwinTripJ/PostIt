@@ -102,7 +102,7 @@
 
 <div align="center">
 
- ![Image](https://github.com/user-attachments/assets/3076859e-1177-443f-a050-47be8d6d4150)
+ ![Image](https://github.com/user-attachments/assets/b6b4966c-117f-4985-aea9-dcd102f3002d)
  
 </div>
 
@@ -111,6 +111,8 @@
 # 📝 프로토타입
 
 <div align="center">
+
+ ![Image](https://github.com/user-attachments/assets/cc31e2a6-6ff3-4b28-9e51-b54e4096914b)
  
 </div>
 
