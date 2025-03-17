@@ -85,6 +85,7 @@ async function heart(event) {
     window.location.href = "/user/login";
     return;
   }
+
   try {
     const response = await axios.post(
       `/like/${postId}`,

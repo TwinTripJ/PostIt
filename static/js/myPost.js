@@ -107,10 +107,13 @@ async function heart(event) {
       return;
     }
     likeCountElement.textContent = response.data.like_count;
+
+    await setLikeStatus();
   } catch (error) {
     console.error("좋아요 처리 중 오류 발생:", error);
   }
 }
+
 // 메인 페이지 모든 글의 좋아요 상태
 async function getUserLikes() {
   try {
@@ -148,6 +151,7 @@ async function setLikeStatus() {
     });
   } catch (err) {}
 }
+
 // 좋아요 상태
 window.onload = function () {
   setLikeStatus();
