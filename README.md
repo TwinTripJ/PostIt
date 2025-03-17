@@ -17,8 +17,7 @@
 > 📌 [⑤ ERD](#-erd)  
 > 📌 [⑥  프로토타입](#-프로토타입)  
 > 📌 [⑦  화면 구성](#-화면-구성)  
-> 📌 [⑧  반응형 화면 구성](#-반응형-화면-구성)  
-> 📌 [⑨  주요 기능](#-주요-기능)  
+> 📌 [⑧  주요 기능](#-주요-기능)  
 
 <br/>
 
@@ -124,32 +123,22 @@
  <table>
   <tr>
    <th> MAIN </th>
-   <th> PRODUCT </th>
-   <th> RECIPE </th>
+   <th> JOIN </th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/a1d98eb7-1282-4111-ada4-bfa6c7fbfcfc" width="250" height="600"></td>
-    <td><img src="https://github.com/user-attachments/assets/8425b72a-41a3-4da9-829b-63a1eef68196" width="250" height="600"></td>
-    <td><img src="https://github.com/user-attachments/assets/cf8dc686-0e88-4144-8f92-9a9d12558d2e" width="300" height="600"></td>
+    <td> <img src="https://github.com/user-attachments/assets/7d5f5723-2e6e-4b88-8a6b-8424e82242b2"/> </td>
+    <td><img src="https://github.com/user-attachments/assets/cc7e1150-53dd-4ae8-8c0c-80096565faa6"/></td>
   </tr>
  </table>
-</div>
 
-<br/>
-
-# 📱 반응형 화면 구성
-
-<div align="center">
  <table>
   <tr>
-   <th> MAIN </th>
-   <th> PRODUCT </th>
-   <th> RECIPE </th>
+   <th> CATEGORY </th>
+   <th> MY ACCOUNT </th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ac581a47-064b-49a4-bc36-a22e99055741" width="100" height="700"></td>
-    <td><img src="https://github.com/user-attachments/assets/0b63a6c2-2785-4128-8807-e528ec8dd4e9" width="200" height="700"></td>
-    <td><img src="https://github.com/user-attachments/assets/8d133e1f-12c6-4a1d-afcf-1d5ba795d86f" width="200" height="700"></td>
+    <td><img src="https://github.com/user-attachments/assets/d46f89f9-fc7c-4683-b09b-72ec144b2f33"/></td>
+    <td><img src="https://github.com/user-attachments/assets/64811029-2c7e-419c-955e-26486617af93"/></td>
   </tr>
  </table>
 </div>
