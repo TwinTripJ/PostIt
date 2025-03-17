@@ -132,7 +132,7 @@
    <th> JOIN </th>
   </tr>
   <tr>
-    <td> <img src="https://github.com/user-attachments/assets/7d5f5723-2e6e-4b88-8a6b-8424e82242b2"/> </td>
+    <td> <img src="https://github.com/user-attachments/assets/cbcdafab-0ea8-4151-bae1-4a48b65b7e0c"/> </td>
     <td><img src="https://github.com/user-attachments/assets/cc7e1150-53dd-4ae8-8c0c-80096565faa6"/></td>
   </tr>
  </table>
