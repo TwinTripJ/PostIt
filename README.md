@@ -80,6 +80,11 @@
   <h2>데이터베이스</h2>
   <img src="https://img.shields.io/badge/mysql-%234479A1.svg?&style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge" />
 
+  <h2>사용한 API</h2>
+  <img src="https://img.shields.io/badge/Naver%20Login-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Login Badge" />
+  <img src="https://img.shields.io/badge/Kakao%20Login-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=black" alt="Kakao Login Badge" />
+  <img src="https://img.shields.io/badge/Naver%20Maps-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Maps Badge" />
+
   <h2>개발 도구</h2>
   <img src="https://img.shields.io/badge/visual%20studio%20code-%23007ACC.svg?&style=for-the-badge&logo=visual%20studio%20code&logoColor=white" alt="VS Code Badge" />
   <img src="https://img.shields.io/badge/mysql Workbench-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQLWorkbench Badge" />
@@ -92,6 +97,7 @@
   <img src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white" />
   <img src="https://img.shields.io/badge/Toast_UI_Editor-FFDD00?style=for-the-badge&logo=ToastUI&logoColor=black" />
   <img src="https://img.shields.io/badge/sequelize-%234479A1.svg?style=for-the-badge&logo=sequelize&logoColor=white" />
+  <img src="https://img.shields.io/badge/multer-%23FFAA00.svg?&style=for-the-badge&logo=multer&logoColor=white" alt="Multer Badge" />
 
 </div>
 
@@ -171,6 +177,7 @@
 
 <h3> 🌟 게시글 작성 </h3>
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp새로운 게시글을 작성하여 DB에 저장한 후, 해당 DB의 모든 게시물을 메인에 출력</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp직관적인 UI를 제공하는 토스트 에디터를 활용하여 텍스트 입력 및 이미지 삽입</h4>
 <div align="center">
  
   ![Image](https://github.com/user-attachments/assets/6124af33-82f8-41c2-a365-ec50ceab1ca2)
@@ -236,3 +243,68 @@
 
 <br/>
 
+<h2> 🧭 네비게이션 바 </h2>
+<h3> 🌟 내 계정 페이지 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp multer를 활용하여 프로필 사진 변경 가능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버, 카카오 계정이 아닌 사이트 계정의 경우 비밀번호 변경 가능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버 지도 API를 활용한 주소 입력 기능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp하나라도 변경될 경우 해당 계정의 정보가 DB에 갱신</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp(* 영상 속 계정은 카카오 계정이기 때문에 비밀번호 변경 부분 비활성화)</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/d768a2ad-7f7d-4b4f-95c8-f975bbeb5ac5)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 계정 탈퇴 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp탈퇴 시 해당 계정의 게시글과 좋아요 정보 모두 삭제</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/6a4cff8c-eb8f-4083-82b9-43436107f256)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 내 게시글 관리 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp내가 작성한 게시글 목록 및 즐겨찾기 게시물 확인 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/6fc1bcb7-3cf3-4a84-9c2f-49d2101446f4)
+  
+</div>
+
+<br/>
+
+<h2> 📝 상세 페이지 </h2>
+<h3> 🌟 내 계정 상세 페이지 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp게시글 수정, 삭제 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/7516e83d-b573-4f3f-81cd-07766a3ed0da)
+  
+</div>
+
+<br/>
+
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp프로필 클릭 시, 내 게시글, 내 계정 변경 페이지로 이동 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/e55314e7-27d1-4165-be9a-9efae08aee94)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 다른 작성자의 상세 페이지 </h3>
+
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp프로필 클릭 시, 해당 작성자의 모든 게시글 조회 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/27b68349-17e4-457a-a16b-7b88f9a342c9)
+  
+</div>
+
+<br/>
