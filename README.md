@@ -147,81 +147,92 @@
 
 # ⚙ 주요 기능
 
-<h2> 📃 메인 페이지 </h2>
-<h3> 제품 떠오르게 하기 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp각 요소에 딜레이 적용하여 떠오르게 하기</h4>
+<h2> 📌 메인 페이지 </h2>
+<h3> 🌟 카테고리별 이동 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp요청된 카테고리를 기준으로 DB에서 해당 카테고리의 게시글을 조회 및 출력</h4>
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d09f2eb7-3702-43d9-b056-d8d89f99d70c">
+
+  ![Image](https://github.com/user-attachments/assets/11be77b0-e4e5-4987-b8f0-297080aeab0e)
+  
 </div>
 
 <br/>
 
-<h3> 스크롤 시 스타일 속성 변경 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp스크롤하여 해당 위치에 도달할 시 스크롤 라인 애니메이션 적용</h4>
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/224c1574-7177-40c5-b502-bb0e408c8096">
-</div>
-
-<br/>
-
-<h2> 🌟 드래그 스크롤 </h2>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp마우스 이벤트를 활용한 드래그 스크롤 기능</h4>
+<h3> 🌟 전체 게시글 조회 및 좋아요 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbspDB의 게시물을 모두 조회하여 내림차순으로 출력</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp좋아요 버튼 클릭 시 DB에 상태 저장 후 출력</h4>
 <div align="center">
  
- ![Image](https://github.com/user-attachments/assets/4119cd6d-ef1a-4996-a69d-e01be744b4d1)
-
+  ![Image](https://github.com/user-attachments/assets/632368e0-29dc-4153-8e62-ee8dcb0fce7f)
+  
 </div>
 
 <br/>
 
-<h2> 🌟 이미지, 텍스트 반복 </h2>
-<h3> js로 동적인 이미지 반복 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp함수 호출하여 공백없이 반복</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/878c2d82-fcd6-42ce-9701-c412a05dfa8c)
-
-</div>
-
-<br/>
-
-<h3> css로 정적인 텍스트 반복 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp 애니메이션을 활용한 텍스트 반복</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/2d227aa4-bff7-411a-a968-f569b4e2d947)
-
-</div>
-
-<br/>
-
-<h2> 🌟 요소 고정 및 스크롤 이동 </h2>
-<h3> 요소 고정 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp sticky를 활용해 스크롤 시 지정 지점에서 요소 고정</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/98d63e03-2f65-4cee-ab14-d8fac9b4e23c)
- 
-</div>
-
-<br/>
-
-<h3> 스크롤 이동 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp버튼 클릭 시 스크롤 이동</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/18d61968-b7dc-4fe4-bd40-47446e3853f4)
- 
-</div>
-
-<br/>
-
-<h2> 🌟 모달창을 활용한 레시피 확인 </h2>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp부트스트랩을 활용하여 레시피를 구성</h4>
+<h3> 🌟 게시글 작성 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp새로운 게시글을 작성하여 DB에 저장한 후, 해당 DB의 모든 게시물을 메인에 출력</h4>
 <div align="center">
  
- ![Image](https://github.com/user-attachments/assets/e9d663ab-7df9-4d37-832e-7bd04f983e25)
-
+  ![Image](https://github.com/user-attachments/assets/6124af33-82f8-41c2-a365-ec50ceab1ca2)
+  
 </div>
 
 <br/>
+
+<h3> 🌟 게시글 검색 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp제목을 기준으로 게시글 검색 기능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  
+</div>
+
+<br/>
+
+<h2> 👤 로그인 & 회원가입 </h2>
+<h3> 🌟 회원가입 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp유저 정보를 DB에 저장하여 계정 생성</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 로그인 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp회원가입 후 사이트 계정으로 로그인</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/c8c8a260-1fa6-47a7-9271-cf786e3bb3ef)
+  
+</div>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버 및 카카오 로그인 API를 활용한 간편 로그인</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/3aa74779-b92a-4e0f-ae95-5b5810e2ad62)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 아이디 찾기 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp이름과 전화번호를 받아 아이디 조회</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/48e6fac5-637f-43fc-9438-11104eb62429)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 비밀번호 찾기 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp아이디로 조회하여 해당 계정의 비밀번호 변경</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  
+</div>
+
+<br/>
+
