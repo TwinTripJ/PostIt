@@ -7,19 +7,24 @@ const toggleLike = async (req, res) => {
   try {
     const { postId } = req.params;
     const user_id = req.user.userId;
+
     const existingLike = await Like.findOne({
       where: { user_id: user_id, post_id: postId },
     });
+
     if (existingLike) {
       await existingLike.destroy();
     } else {
       await Like.create({ user_id: user_id, post_id: postId });
     }
+
     const likeCount = await Like.count({ where: { post_id: postId } });
+
     await Post.update({ like_count: likeCount }, { where: { id: postId } });
+
     return res.status(200).json({
       message: existingLike ? "좋아요 취소" : "좋아요 추가",
-      liked: !existingLike,
+      // liked: !existingLike,
       post_id: postId,
       like_count: likeCount,
     });
