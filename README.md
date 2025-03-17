@@ -249,7 +249,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버, 카카오 계정이 아닌 사이트 계정의 경우 비밀번호 변경 가능</h4>
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버 지도 API를 활용한 주소 입력 기능</h4>
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp하나라도 변경될 경우 해당 계정의 정보가 DB에 갱신</h4>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp(* 영상 속 계정은 카카오 계정이기 때문에 비밀번호 변경 부분 비활성화)</h4>
+<h5>&nbsp&nbsp&nbsp&nbsp&nbsp( * 영상 속 계정은 카카오 계정이기 때문에 비밀번호 변경 부분 비활성화)</h5>
 <div align="center">
  
   ![Image](https://github.com/user-attachments/assets/d768a2ad-7f7d-4b4f-95c8-f975bbeb5ac5)
