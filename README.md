@@ -17,8 +17,7 @@
 > 📌 [⑤ ERD](#-erd)  
 > 📌 [⑥  프로토타입](#-프로토타입)  
 > 📌 [⑦  화면 구성](#-화면-구성)  
-> 📌 [⑧  반응형 화면 구성](#-반응형-화면-구성)  
-> 📌 [⑨  주요 기능](#-주요-기능)  
+> 📌 [⑧  주요 기능](#-주요-기능)  
 
 <br/>
 
@@ -30,8 +29,8 @@
 
 # ✈ 개발 동기
 
-####  여행 후기를 쉽게 기록하고 열람할 수 있는 공간이 필요하다고 느꼈으며,
-####  다양한 여행 경험을 한눈에 볼 수 있도록 웹 애플리케이션을 개발하게 되었습니다.
+####  여행 후기를 쉽게 기록하고 열람할 수 있는 공간이 필요하다고 느껴
+####  다양한 여행 경험을 한눈에 볼 수 있도록 하는 웹 애플리케이션을 개발하게 되었습니다.
 
 <br/>
 
@@ -81,6 +80,11 @@
   <h2>데이터베이스</h2>
   <img src="https://img.shields.io/badge/mysql-%234479A1.svg?&style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL Badge" />
 
+  <h2>사용한 API</h2>
+  <img src="https://img.shields.io/badge/Naver%20Login-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Login Badge" />
+  <img src="https://img.shields.io/badge/Kakao%20Login-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=black" alt="Kakao Login Badge" />
+  <img src="https://img.shields.io/badge/Naver%20Maps-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Maps Badge" />
+
   <h2>개발 도구</h2>
   <img src="https://img.shields.io/badge/visual%20studio%20code-%23007ACC.svg?&style=for-the-badge&logo=visual%20studio%20code&logoColor=white" alt="VS Code Badge" />
   <img src="https://img.shields.io/badge/mysql Workbench-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQLWorkbench Badge" />
@@ -93,6 +97,7 @@
   <img src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white" />
   <img src="https://img.shields.io/badge/Toast_UI_Editor-FFDD00?style=for-the-badge&logo=ToastUI&logoColor=black" />
   <img src="https://img.shields.io/badge/sequelize-%234479A1.svg?style=for-the-badge&logo=sequelize&logoColor=white" />
+  <img src="https://img.shields.io/badge/multer-%23FFAA00.svg?&style=for-the-badge&logo=multer&logoColor=white" alt="Multer Badge" />
 
 </div>
 
@@ -124,32 +129,22 @@
  <table>
   <tr>
    <th> MAIN </th>
-   <th> PRODUCT </th>
-   <th> RECIPE </th>
+   <th> JOIN </th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/a1d98eb7-1282-4111-ada4-bfa6c7fbfcfc" width="250" height="600"></td>
-    <td><img src="https://github.com/user-attachments/assets/8425b72a-41a3-4da9-829b-63a1eef68196" width="250" height="600"></td>
-    <td><img src="https://github.com/user-attachments/assets/cf8dc686-0e88-4144-8f92-9a9d12558d2e" width="300" height="600"></td>
+    <td> <img src="https://github.com/user-attachments/assets/cbcdafab-0ea8-4151-bae1-4a48b65b7e0c"/> </td>
+    <td><img src="https://github.com/user-attachments/assets/cc7e1150-53dd-4ae8-8c0c-80096565faa6"/></td>
   </tr>
  </table>
-</div>
 
-<br/>
-
-# 📱 반응형 화면 구성
-
-<div align="center">
  <table>
   <tr>
-   <th> MAIN </th>
-   <th> PRODUCT </th>
-   <th> RECIPE </th>
+   <th> CATEGORY </th>
+   <th> MY ACCOUNT </th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/ac581a47-064b-49a4-bc36-a22e99055741" width="100" height="700"></td>
-    <td><img src="https://github.com/user-attachments/assets/0b63a6c2-2785-4128-8807-e528ec8dd4e9" width="200" height="700"></td>
-    <td><img src="https://github.com/user-attachments/assets/8d133e1f-12c6-4a1d-afcf-1d5ba795d86f" width="200" height="700"></td>
+    <td><img src="https://github.com/user-attachments/assets/d46f89f9-fc7c-4683-b09b-72ec144b2f33"/></td>
+    <td><img src="https://github.com/user-attachments/assets/64811029-2c7e-419c-955e-26486617af93"/></td>
   </tr>
  </table>
 </div>
@@ -158,81 +153,158 @@
 
 # ⚙ 주요 기능
 
-<h2> 🌟 애니메이션 </h2>
-<h3> 제품 떠오르게 하기 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp각 요소에 딜레이 적용하여 떠오르게 하기</h4>
+<h2> 📌 메인 페이지 </h2>
+<h3> 🌟 카테고리별 이동 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp요청된 카테고리를 기준으로 DB에서 해당 카테고리의 게시글을 조회 및 출력</h4>
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/d09f2eb7-3702-43d9-b056-d8d89f99d70c">
+
+  ![Image](https://github.com/user-attachments/assets/11be77b0-e4e5-4987-b8f0-297080aeab0e)
+  
 </div>
 
 <br/>
 
-<h3> 스크롤 시 스타일 속성 변경 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp스크롤하여 해당 위치에 도달할 시 스크롤 라인 애니메이션 적용</h4>
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/224c1574-7177-40c5-b502-bb0e408c8096">
-</div>
-
-<br/>
-
-<h2> 🌟 드래그 스크롤 </h2>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp마우스 이벤트를 활용한 드래그 스크롤 기능</h4>
+<h3> 🌟 전체 게시글 조회 및 좋아요 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbspDB의 게시물을 모두 조회하여 내림차순으로 출력</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp좋아요 버튼 클릭 시 DB에 상태 저장 후 출력</h4>
 <div align="center">
  
- ![Image](https://github.com/user-attachments/assets/4119cd6d-ef1a-4996-a69d-e01be744b4d1)
-
+  ![Image](https://github.com/user-attachments/assets/632368e0-29dc-4153-8e62-ee8dcb0fce7f)
+  
 </div>
 
 <br/>
 
-<h2> 🌟 이미지, 텍스트 반복 </h2>
-<h3> js로 동적인 이미지 반복 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp함수 호출하여 공백없이 반복</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/878c2d82-fcd6-42ce-9701-c412a05dfa8c)
-
-</div>
-
-<br/>
-
-<h3> css로 정적인 텍스트 반복 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp 애니메이션을 활용한 텍스트 반복</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/2d227aa4-bff7-411a-a968-f569b4e2d947)
-
-</div>
-
-<br/>
-
-<h2> 🌟 요소 고정 및 스크롤 이동 </h2>
-<h3> 요소 고정 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp sticky를 활용해 스크롤 시 지정 지점에서 요소 고정</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/98d63e03-2f65-4cee-ab14-d8fac9b4e23c)
- 
-</div>
-
-<br/>
-
-<h3> 스크롤 이동 </h3>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp버튼 클릭 시 스크롤 이동</h4>
-<div align="center">
-
- ![Image](https://github.com/user-attachments/assets/18d61968-b7dc-4fe4-bd40-47446e3853f4)
- 
-</div>
-
-<br/>
-
-<h2> 🌟 모달창을 활용한 레시피 확인 </h2>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp부트스트랩을 활용하여 레시피를 구성</h4>
+<h3> 🌟 게시글 작성 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp새로운 게시글을 작성하여 DB에 저장한 후, 해당 DB의 모든 게시물을 메인에 출력</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp직관적인 UI를 제공하는 토스트 에디터를 활용하여 텍스트 입력 및 이미지 삽입</h4>
 <div align="center">
  
- ![Image](https://github.com/user-attachments/assets/e9d663ab-7df9-4d37-832e-7bd04f983e25)
+  ![Image](https://github.com/user-attachments/assets/6124af33-82f8-41c2-a365-ec50ceab1ca2)
+  
+</div>
 
+<br/>
+
+<h3> 🌟 게시글 검색 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp제목을 기준으로 게시글 검색 기능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/471667f4-3eb5-4dca-baac-6204399f904b)
+  
+</div>
+
+<br/>
+
+<h2> 👤 로그인 & 회원가입 </h2>
+<h3> 🌟 회원가입 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp유저 정보를 DB에 저장하여 계정 생성</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/e2672643-b05d-4499-b26f-2ac8004af0e7)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 로그인 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp회원가입 후 사이트 계정으로 로그인</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/c8c8a260-1fa6-47a7-9271-cf786e3bb3ef)
+  
+</div>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버 및 카카오 로그인 API를 활용한 간편 로그인</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/3aa74779-b92a-4e0f-ae95-5b5810e2ad62)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 아이디 찾기 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp이름과 전화번호를 받아 아이디 조회</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/48e6fac5-637f-43fc-9438-11104eb62429)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 비밀번호 찾기 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp아이디로 조회하여 해당 계정의 비밀번호 변경</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/061e0276-e1ad-4d1f-8210-230c4b010a60)
+  
+</div>
+
+<br/>
+
+<h2> 🧭 네비게이션 바 </h2>
+<h3> 🌟 내 계정 페이지 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp multer를 활용하여 프로필 사진 변경 가능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버, 카카오 계정이 아닌 사이트 계정의 경우 비밀번호 변경 가능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp네이버 지도 API를 활용한 주소 입력 기능</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp하나라도 변경될 경우 해당 계정의 정보가 DB에 갱신</h4>
+<h5>&nbsp&nbsp&nbsp&nbsp&nbsp( * 영상 속 계정은 카카오 계정이기 때문에 비밀번호 변경 부분 비활성화)</h5>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/d768a2ad-7f7d-4b4f-95c8-f975bbeb5ac5)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 계정 탈퇴 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp탈퇴 시 해당 계정의 게시글과 좋아요 정보 모두 삭제</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/6a4cff8c-eb8f-4083-82b9-43436107f256)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 내 게시글 관리 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp내가 작성한 게시글 목록 및 즐겨찾기 게시물 확인 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/6fc1bcb7-3cf3-4a84-9c2f-49d2101446f4)
+  
+</div>
+
+<br/>
+
+<h2> 📝 상세 페이지 </h2>
+<h3> 🌟 내 계정 상세 페이지 </h3>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp게시글 수정, 삭제 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/7516e83d-b573-4f3f-81cd-07766a3ed0da)
+  
+</div>
+
+<br/>
+
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp프로필 클릭 시, 내 게시글, 내 계정 변경 페이지로 이동 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/e55314e7-27d1-4165-be9a-9efae08aee94)
+  
+</div>
+
+<br/>
+
+<h3> 🌟 다른 작성자의 상세 페이지 </h3>
+
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp프로필 클릭 시, 해당 작성자의 모든 게시글 조회 가능</h4>
+<div align="center">
+ 
+  ![Image](https://github.com/user-attachments/assets/27b68349-17e4-457a-a16b-7b88f9a342c9)
+  
 </div>
 
 <br/>
